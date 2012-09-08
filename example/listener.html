@@ -173,7 +173,7 @@
                 
         <div id="bodyColumn"  class="span9" >
                                   
-            <div class="section"><h2>GPIO State Listener Example using Pi4J.<a name="GPIO_State_Listener_Example_using_Pi4J."></a></h2><p>The following example demonstrates how to setup a listener for GPIO pin state changes on the Raspberry Pi. This listener implementation is far more efficient than constantly polling and querying for the the GPIO pin state. The listener implementation is based on GPIO hardware interrupts not state polling.</p><p>The source code for this example is included in the github repository: <a class="externalLink" href="https://github.com/Pi4J/pi4j/tree/master/src/test/java/com/pi4j/io/example">https://github.com/Pi4J/pi4j/tree/master/src/test/java/com/pi4j/io/example</a></p><div class="source"><pre class="prettyprint">package com.pi4j.io.example;
+            <div class="section"><h2>GPIO State Listener Example using Pi4J.<a name="GPIO_State_Listener_Example_using_Pi4J."></a></h2><p>The following example demonstrates how to setup a listener for GPIO pin state changes on the Raspberry Pi. This listener implementation is far more efficient than constantly polling and querying for the the GPIO pin state. The listener implementation is based on GPIO hardware interrupts not state polling.</p><div class="section"><h3>Source Code <a name="Source_Code"></a></h3><p>The source code for this example is included in the github repository: <a class="externalLink" href="https://github.com/Pi4J/pi4j/tree/master/src/test/java/com/pi4j/io/example">https://github.com/Pi4J/pi4j/tree/master/src/test/java/com/pi4j/io/example</a></p><div class="source"><pre class="prettyprint">package com.pi4j.io.example;
 
 import com.pi4j.io.gpio.Gpio;
 import com.pi4j.io.gpio.GpioFactory;
@@ -232,7 +232,7 @@ class GpioExampleListener implements GpioListener
                 + event.getState());
     }
 }
-</pre></div></div>
+</pre></div></div><div class="section"><h3>Wiring Diagram<a name="Wiring_Diagram"></a></h3><p>The following circuit can be used in conjunction with this sample code.</p><img src="../images/gpio-listener-example.png" alt="" /></div></div>
                   </div>
             </div>
           </div>
