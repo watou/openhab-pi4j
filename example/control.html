@@ -48,14 +48,32 @@
             
       
                                               
-    <li class="pull-right">              <a href="https://github.com/Pi4J/pi4j/" class="externalLink" title="Pi4J Source Repository">
-        Pi4J Source Repository</a>
+    <li class="pull-right">              <a href="http://www.savagehomeautomation.com/" class="externalLink" target="_blank" title="Blog">
+        Blog</a>
   </li>
 
         <li class="divider pull-right">|</li>
       
-    <li class="pull-right">              <a href=".././" title="Pi4J Home">
-        Pi4J Home</a>
+    <li class="pull-right">              <a href="https://github.com/Pi4J/pi4j/wiki/" class="externalLink" target="pi4j-github" title="Wiki">
+        Wiki</a>
+  </li>
+
+        <li class="divider pull-right">|</li>
+      
+    <li class="pull-right">              <a href="https://github.com/Pi4J/pi4j/issues/" class="externalLink" target="pi4j-github" title="Issues">
+        Issues</a>
+  </li>
+
+        <li class="divider pull-right">|</li>
+      
+    <li class="pull-right">              <a href="https://github.com/Pi4J/pi4j/" class="externalLink" target="pi4j-github" title="Github">
+        Github</a>
+  </li>
+
+        <li class="divider pull-right">|</li>
+      
+    <li class="pull-right">              <a href=".././" title="Home">
+        Home</a>
   </li>
 
                         </ul>
@@ -207,9 +225,14 @@ public class ControlGpioExample
 
         Thread.sleep(5000);
 
-        // toggle the current state of gpio pin #4
+        // toggle the current state of gpio pin #4 (should turn on)
         gpio.toggleState(GpioPin.GPIO_04);
 
+        Thread.sleep(5000);
+
+        // toggle the current state of gpio pin #4  (should turn off)
+        gpio.toggleState(GpioPin.GPIO_04);
+        
         Thread.sleep(5000);
 
         // turn on gpio pin #4 for 1 second and then off
