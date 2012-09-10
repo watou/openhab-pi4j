@@ -75,27 +75,39 @@
 <span class="sourceLineNo">067</span>    void setPwmValue(List&lt;GpioPin&gt; pins, int value);<a name="line.67"></a>
 <span class="sourceLineNo">068</span><a name="line.68"></a>
 <span class="sourceLineNo">069</span>    void addListener(GpioListener listener);<a name="line.69"></a>
-<span class="sourceLineNo">070</span>    //void addListener(GpioListener listener, GpioPin pin);<a name="line.70"></a>
-<span class="sourceLineNo">071</span>    //void addListener(GpioListener listener, GpioPin pins[]);<a name="line.71"></a>
-<span class="sourceLineNo">072</span>    //void addListener(GpioListener listener, List&lt;GpioPin&gt; pins);<a name="line.72"></a>
-<span class="sourceLineNo">073</span>    <a name="line.73"></a>
-<span class="sourceLineNo">074</span>    void removeListener(GpioListener listener);<a name="line.74"></a>
-<span class="sourceLineNo">075</span><a name="line.75"></a>
-<span class="sourceLineNo">076</span>    void addTrigger(GpioTrigger trigger);<a name="line.76"></a>
-<span class="sourceLineNo">077</span>    void removeTrigger(GpioTrigger trigger);    <a name="line.77"></a>
-<span class="sourceLineNo">078</span><a name="line.78"></a>
-<span class="sourceLineNo">079</span>    void setup(GpioPin pin, GpioPinDirection direction, GpioPinEdge edge, GpioPinResistor resistance);    <a name="line.79"></a>
-<span class="sourceLineNo">080</span>    void setup(GpioPin pins[], GpioPinDirection direction, GpioPinEdge edge, GpioPinResistor resistance);<a name="line.80"></a>
-<span class="sourceLineNo">081</span>    void setup(List&lt;GpioPin&gt; pins, GpioPinDirection direction, GpioPinEdge edge, GpioPinResistor resistance);<a name="line.81"></a>
-<span class="sourceLineNo">082</span>    <a name="line.82"></a>
-<span class="sourceLineNo">083</span>    void setup(GpioPin pin, GpioPinDirection direction, GpioPinEdge edge);<a name="line.83"></a>
-<span class="sourceLineNo">084</span>    void setup(GpioPin pins[], GpioPinDirection direction, GpioPinEdge edge);<a name="line.84"></a>
-<span class="sourceLineNo">085</span>    void setup(List&lt;GpioPin&gt; pins, GpioPinDirection direction, GpioPinEdge edge);<a name="line.85"></a>
-<span class="sourceLineNo">086</span>    <a name="line.86"></a>
-<span class="sourceLineNo">087</span>    void setup(GpioPin pin, GpioPinDirection direction);<a name="line.87"></a>
-<span class="sourceLineNo">088</span>    void setup(GpioPin pins[], GpioPinDirection direction);<a name="line.88"></a>
-<span class="sourceLineNo">089</span>    void setup(List&lt;GpioPin&gt; pins, GpioPinDirection direction);    <a name="line.89"></a>
-<span class="sourceLineNo">090</span>}<a name="line.90"></a>
+<span class="sourceLineNo">070</span>    void addListener(GpioListener[] listeners);<a name="line.70"></a>
+<span class="sourceLineNo">071</span>    void addListener(List&lt;GpioListener&gt; listeners);<a name="line.71"></a>
+<span class="sourceLineNo">072</span>    <a name="line.72"></a>
+<span class="sourceLineNo">073</span>    //void addListener(GpioListener listener, GpioPin pin);<a name="line.73"></a>
+<span class="sourceLineNo">074</span>    //void addListener(GpioListener listener, GpioPin pins[]);<a name="line.74"></a>
+<span class="sourceLineNo">075</span>    //void addListener(GpioListener listener, List&lt;GpioPin&gt; pins);<a name="line.75"></a>
+<span class="sourceLineNo">076</span>    <a name="line.76"></a>
+<span class="sourceLineNo">077</span>    void removeListener(GpioListener listener);<a name="line.77"></a>
+<span class="sourceLineNo">078</span>    void removeListener(GpioListener[] listeners);<a name="line.78"></a>
+<span class="sourceLineNo">079</span>    void removeListener(List&lt;GpioListener&gt; listeners);<a name="line.79"></a>
+<span class="sourceLineNo">080</span>    void removeAllListeners();<a name="line.80"></a>
+<span class="sourceLineNo">081</span>    <a name="line.81"></a>
+<span class="sourceLineNo">082</span>    void addTrigger(GpioTrigger trigger);<a name="line.82"></a>
+<span class="sourceLineNo">083</span>    void addTrigger(GpioTrigger[] triggers);<a name="line.83"></a>
+<span class="sourceLineNo">084</span>    void addTrigger(List&lt;GpioTrigger&gt; triggers);<a name="line.84"></a>
+<span class="sourceLineNo">085</span>    <a name="line.85"></a>
+<span class="sourceLineNo">086</span>    void removeTrigger(GpioTrigger trigger);    <a name="line.86"></a>
+<span class="sourceLineNo">087</span>    void removeTrigger(GpioTrigger[] triggers);<a name="line.87"></a>
+<span class="sourceLineNo">088</span>    void removeTrigger(List&lt;GpioTrigger&gt; triggers);<a name="line.88"></a>
+<span class="sourceLineNo">089</span>    void removeAllTriggers();<a name="line.89"></a>
+<span class="sourceLineNo">090</span>    <a name="line.90"></a>
+<span class="sourceLineNo">091</span>    void setup(GpioPin pin, GpioPinDirection direction, GpioPinEdge edge, GpioPinResistor resistance);    <a name="line.91"></a>
+<span class="sourceLineNo">092</span>    void setup(GpioPin pins[], GpioPinDirection direction, GpioPinEdge edge, GpioPinResistor resistance);<a name="line.92"></a>
+<span class="sourceLineNo">093</span>    void setup(List&lt;GpioPin&gt; pins, GpioPinDirection direction, GpioPinEdge edge, GpioPinResistor resistance);<a name="line.93"></a>
+<span class="sourceLineNo">094</span>    <a name="line.94"></a>
+<span class="sourceLineNo">095</span>    void setup(GpioPin pin, GpioPinDirection direction, GpioPinEdge edge);<a name="line.95"></a>
+<span class="sourceLineNo">096</span>    void setup(GpioPin pins[], GpioPinDirection direction, GpioPinEdge edge);<a name="line.96"></a>
+<span class="sourceLineNo">097</span>    void setup(List&lt;GpioPin&gt; pins, GpioPinDirection direction, GpioPinEdge edge);<a name="line.97"></a>
+<span class="sourceLineNo">098</span>    <a name="line.98"></a>
+<span class="sourceLineNo">099</span>    void setup(GpioPin pin, GpioPinDirection direction);<a name="line.99"></a>
+<span class="sourceLineNo">100</span>    void setup(GpioPin pins[], GpioPinDirection direction);<a name="line.100"></a>
+<span class="sourceLineNo">101</span>    void setup(List&lt;GpioPin&gt; pins, GpioPinDirection direction);    <a name="line.101"></a>
+<span class="sourceLineNo">102</span>}<a name="line.102"></a>
 
 
 

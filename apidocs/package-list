@@ -4,4 +4,5 @@ com.pi4j.io.gpio.impl
 com.pi4j.io.gpio.trigger
 com.pi4j.io.serial
 com.pi4j.io.serial.impl
+com.pi4j.system
 com.pi4j.wiringpi

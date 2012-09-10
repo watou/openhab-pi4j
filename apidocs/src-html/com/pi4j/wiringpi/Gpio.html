@@ -35,7 +35,7 @@
 <span class="sourceLineNo">027</span> * <a name="line.27"></a>
 <span class="sourceLineNo">028</span> * &lt;p&gt;<a name="line.28"></a>
 <span class="sourceLineNo">029</span> * The main difference is that unlike the Arduino system, the main loop of the program is not<a name="line.29"></a>
-<span class="sourceLineNo">030</span> * provided for you – you need to write it yourself. This is often desirable in a Linux system<a name="line.30"></a>
+<span class="sourceLineNo">030</span> * provided for you and you need to write it yourself. This is often desirable in a Linux system<a name="line.30"></a>
 <span class="sourceLineNo">031</span> * anyway as it can give you access to command-line arguments and so on. See the examples page for<a name="line.31"></a>
 <span class="sourceLineNo">032</span> * some simple examples and a Makefile to use.<a name="line.32"></a>
 <span class="sourceLineNo">033</span> * &lt;/p&gt;<a name="line.33"></a>
@@ -207,7 +207,7 @@
 <span class="sourceLineNo">199</span>     * <a name="line.199"></a>
 <span class="sourceLineNo">200</span>     * &lt;p&gt;<a name="line.200"></a>
 <span class="sourceLineNo">201</span>     * &lt;b&gt;&lt;i&gt;Also note that some functions (noted below) have no effect when using this mode as<a name="line.201"></a>
-<span class="sourceLineNo">202</span>     * they’re not currently possible to action unless called with root privileges.&lt;/i&gt;&lt;/b&gt;<a name="line.202"></a>
+<span class="sourceLineNo">202</span>     * they're not currently possible to action unless called with root privileges.&lt;/i&gt;&lt;/b&gt;<a name="line.202"></a>
 <span class="sourceLineNo">203</span>     * &lt;/p&gt;<a name="line.203"></a>
 <span class="sourceLineNo">204</span>     * <a name="line.204"></a>
 <span class="sourceLineNo">205</span>     * @see &lt;a<a name="line.205"></a>
@@ -507,9 +507,9 @@
 <span class="sourceLineNo">499</span>     * &lt;p&gt;<a name="line.499"></a>
 <span class="sourceLineNo">500</span>     * This attempts to shift your program (or thread in a multi-threaded program) to a higher<a name="line.500"></a>
 <span class="sourceLineNo">501</span>     * priority and enables a real-time scheduling. The priority parameter should be from 0 (the<a name="line.501"></a>
-<span class="sourceLineNo">502</span>     * Default) to 99 (the maximum). This won’t make your program go any faster, but it will give it<a name="line.502"></a>
+<span class="sourceLineNo">502</span>     * Default) to 99 (the maximum). This won't make your program go any faster, but it will give it<a name="line.502"></a>
 <span class="sourceLineNo">503</span>     * a bigger slice of time when other programs are running. The priority parameter works relative<a name="line.503"></a>
-<span class="sourceLineNo">504</span>     * to others – so you can make one program priority 1 and another priority 2 and it will have<a name="line.504"></a>
+<span class="sourceLineNo">504</span>     * to others and so you can make one program priority 1 and another priority 2 and it will have<a name="line.504"></a>
 <span class="sourceLineNo">505</span>     * the same effect as setting one to 10 and the other to 90 (as long as no other programs are<a name="line.505"></a>
 <span class="sourceLineNo">506</span>     * running with elevated priorities)<a name="line.506"></a>
 <span class="sourceLineNo">507</span>     * &lt;/p&gt;<a name="line.507"></a>
@@ -540,7 +540,7 @@
 <span class="sourceLineNo">532</span>     * &lt;h1&gt;[Interrupts]&lt;/h1&gt;<a name="line.532"></a>
 <span class="sourceLineNo">533</span>     * <a name="line.533"></a>
 <span class="sourceLineNo">534</span>     * With a newer kernel patched with the GPIO interrupt handling code, you can now wait for an<a name="line.534"></a>
-<span class="sourceLineNo">535</span>     * interrupt in your program. This frees up the processor to do other tasks while you’re waiting<a name="line.535"></a>
+<span class="sourceLineNo">535</span>     * interrupt in your program. This frees up the processor to do other tasks while you're waiting<a name="line.535"></a>
 <span class="sourceLineNo">536</span>     * for that interrupt. The GPIO can be set to interrupt on a rising, falling or both edges of<a name="line.536"></a>
 <span class="sourceLineNo">537</span>     * the incoming signal.<a name="line.537"></a>
 <span class="sourceLineNo">538</span>     * <a name="line.538"></a>
@@ -594,7 +594,7 @@
 <span class="sourceLineNo">586</span>     * &lt;h1&gt;Concurrent Processing (multi-threading)&lt;/h1&gt;<a name="line.586"></a>
 <span class="sourceLineNo">587</span>     * <a name="line.587"></a>
 <span class="sourceLineNo">588</span>     * wiringPi has a simplified interface to the Linux implementation of Posix threads, as well as<a name="line.588"></a>
-<span class="sourceLineNo">589</span>     * a (simplified) mechanisms to access mutex’s (Mutual exclusions)<a name="line.589"></a>
+<span class="sourceLineNo">589</span>     * a (simplified) mechanisms to access mutexs (Mutual exclusions)<a name="line.589"></a>
 <span class="sourceLineNo">590</span>     * <a name="line.590"></a>
 <span class="sourceLineNo">591</span>     * Using these functions you can create a new process (a function inside your main program)<a name="line.591"></a>
 <span class="sourceLineNo">592</span>     * which runs concurrently with your main program and using the mutex mechanisms, safely pass<a name="line.592"></a>
