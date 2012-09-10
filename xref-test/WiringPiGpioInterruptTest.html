@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>WiringPiGpioInterruptTest xref</title>
+<link type="text/css" rel="stylesheet" href="../stylesheet.css" />
+</head>
+<body>
+<div id="overview"><a href="../testapidocs//WiringPiGpioInterruptTest.html">View Javadoc</a></div><pre>
+
+<a class="jxr_linenumber" name="1" href="#1">1</a>   <strong class="jxr_keyword">import</strong> com.pi4j.wiringpi.Gpio;
+<a class="jxr_linenumber" name="2" href="#2">2</a>   <strong class="jxr_keyword">import</strong> com.pi4j.wiringpi.GpioInterrupt;
+<a class="jxr_linenumber" name="3" href="#3">3</a>   <strong class="jxr_keyword">import</strong> com.pi4j.wiringpi.GpioInterruptListener;
+<a class="jxr_linenumber" name="4" href="#4">4</a>   <strong class="jxr_keyword">import</strong> com.pi4j.wiringpi.GpioInterruptEvent;
+<a class="jxr_linenumber" name="5" href="#5">5</a>   
+<a class="jxr_linenumber" name="6" href="#6">6</a>   <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="..//WiringPiGpioInterruptTest.html">WiringPiGpioInterruptTest</a>
+<a class="jxr_linenumber" name="7" href="#7">7</a>   {
+<a class="jxr_linenumber" name="8" href="#8">8</a>       <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">void</strong> main(String args[]) <strong class="jxr_keyword">throws</strong> InterruptedException
+<a class="jxr_linenumber" name="9" href="#9">9</a>       {
+<a class="jxr_linenumber" name="10" href="#10">10</a>          System.out.println(<span class="jxr_string">"&lt;--Pi4J--&gt; GPIO INTERRUPT test program"</span>);
+<a class="jxr_linenumber" name="11" href="#11">11</a>          
+<a class="jxr_linenumber" name="12" href="#12">12</a>          <em class="jxr_comment">// create test listener and add as a GPIO listener</em>
+<a class="jxr_linenumber" name="13" href="#13">13</a>          <a href="..//WiringPiGpioInterruptTest.html">GpioTestInterruptListener</a> lsnr = <strong class="jxr_keyword">new</strong> <a href="..//WiringPiGpioInterruptTest.html">GpioTestInterruptListener</a>();
+<a class="jxr_linenumber" name="14" href="#14">14</a>          GpioInterrupt.addListener(lsnr);
+<a class="jxr_linenumber" name="15" href="#15">15</a>  
+<a class="jxr_linenumber" name="16" href="#16">16</a>          <em class="jxr_comment">// setup wiring pi</em>
+<a class="jxr_linenumber" name="17" href="#17">17</a>          <strong class="jxr_keyword">if</strong> (Gpio.wiringPiSetupGpio() == -1)
+<a class="jxr_linenumber" name="18" href="#18">18</a>          {
+<a class="jxr_linenumber" name="19" href="#19">19</a>              System.out.println(<span class="jxr_string">" ==&gt;&gt; GPIO SETUP FAILED"</span>);
+<a class="jxr_linenumber" name="20" href="#20">20</a>              <strong class="jxr_keyword">return</strong>;
+<a class="jxr_linenumber" name="21" href="#21">21</a>          }
+<a class="jxr_linenumber" name="22" href="#22">22</a>  
+<a class="jxr_linenumber" name="23" href="#23">23</a>          <em class="jxr_comment">// configure GPIO 14 as an OUTPUT; </em>
+<a class="jxr_linenumber" name="24" href="#24">24</a>          Gpio.pinMode(25, Gpio.OUTPUT);
+<a class="jxr_linenumber" name="25" href="#25">25</a>          Gpio.pinMode(18, Gpio.OUTPUT);
+<a class="jxr_linenumber" name="26" href="#26">26</a>          
+<a class="jxr_linenumber" name="27" href="#27">27</a>          <em class="jxr_comment">// configure GPIO 4 as an INPUT pin; enable it for callbacks</em>
+<a class="jxr_linenumber" name="28" href="#28">28</a>          Gpio.pinMode(4, Gpio.INPUT);
+<a class="jxr_linenumber" name="29" href="#29">29</a>          Gpio.pullUpDnControl(4, Gpio.PUD_DOWN);        
+<a class="jxr_linenumber" name="30" href="#30">30</a>          GpioInterrupt.enablePinStateChangeCallback(4);
+<a class="jxr_linenumber" name="31" href="#31">31</a>  
+<a class="jxr_linenumber" name="32" href="#32">32</a>          <em class="jxr_comment">// configure GPIO 17 as an INPUT pin; enable it for callbacks</em>
+<a class="jxr_linenumber" name="33" href="#33">33</a>          Gpio.pinMode(17, Gpio.INPUT);
+<a class="jxr_linenumber" name="34" href="#34">34</a>          Gpio.pullUpDnControl(17, Gpio.PUD_DOWN);        
+<a class="jxr_linenumber" name="35" href="#35">35</a>          GpioInterrupt.enablePinStateChangeCallback(17);
+<a class="jxr_linenumber" name="36" href="#36">36</a>  
+<a class="jxr_linenumber" name="37" href="#37">37</a>          <em class="jxr_comment">// continuously loop to prevent program from exiting</em>
+<a class="jxr_linenumber" name="38" href="#38">38</a>          <strong class="jxr_keyword">for</strong> (;;)
+<a class="jxr_linenumber" name="39" href="#39">39</a>          {
+<a class="jxr_linenumber" name="40" href="#40">40</a>              Thread.sleep(5000);
+<a class="jxr_linenumber" name="41" href="#41">41</a>          }
+<a class="jxr_linenumber" name="42" href="#42">42</a>      }
+<a class="jxr_linenumber" name="43" href="#43">43</a>  }
+<a class="jxr_linenumber" name="44" href="#44">44</a>  
+<a class="jxr_linenumber" name="45" href="#45">45</a>  <strong class="jxr_keyword">class</strong> <a href="..//WiringPiGpioInterruptTest.html">GpioTestInterruptListener</a> <strong class="jxr_keyword">implements</strong> GpioInterruptListener
+<a class="jxr_linenumber" name="46" href="#46">46</a>  {
+<a class="jxr_linenumber" name="47" href="#47">47</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> pinStateChange(GpioInterruptEvent event)
+<a class="jxr_linenumber" name="48" href="#48">48</a>      {
+<a class="jxr_linenumber" name="49" href="#49">49</a>          System.out.println(<span class="jxr_string">"Raspberry Pi PIN ["</span> + event.getPin() +<span class="jxr_string">"] is in STATE ["</span> + event.getState() + <span class="jxr_string">"]"</span>);
+<a class="jxr_linenumber" name="50" href="#50">50</a>          
+<a class="jxr_linenumber" name="51" href="#51">51</a>          <strong class="jxr_keyword">if</strong>(event.getPin() == 4)
+<a class="jxr_linenumber" name="52" href="#52">52</a>          {
+<a class="jxr_linenumber" name="53" href="#53">53</a>              Gpio.digitalWrite(25, event.getStateValue());
+<a class="jxr_linenumber" name="54" href="#54">54</a>          }
+<a class="jxr_linenumber" name="55" href="#55">55</a>          <strong class="jxr_keyword">if</strong>(event.getPin() == 17)
+<a class="jxr_linenumber" name="56" href="#56">56</a>          {
+<a class="jxr_linenumber" name="57" href="#57">57</a>              Gpio.digitalWrite(18, event.getStateValue());
+<a class="jxr_linenumber" name="58" href="#58">58</a>          }
+<a class="jxr_linenumber" name="59" href="#59">59</a>      }
+<a class="jxr_linenumber" name="60" href="#60">60</a>  }
+</pre>
+<hr/><div id="footer">This page was automatically generated by <a href="http://maven.apache.org/">Maven</a></div></body>
+</html>
+

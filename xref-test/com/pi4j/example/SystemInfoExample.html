@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>SystemInfoExample xref</title>
+<link type="text/css" rel="stylesheet" href="../../../stylesheet.css" />
+</head>
+<body>
+<div id="overview"><a href="../../../../testapidocs/com/pi4j/example/SystemInfoExample.html">View Javadoc</a></div><pre>
+
+<a class="jxr_linenumber" name="1" href="#1">1</a>   <em class="jxr_comment">// START SNIPPET: system-info-snippet</em>
+<a class="jxr_linenumber" name="2" href="#2">2</a>   <strong class="jxr_keyword">package</strong> com.pi4j.example;
+<a class="jxr_linenumber" name="3" href="#3">3</a>   
+<a class="jxr_linenumber" name="4" href="#4">4</a>   <strong class="jxr_keyword">import</strong> java.io.IOException;
+<a class="jxr_linenumber" name="5" href="#5">5</a>   
+<a class="jxr_linenumber" name="6" href="#6">6</a>   <strong class="jxr_keyword">import</strong> com.pi4j.system.NetworkInfo;
+<a class="jxr_linenumber" name="7" href="#7">7</a>   <strong class="jxr_keyword">import</strong> com.pi4j.system.SystemInfo;
+<a class="jxr_linenumber" name="8" href="#8">8</a>   
+<a class="jxr_linenumber" name="9" href="#9">9</a>   <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="10" href="#10">10</a>  <em class="jxr_javadoccomment"> * This example code demonstrates how to access a few of the system information properties and</em>
+<a class="jxr_linenumber" name="11" href="#11">11</a>  <em class="jxr_javadoccomment"> * network information from the Raspberry Pi.</em>
+<a class="jxr_linenumber" name="12" href="#12">12</a>  <em class="jxr_javadoccomment"> * </em>
+<a class="jxr_linenumber" name="13" href="#13">13</a>  <em class="jxr_javadoccomment"> * @author Robert Savage</em>
+<a class="jxr_linenumber" name="14" href="#14">14</a>  <em class="jxr_javadoccomment"> */</em>
+<a class="jxr_linenumber" name="15" href="#15">15</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../com/pi4j/example/SystemInfoExample.html">SystemInfoExample</a>
+<a class="jxr_linenumber" name="16" href="#16">16</a>  {
+<a class="jxr_linenumber" name="17" href="#17">17</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">void</strong> main(String[] args) <strong class="jxr_keyword">throws</strong> InterruptedException, IOException
+<a class="jxr_linenumber" name="18" href="#18">18</a>      {
+<a class="jxr_linenumber" name="19" href="#19">19</a>          <em class="jxr_comment">// display a few of the available system information properties</em>
+<a class="jxr_linenumber" name="20" href="#20">20</a>          System.out.println(<span class="jxr_string">"Serial Number     :  "</span> + SystemInfo.getSerial());
+<a class="jxr_linenumber" name="21" href="#21">21</a>          System.out.println(<span class="jxr_string">"CPU Revision      :  "</span> + SystemInfo.getCpuRevision());
+<a class="jxr_linenumber" name="22" href="#22">22</a>          System.out.println(<span class="jxr_string">"CPU Architecture  :  "</span> + SystemInfo.getCpuArchitecture());
+<a class="jxr_linenumber" name="23" href="#23">23</a>          System.out.println(<span class="jxr_string">"CPU Part          :  "</span> + SystemInfo.getCpuPart());
+<a class="jxr_linenumber" name="24" href="#24">24</a>          System.out.println(<span class="jxr_string">"MIPS              :  "</span> + SystemInfo.getBogoMIPS());
+<a class="jxr_linenumber" name="25" href="#25">25</a>          System.out.println(<span class="jxr_string">"Processor         :  "</span> + SystemInfo.getProcessor());
+<a class="jxr_linenumber" name="26" href="#26">26</a>          System.out.println(<span class="jxr_string">"Hardware Revision :  "</span> + SystemInfo.getRevision());
+<a class="jxr_linenumber" name="27" href="#27">27</a>  
+<a class="jxr_linenumber" name="28" href="#28">28</a>          <em class="jxr_comment">// display some of the network information</em>
+<a class="jxr_linenumber" name="29" href="#29">29</a>          System.out.println(<span class="jxr_string">"Hostname          :  "</span> + NetworkInfo.getHostname());
+<a class="jxr_linenumber" name="30" href="#30">30</a>          <strong class="jxr_keyword">for</strong> (String ipAddress : NetworkInfo.getIPAddresses())
+<a class="jxr_linenumber" name="31" href="#31">31</a>              System.out.println(<span class="jxr_string">"IP Addresses      :  "</span> + ipAddress);
+<a class="jxr_linenumber" name="32" href="#32">32</a>          <strong class="jxr_keyword">for</strong> (String fqdn : NetworkInfo.getFQDNs())
+<a class="jxr_linenumber" name="33" href="#33">33</a>              System.out.println(<span class="jxr_string">"FQDN              :  "</span> + fqdn);
+<a class="jxr_linenumber" name="34" href="#34">34</a>          <strong class="jxr_keyword">for</strong> (String nameserver : NetworkInfo.getNameservers())
+<a class="jxr_linenumber" name="35" href="#35">35</a>              System.out.println(<span class="jxr_string">"Nameserver        :  "</span> + nameserver);
+<a class="jxr_linenumber" name="36" href="#36">36</a>      }
+<a class="jxr_linenumber" name="37" href="#37">37</a>  }
+<a class="jxr_linenumber" name="38" href="#38">38</a>  <em class="jxr_comment">// END SNIPPET: system-info-snippet</em>
+</pre>
+<hr/><div id="footer">This page was automatically generated by <a href="http://maven.apache.org/">Maven</a></div></body>
+</html>
+
