@@ -278,7 +278,7 @@ class GpioExampleListener implements GpioListener
                 + event.getState());
     }
 }
-</pre></div></div><div class="section"><h3>Wiring Diagram<a name="Wiring_Diagram"></a></h3><p>The following circuit can be used in conjunction with this sample code.</p><img src="../images/gpio-listener-example.png" alt="" /></div></div>
+</pre></div></div><div class="section"><h3>Wiring Diagram<a name="Wiring_Diagram"></a></h3><p>The following circuit can be used in conjunction with this sample code.</p><img src="../images/gpio-listener-example.png" alt="" /></div><div class="section"><h3>Compile<a name="Compile"></a></h3><p>First, copy the <i>ListenGpioExample.java</i> source file to a directory on the RaspberryPi.<br />Next, use the following command to compile this example program:</p><p><tt>javac -cp /usr/share/java/pi4j.jar -d ListenGpioExample.java</tt></p></div><div class="section"><h3>Execute<a name="Execute"></a></h3><p>The following command will run this example program:</p><p><tt>sudo java -Djava.library.path=/usr/local/lib -classpath .:/usr/share/java/pi4j.jar com.pi4j.example.ListenGpioExample</tt></p></div><div class="section"><h3>Output<a name="Output"></a></h3><p>You should see the following message on the console each time the momentary button is pressed:</p><p><tt> --&gt; GPIO PIN STATE CHANGE: 4 = HIGH </tt></p><p>and this message on the console each time the momentary button is released:</p><p><tt> --&gt; GPIO PIN STATE CHANGE: 4 = LOW </tt></p></div></div>
                   </div>
             </div>
           </div>
