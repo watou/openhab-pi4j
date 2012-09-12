@@ -14,10 +14,10 @@
 <span class="sourceLineNo">006</span>import com.pi4j.io.gpio.Gpio;<a name="line.6"></a>
 <span class="sourceLineNo">007</span>import com.pi4j.io.gpio.GpioFactory;<a name="line.7"></a>
 <span class="sourceLineNo">008</span>import com.pi4j.io.gpio.GpioPin;<a name="line.8"></a>
-<span class="sourceLineNo">009</span>import com.pi4j.io.gpio.GpioPinDirection;<a name="line.9"></a>
-<span class="sourceLineNo">010</span>import com.pi4j.io.gpio.GpioPinEdge;<a name="line.10"></a>
-<span class="sourceLineNo">011</span>import com.pi4j.io.gpio.GpioPinResistor;<a name="line.11"></a>
-<span class="sourceLineNo">012</span>import com.pi4j.io.gpio.GpioPinState;<a name="line.12"></a>
+<span class="sourceLineNo">009</span>import com.pi4j.io.gpio.Pin;<a name="line.9"></a>
+<span class="sourceLineNo">010</span>import com.pi4j.io.gpio.PinEdge;<a name="line.10"></a>
+<span class="sourceLineNo">011</span>import com.pi4j.io.gpio.PinResistor;<a name="line.11"></a>
+<span class="sourceLineNo">012</span>import com.pi4j.io.gpio.PinState;<a name="line.12"></a>
 <span class="sourceLineNo">013</span>import com.pi4j.io.gpio.trigger.GpioCallbackTrigger;<a name="line.13"></a>
 <span class="sourceLineNo">014</span>import com.pi4j.io.gpio.trigger.GpioPulseStateTrigger;<a name="line.14"></a>
 <span class="sourceLineNo">015</span>import com.pi4j.io.gpio.trigger.GpioSetStateTrigger;<a name="line.15"></a>
@@ -35,62 +35,50 @@
 <span class="sourceLineNo">027</span>        // create gpio controller<a name="line.27"></a>
 <span class="sourceLineNo">028</span>        Gpio gpio = GpioFactory.createInstance();<a name="line.28"></a>
 <span class="sourceLineNo">029</span><a name="line.29"></a>
-<span class="sourceLineNo">030</span>        // create a gpio control trigger on gpio pin#4; when #4 goes HIGH, also set pin #21 to HIGH<a name="line.30"></a>
-<span class="sourceLineNo">031</span>        GpioSetStateTrigger triggerOn = new GpioSetStateTrigger(GpioPin.GPIO_04, GpioPinState.HIGH,<a name="line.31"></a>
-<span class="sourceLineNo">032</span>                GpioPin.GPIO_21, GpioPinState.HIGH);<a name="line.32"></a>
-<span class="sourceLineNo">033</span><a name="line.33"></a>
-<span class="sourceLineNo">034</span>        // create a gpio control trigger on gpio pin#4; when #4 goes LOW, also set pin #21 to LOW<a name="line.34"></a>
-<span class="sourceLineNo">035</span>        GpioSetStateTrigger triggerOff = new GpioSetStateTrigger(GpioPin.GPIO_04, GpioPinState.LOW,<a name="line.35"></a>
-<span class="sourceLineNo">036</span>                GpioPin.GPIO_21, GpioPinState.LOW);<a name="line.36"></a>
-<span class="sourceLineNo">037</span><a name="line.37"></a>
-<span class="sourceLineNo">038</span>        // create a gpio synchronization trigger on gpio pin#4; when #4 changes, also set pin #22 to<a name="line.38"></a>
-<span class="sourceLineNo">039</span>        // same state<a name="line.39"></a>
-<span class="sourceLineNo">040</span>        GpioSyncStateTrigger triggerSync = new GpioSyncStateTrigger(GpioPin.GPIO_04,<a name="line.40"></a>
-<span class="sourceLineNo">041</span>                GpioPinState.allStates(), GpioPin.GPIO_22);<a name="line.41"></a>
-<span class="sourceLineNo">042</span><a name="line.42"></a>
-<span class="sourceLineNo">043</span>        // create a gpio pulse trigger on gpio pin#4; when #4 goes HIGH, also pulse pin #23 to the<a name="line.43"></a>
-<span class="sourceLineNo">044</span>        // HIGH state for 1 second<a name="line.44"></a>
-<span class="sourceLineNo">045</span>        GpioPulseStateTrigger triggerPulse = new GpioPulseStateTrigger(GpioPin.GPIO_04,<a name="line.45"></a>
-<span class="sourceLineNo">046</span>                GpioPinState.HIGH, GpioPin.GPIO_23, 1000);<a name="line.46"></a>
-<span class="sourceLineNo">047</span><a name="line.47"></a>
-<span class="sourceLineNo">048</span>        // create a gpio callback trigger on gpio pin#4; when #4 changes state, perform a callback<a name="line.48"></a>
-<span class="sourceLineNo">049</span>        // invocation on the user defined 'Callable' class instance<a name="line.49"></a>
-<span class="sourceLineNo">050</span>        GpioCallbackTrigger triggerCallback = new GpioCallbackTrigger(GpioPin.GPIO_04,<a name="line.50"></a>
-<span class="sourceLineNo">051</span>                GpioPinState.allStates(), new Callable&lt;Void&gt;()<a name="line.51"></a>
-<span class="sourceLineNo">052</span>                {<a name="line.52"></a>
-<span class="sourceLineNo">053</span>                    public Void call() throws Exception<a name="line.53"></a>
-<span class="sourceLineNo">054</span>                    {<a name="line.54"></a>
-<span class="sourceLineNo">055</span>                        System.out.println(" --&gt; GPIO TRIGGER CALLBACK RECEIVED ");<a name="line.55"></a>
-<span class="sourceLineNo">056</span>                        return null;<a name="line.56"></a>
-<span class="sourceLineNo">057</span>                    }<a name="line.57"></a>
-<span class="sourceLineNo">058</span>                });<a name="line.58"></a>
-<span class="sourceLineNo">059</span><a name="line.59"></a>
-<span class="sourceLineNo">060</span>        // register all the gpio triggers with the gpio controller<a name="line.60"></a>
-<span class="sourceLineNo">061</span>        gpio.addTrigger(triggerOn);<a name="line.61"></a>
-<span class="sourceLineNo">062</span>        gpio.addTrigger(triggerOff);<a name="line.62"></a>
-<span class="sourceLineNo">063</span>        gpio.addTrigger(triggerSync);<a name="line.63"></a>
-<span class="sourceLineNo">064</span>        gpio.addTrigger(triggerCallback);<a name="line.64"></a>
-<span class="sourceLineNo">065</span>        gpio.addTrigger(triggerPulse);<a name="line.65"></a>
-<span class="sourceLineNo">066</span><a name="line.66"></a>
-<span class="sourceLineNo">067</span>        // setup gpio pin #4 as an input pin with its internal pull down resistor enabled<a name="line.67"></a>
-<span class="sourceLineNo">068</span>        // (configure pin edge to both rising and falling to get notified for HIGH and LOW state<a name="line.68"></a>
-<span class="sourceLineNo">069</span>        // changes)<a name="line.69"></a>
-<span class="sourceLineNo">070</span>        gpio.setup(GpioPin.GPIO_04, GpioPinDirection.IN, GpioPinEdge.BOTH,<a name="line.70"></a>
-<span class="sourceLineNo">071</span>                   GpioPinResistor.PULL_DOWN);<a name="line.71"></a>
-<span class="sourceLineNo">072</span><a name="line.72"></a>
-<span class="sourceLineNo">073</span>        // setup gpio pins #21,22,23 as an output pins and make sure they are all LOW at startup<a name="line.73"></a>
-<span class="sourceLineNo">074</span>        GpioPin[] pins = { GpioPin.GPIO_21, GpioPin.GPIO_22, GpioPin.GPIO_23 };<a name="line.74"></a>
-<span class="sourceLineNo">075</span>        gpio.setup(pins, GpioPinDirection.OUT);<a name="line.75"></a>
-<span class="sourceLineNo">076</span>        gpio.setLow(pins);<a name="line.76"></a>
-<span class="sourceLineNo">077</span><a name="line.77"></a>
-<span class="sourceLineNo">078</span>        // keep program running until user aborts (CTRL-C)<a name="line.78"></a>
-<span class="sourceLineNo">079</span>        for (;;)<a name="line.79"></a>
-<span class="sourceLineNo">080</span>        {<a name="line.80"></a>
-<span class="sourceLineNo">081</span>            Thread.sleep(500);<a name="line.81"></a>
-<span class="sourceLineNo">082</span>        }<a name="line.82"></a>
-<span class="sourceLineNo">083</span>    }<a name="line.83"></a>
-<span class="sourceLineNo">084</span>}<a name="line.84"></a>
-<span class="sourceLineNo">085</span>// END SNIPPET: trigger-gpio-snippet<a name="line.85"></a>
+<span class="sourceLineNo">030</span>        // provision gpio pin #4 as an input pin with its internal pull down resistor enabled<a name="line.30"></a>
+<span class="sourceLineNo">031</span>        // (configure pin edge to both rising and falling to get notified for HIGH and LOW state<a name="line.31"></a>
+<span class="sourceLineNo">032</span>        // changes)<a name="line.32"></a>
+<span class="sourceLineNo">033</span>        GpioPin myButton = gpio.provisionInputPin(Pin.GPIO_04, "MyButton", PinEdge.BOTH, PinResistor.PULL_DOWN);<a name="line.33"></a>
+<span class="sourceLineNo">034</span><a name="line.34"></a>
+<span class="sourceLineNo">035</span>        // setup gpio pins #21,22,23 as an output pins and make sure they are all LOW at startup<a name="line.35"></a>
+<span class="sourceLineNo">036</span>        GpioPin myLed[] = { <a name="line.36"></a>
+<span class="sourceLineNo">037</span>                gpio.provisionOuputPin(Pin.GPIO_21, "LED #1", PinState.LOW), <a name="line.37"></a>
+<span class="sourceLineNo">038</span>                gpio.provisionOuputPin(Pin.GPIO_22, "LED #2", PinState.LOW),<a name="line.38"></a>
+<span class="sourceLineNo">039</span>                gpio.provisionOuputPin(Pin.GPIO_23, "LED #3", PinState.LOW) };<a name="line.39"></a>
+<span class="sourceLineNo">040</span>        <a name="line.40"></a>
+<span class="sourceLineNo">041</span>        // create a gpio control trigger on gpio pin #4; when #4 goes HIGH, also set pin #21 to HIGH<a name="line.41"></a>
+<span class="sourceLineNo">042</span>        myButton.addTrigger(new GpioSetStateTrigger(PinState.HIGH, myLed[0], PinState.HIGH));<a name="line.42"></a>
+<span class="sourceLineNo">043</span><a name="line.43"></a>
+<span class="sourceLineNo">044</span>        // create a gpio control trigger on gpio pin #4; when #4 goes LOW, also set pin #21 to LOW<a name="line.44"></a>
+<span class="sourceLineNo">045</span>        myButton.addTrigger(new GpioSetStateTrigger(PinState.LOW, myLed[0], PinState.LOW));<a name="line.45"></a>
+<span class="sourceLineNo">046</span>        <a name="line.46"></a>
+<span class="sourceLineNo">047</span>        // create a gpio synchronization trigger on gpio pin#4; when #4 changes, also set pin #22 to<a name="line.47"></a>
+<span class="sourceLineNo">048</span>        // same state<a name="line.48"></a>
+<span class="sourceLineNo">049</span>        myButton.addTrigger(new GpioSyncStateTrigger(myLed[1]));<a name="line.49"></a>
+<span class="sourceLineNo">050</span><a name="line.50"></a>
+<span class="sourceLineNo">051</span>        // create a gpio pulse trigger on gpio pin#4; when #4 goes HIGH, also pulse pin #23 to the<a name="line.51"></a>
+<span class="sourceLineNo">052</span>        // HIGH state for 1 second<a name="line.52"></a>
+<span class="sourceLineNo">053</span>        myButton.addTrigger(new GpioPulseStateTrigger(PinState.HIGH, myLed[2], 1000));<a name="line.53"></a>
+<span class="sourceLineNo">054</span>        <a name="line.54"></a>
+<span class="sourceLineNo">055</span>        // create a gpio callback trigger on gpio pin#4; when #4 changes state, perform a callback<a name="line.55"></a>
+<span class="sourceLineNo">056</span>        // invocation on the user defined 'Callable' class instance<a name="line.56"></a>
+<span class="sourceLineNo">057</span>        myButton.addTrigger(new GpioCallbackTrigger(new Callable&lt;Void&gt;()<a name="line.57"></a>
+<span class="sourceLineNo">058</span>                {<a name="line.58"></a>
+<span class="sourceLineNo">059</span>                    public Void call() throws Exception<a name="line.59"></a>
+<span class="sourceLineNo">060</span>                    {<a name="line.60"></a>
+<span class="sourceLineNo">061</span>                        System.out.println(" --&gt; GPIO TRIGGER CALLBACK RECEIVED ");<a name="line.61"></a>
+<span class="sourceLineNo">062</span>                        return null;<a name="line.62"></a>
+<span class="sourceLineNo">063</span>                    }<a name="line.63"></a>
+<span class="sourceLineNo">064</span>                }));<a name="line.64"></a>
+<span class="sourceLineNo">065</span><a name="line.65"></a>
+<span class="sourceLineNo">066</span>        // keep program running until user aborts (CTRL-C)<a name="line.66"></a>
+<span class="sourceLineNo">067</span>        for (;;)<a name="line.67"></a>
+<span class="sourceLineNo">068</span>        {<a name="line.68"></a>
+<span class="sourceLineNo">069</span>            Thread.sleep(500);<a name="line.69"></a>
+<span class="sourceLineNo">070</span>        }<a name="line.70"></a>
+<span class="sourceLineNo">071</span>    }<a name="line.71"></a>
+<span class="sourceLineNo">072</span>}<a name="line.72"></a>
+<span class="sourceLineNo">073</span>// END SNIPPET: trigger-gpio-snippet<a name="line.73"></a>
 
 
 
