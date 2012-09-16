@@ -282,41 +282,43 @@ public class TriggerGpioExample
         // create gpio controller
         Gpio gpio = GpioFactory.createInstance();
 
-        // provision gpio pin #4 as an input pin with its internal pull down resistor enabled
-        // (configure pin edge to both rising and falling to get notified for HIGH and LOW state
-        // changes)
-        GpioPin myButton = gpio.provisionInputPin(Pin.GPIO_04, &quot;MyButton&quot;, PinEdge.BOTH, PinResistor.PULL_DOWN);
+        // provision gpio pin #02 as an input pin with its internal pull down resistor enabled
+        // (configure pin edge to both rising and falling to get notified for HIGH and LOW state changes)
+        GpioPin myButton = gpio.provisionInputPin(Pin.GPIO_02, 
+                                                  &quot;MyButton&quot;, 
+                                                  PinEdge.BOTH,
+                                                  PinResistor.PULL_DOWN);
 
-        // setup gpio pins #21,22,23 as an output pins and make sure they are all LOW at startup
-        GpioPin myLed[] = { 
-                gpio.provisionOuputPin(Pin.GPIO_21, &quot;LED #1&quot;, PinState.LOW), 
-                gpio.provisionOuputPin(Pin.GPIO_22, &quot;LED #2&quot;, PinState.LOW),
-                gpio.provisionOuputPin(Pin.GPIO_23, &quot;LED #3&quot;, PinState.LOW) };
-        
-        // create a gpio control trigger on gpio pin #4; when #4 goes HIGH, also set pin #21 to HIGH
+        // setup gpio pins #04, #05, #06 as an output pins and make sure they are all LOW at startup
+        GpioPin myLed[] =
+          { 
+            gpio.provisionOuputPin(Pin.GPIO_04, &quot;LED #1&quot;, PinState.LOW),
+            gpio.provisionOuputPin(Pin.GPIO_05, &quot;LED #2&quot;, PinState.LOW),
+            gpio.provisionOuputPin(Pin.GPIO_06, &quot;LED #3&quot;, PinState.LOW) 
+          };
+
+        // create a gpio control trigger on the input pin ; when the input goes HIGH, also set gpio pin #04 to HIGH
         myButton.addTrigger(new GpioSetStateTrigger(PinState.HIGH, myLed[0], PinState.HIGH));
 
-        // create a gpio control trigger on gpio pin #4; when #4 goes LOW, also set pin #21 to LOW
+        // create a gpio control trigger on the input pin ; when the input goes LOW, also set gpio pin #04 to LOW
         myButton.addTrigger(new GpioSetStateTrigger(PinState.LOW, myLed[0], PinState.LOW));
-        
-        // create a gpio synchronization trigger on gpio pin#4; when #4 changes, also set pin #22 to
-        // same state
+
+        // create a gpio synchronization trigger on the input pin; when the input changes, also set gpio pin #05 to same state
         myButton.addTrigger(new GpioSyncStateTrigger(myLed[1]));
 
-        // create a gpio pulse trigger on gpio pin#4; when #4 goes HIGH, also pulse pin #23 to the
-        // HIGH state for 1 second
+        // create a gpio pulse trigger on the input pin; when the input goes HIGH, also pulse gpio pin #06 to the HIGH state for 1 second
         myButton.addTrigger(new GpioPulseStateTrigger(PinState.HIGH, myLed[2], 1000));
-        
+
         // create a gpio callback trigger on gpio pin#4; when #4 changes state, perform a callback
         // invocation on the user defined 'Callable' class instance
         myButton.addTrigger(new GpioCallbackTrigger(new Callable&lt;Void&gt;()
-                {
-                    public Void call() throws Exception
-                    {
-                        System.out.println(&quot; --&gt; GPIO TRIGGER CALLBACK RECEIVED &quot;);
-                        return null;
-                    }
-                }));
+        {
+            public Void call() throws Exception
+            {
+                System.out.println(&quot; --&gt; GPIO TRIGGER CALLBACK RECEIVED &quot;);
+                return null;
+            }
+        }));
 
         // keep program running until user aborts (CTRL-C)
         for (;;)
@@ -325,7 +327,7 @@ public class TriggerGpioExample
         }
     }
 }
-</pre></div></div><div class="section"><h3>Wiring Diagram<a name="Wiring_Diagram"></a></h3><p>The following circuit can be used in conjunction with this sample code.</p><img src="../images/gpio-trigger-example.png" alt="" /></div><div class="section"><h3>Compile<a name="Compile"></a></h3><p>First, copy the <i>TriggerGpioExample.java</i> source file to a directory on the RaspberryPi.<br />Next, use the following command to compile this example program:</p><p><tt>javac -cp /usr/share/java/pi4j.jar -d TriggerGpioExample.java</tt></p></div><div class="section"><h3>Execute<a name="Execute"></a></h3><p>The following command will run this example program:</p><p><tt>sudo java -Djava.library.path=/usr/local/lib -classpath .:/usr/share/java/pi4j.jar com.pi4j.example.TriggerGpioExample</tt></p></div><div class="section"><h3>Output<a name="Output"></a></h3><p>The LED attached to GPIO pin 21 should turn ON when the momentary button is pressed and OFF when the button is released.</p><p>The LED attached to GPIO pin 22 should turn ON when the momentary button is pressed and OFF when the button is released.</p><p>The LED attached to GPIO pin 23 should turn ON for 1 second when the momentary button is pressed. The button release has no effect on this LED.</p><p>The following message should be displayed on the console each time the momentary button is pressed and again when released.</p><p><tt> --&gt; GPIO TRIGGER CALLBACK RECEIVED </tt></p></div></div>
+</pre></div></div><div class="section"><h3>Wiring Diagram<a name="Wiring_Diagram"></a></h3><p>The following circuit can be used in conjunction with this sample code.</p><img src="../images/gpio-trigger-example.png" alt="" /><p><a href="../images/gpio-trigger-example-large.png">(click here for hi-resolution image)</a></p></div><div class="section"><h3>Compile<a name="Compile"></a></h3><p>First, copy the <i>TriggerGpioExample.java</i> source file to a directory on the RaspberryPi.<br />Next, use the following command to compile this example program:</p><p><tt>javac -cp pi4j.jar -d . TriggerGpioExample.java</tt></p></div><div class="section"><h3>Execute<a name="Execute"></a></h3><p>The following command will run this example program:</p><p><tt>sudo java -classpath .:pi4j.jar com.pi4j.example.TriggerGpioExample</tt></p></div><div class="section"><h3>Output<a name="Output"></a></h3><p>The LED attached to GPIO pin 21 should turn ON when the momentary button is pressed and OFF when the button is released.</p><p>The LED attached to GPIO pin 22 should turn ON when the momentary button is pressed and OFF when the button is released.</p><p>The LED attached to GPIO pin 23 should turn ON for 1 second when the momentary button is pressed. The button release has no effect on this LED.</p><p>The following message should be displayed on the console each time the momentary button is pressed and again when released.</p><p><tt> --&gt; GPIO TRIGGER CALLBACK RECEIVED </tt></p></div></div>
                   </div>
             </div>
           </div>

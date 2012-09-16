@@ -9,7 +9,7 @@
     <copyright>&#169;2012 Pi4J</copyright>
     <item>
       <title>File: 48,
-             Errors: 3485,
+             Errors: 3491,
              Warnings: 0,
              Infos: 0
       </title>
@@ -402,7 +402,7 @@
                   0
                 </td>
                 <td>
-                  71
+                  77
                 </td>
               </tr>
                           <tr>
@@ -533,20 +533,6 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://pi4j/checkstyle.html#com.pi4j.io.gpio.impl.GpioController.java">com/pi4j/io/gpio/impl/GpioController.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  886
-                </td>
-              </tr>
-                          <tr>
-                <td>
                   <a href="http://pi4j/checkstyle.html#com.pi4j.io.gpio.PinDirection.java">com/pi4j/io/gpio/PinDirection.java</a>
                 </td>
                 <td>
@@ -585,6 +571,20 @@
                 </td>
                 <td>
                   16
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://pi4j/checkstyle.html#com.pi4j.io.gpio.impl.GpioControllerImpl.java">com/pi4j/io/gpio/impl/GpioControllerImpl.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  886
                 </td>
               </tr>
                           <tr>

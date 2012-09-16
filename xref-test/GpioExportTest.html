@@ -42,47 +42,47 @@
 <a class="jxr_linenumber" name="32" href="#32">32</a>      {
 <a class="jxr_linenumber" name="33" href="#33">33</a>          System.out.println(<span class="jxr_string">"&lt;--Pi4J--&gt; GPIO export test program"</span>);
 <a class="jxr_linenumber" name="34" href="#34">34</a>          
-<a class="jxr_linenumber" name="35" href="#35">35</a>          <em class="jxr_comment">// set GPIO 4 as the input trigger </em>
-<a class="jxr_linenumber" name="36" href="#36">36</a>          GpioUtil.export(24, GpioUtil.DIRECTION_IN);
-<a class="jxr_linenumber" name="37" href="#37">37</a>          System.out.println(<span class="jxr_string">"GPIO 24 is now exported"</span>);
+<a class="jxr_linenumber" name="35" href="#35">35</a>          <em class="jxr_comment">// set GPIO #07 as the input trigger </em>
+<a class="jxr_linenumber" name="36" href="#36">36</a>          GpioUtil.export(7, GpioUtil.DIRECTION_IN);
+<a class="jxr_linenumber" name="37" href="#37">37</a>          System.out.println(<span class="jxr_string">"GPIO 07 is now exported"</span>);
 <a class="jxr_linenumber" name="38" href="#38">38</a>  
-<a class="jxr_linenumber" name="39" href="#39">39</a>          System.out.println(<span class="jxr_string">"GPIO 24 is exported ? : "</span>+ GpioUtil.isExported(24));
-<a class="jxr_linenumber" name="40" href="#40">40</a>          System.out.println(<span class="jxr_string">"GPIO 24 edge ? : "</span>+ GpioUtil.getDirection(24));
+<a class="jxr_linenumber" name="39" href="#39">39</a>          System.out.println(<span class="jxr_string">"GPIO 07 is exported ? : "</span>+ GpioUtil.isExported(7));
+<a class="jxr_linenumber" name="40" href="#40">40</a>          System.out.println(<span class="jxr_string">"GPIO 07 edge ? : "</span>+ GpioUtil.getDirection(7));
 <a class="jxr_linenumber" name="41" href="#41">41</a>          
-<a class="jxr_linenumber" name="42" href="#42">42</a>          System.out.println(<span class="jxr_string">"GPIO 24 edge = 'none'"</span>);
-<a class="jxr_linenumber" name="43" href="#43">43</a>          GpioUtil.setEdgeDetection(24,GpioUtil.EDGE_NONE);        
-<a class="jxr_linenumber" name="44" href="#44">44</a>          System.out.println(<span class="jxr_string">"GPIO 24 edge ? : "</span>+ GpioUtil.getEdgeDetection(24));
+<a class="jxr_linenumber" name="42" href="#42">42</a>          System.out.println(<span class="jxr_string">"GPIO 07 edge = 'none'"</span>);
+<a class="jxr_linenumber" name="43" href="#43">43</a>          GpioUtil.setEdgeDetection(07,GpioUtil.EDGE_NONE);        
+<a class="jxr_linenumber" name="44" href="#44">44</a>          System.out.println(<span class="jxr_string">"GPIO 07 edge ? : "</span>+ GpioUtil.getEdgeDetection(7));
 <a class="jxr_linenumber" name="45" href="#45">45</a>          Thread.sleep(5000);
 <a class="jxr_linenumber" name="46" href="#46">46</a>          
-<a class="jxr_linenumber" name="47" href="#47">47</a>          System.out.println(<span class="jxr_string">"GPIO 24 edge = 'both'"</span>);
-<a class="jxr_linenumber" name="48" href="#48">48</a>          GpioUtil.setEdgeDetection(24,GpioUtil.EDGE_BOTH);        
-<a class="jxr_linenumber" name="49" href="#49">49</a>          System.out.println(<span class="jxr_string">"GPIO 24 edge ? : "</span>+ GpioUtil.getEdgeDetection(24));
+<a class="jxr_linenumber" name="47" href="#47">47</a>          System.out.println(<span class="jxr_string">"GPIO 07 edge = 'both'"</span>);
+<a class="jxr_linenumber" name="48" href="#48">48</a>          GpioUtil.setEdgeDetection(7,GpioUtil.EDGE_BOTH);        
+<a class="jxr_linenumber" name="49" href="#49">49</a>          System.out.println(<span class="jxr_string">"GPIO 07 edge ? : "</span>+ GpioUtil.getEdgeDetection(7));
 <a class="jxr_linenumber" name="50" href="#50">50</a>          Thread.sleep(5000);
 <a class="jxr_linenumber" name="51" href="#51">51</a>          
-<a class="jxr_linenumber" name="52" href="#52">52</a>          System.out.println(<span class="jxr_string">"GPIO 24 edge = 'rising'"</span>);
-<a class="jxr_linenumber" name="53" href="#53">53</a>          GpioUtil.setEdgeDetection(24,GpioUtil.EDGE_RISING);        
-<a class="jxr_linenumber" name="54" href="#54">54</a>          System.out.println(<span class="jxr_string">"GPIO 24 edge ? : "</span>+ GpioUtil.getEdgeDetection(24));
+<a class="jxr_linenumber" name="52" href="#52">52</a>          System.out.println(<span class="jxr_string">"GPIO 07 edge = 'rising'"</span>);
+<a class="jxr_linenumber" name="53" href="#53">53</a>          GpioUtil.setEdgeDetection(7,GpioUtil.EDGE_RISING);        
+<a class="jxr_linenumber" name="54" href="#54">54</a>          System.out.println(<span class="jxr_string">"GPIO 07 edge ? : "</span>+ GpioUtil.getEdgeDetection(7));
 <a class="jxr_linenumber" name="55" href="#55">55</a>          Thread.sleep(5000);
 <a class="jxr_linenumber" name="56" href="#56">56</a>          
-<a class="jxr_linenumber" name="57" href="#57">57</a>          System.out.println(<span class="jxr_string">"GPIO 24 edge = 'falling'"</span>);
-<a class="jxr_linenumber" name="58" href="#58">58</a>          GpioUtil.setEdgeDetection(24,GpioUtil.EDGE_FALLING);        
-<a class="jxr_linenumber" name="59" href="#59">59</a>          System.out.println(<span class="jxr_string">"GPIO 24 edge ? : "</span>+ GpioUtil.getEdgeDetection(24));
+<a class="jxr_linenumber" name="57" href="#57">57</a>          System.out.println(<span class="jxr_string">"GPIO 07 edge = 'falling'"</span>);
+<a class="jxr_linenumber" name="58" href="#58">58</a>          GpioUtil.setEdgeDetection(7,GpioUtil.EDGE_FALLING);        
+<a class="jxr_linenumber" name="59" href="#59">59</a>          System.out.println(<span class="jxr_string">"GPIO 07 edge ? : "</span>+ GpioUtil.getEdgeDetection(7));
 <a class="jxr_linenumber" name="60" href="#60">60</a>          Thread.sleep(5000);
 <a class="jxr_linenumber" name="61" href="#61">61</a>  
-<a class="jxr_linenumber" name="62" href="#62">62</a>          System.out.println(<span class="jxr_string">"GPIO 24 direction = 'out'"</span>);
-<a class="jxr_linenumber" name="63" href="#63">63</a>          GpioUtil.setDirection(24, GpioUtil.DIRECTION_OUT);     
-<a class="jxr_linenumber" name="64" href="#64">64</a>          System.out.println(<span class="jxr_string">"GPIO 24 direction ? : "</span>+ GpioUtil.getDirection(24));
+<a class="jxr_linenumber" name="62" href="#62">62</a>          System.out.println(<span class="jxr_string">"GPIO 07 direction = 'out'"</span>);
+<a class="jxr_linenumber" name="63" href="#63">63</a>          GpioUtil.setDirection(7, GpioUtil.DIRECTION_OUT);     
+<a class="jxr_linenumber" name="64" href="#64">64</a>          System.out.println(<span class="jxr_string">"GPIO 07 direction ? : "</span>+ GpioUtil.getDirection(7));
 <a class="jxr_linenumber" name="65" href="#65">65</a>          Thread.sleep(5000);
 <a class="jxr_linenumber" name="66" href="#66">66</a>  
-<a class="jxr_linenumber" name="67" href="#67">67</a>          System.out.println(<span class="jxr_string">"GPIO 24 direction = 'in'"</span>);
-<a class="jxr_linenumber" name="68" href="#68">68</a>          GpioUtil.setDirection(24, GpioUtil.DIRECTION_IN);     
-<a class="jxr_linenumber" name="69" href="#69">69</a>          System.out.println(<span class="jxr_string">"GPIO 24 direction ? : "</span>+ GpioUtil.getDirection(24));
+<a class="jxr_linenumber" name="67" href="#67">67</a>          System.out.println(<span class="jxr_string">"GPIO 07 direction = 'in'"</span>);
+<a class="jxr_linenumber" name="68" href="#68">68</a>          GpioUtil.setDirection(7, GpioUtil.DIRECTION_IN);     
+<a class="jxr_linenumber" name="69" href="#69">69</a>          System.out.println(<span class="jxr_string">"GPIO 07 direction ? : "</span>+ GpioUtil.getDirection(7));
 <a class="jxr_linenumber" name="70" href="#70">70</a>          Thread.sleep(5000);
 <a class="jxr_linenumber" name="71" href="#71">71</a>          
-<a class="jxr_linenumber" name="72" href="#72">72</a>          GpioUtil.unexport(24);
-<a class="jxr_linenumber" name="73" href="#73">73</a>          System.out.println(<span class="jxr_string">"GPIO 24 is now unexported"</span>);
+<a class="jxr_linenumber" name="72" href="#72">72</a>          GpioUtil.unexport(7);
+<a class="jxr_linenumber" name="73" href="#73">73</a>          System.out.println(<span class="jxr_string">"GPIO 07 is now unexported"</span>);
 <a class="jxr_linenumber" name="74" href="#74">74</a>          
-<a class="jxr_linenumber" name="75" href="#75">75</a>          System.out.println(<span class="jxr_string">"GPIO 24 is exported ? : "</span>+ GpioUtil.isExported(24));        
+<a class="jxr_linenumber" name="75" href="#75">75</a>          System.out.println(<span class="jxr_string">"GPIO 07 is exported ? : "</span>+ GpioUtil.isExported(7));        
 <a class="jxr_linenumber" name="76" href="#76">76</a>      }
 <a class="jxr_linenumber" name="77" href="#77">77</a>  }
 <a class="jxr_linenumber" name="78" href="#78">78</a>  

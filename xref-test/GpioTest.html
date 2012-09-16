@@ -62,18 +62,18 @@
 <a class="jxr_linenumber" name="52" href="#52">52</a>          <em class="jxr_comment">// create gpio controller</em>
 <a class="jxr_linenumber" name="53" href="#53">53</a>          Gpio gpio = GpioFactory.createInstance();
 <a class="jxr_linenumber" name="54" href="#54">54</a>  
-<a class="jxr_linenumber" name="55" href="#55">55</a>          <em class="jxr_comment">// setup gpio pin #4 as an input pin whose biased to ground and receives +3VDC to be</em>
+<a class="jxr_linenumber" name="55" href="#55">55</a>          <em class="jxr_comment">// setup gpio pin #07 as an input pin whose biased to ground and receives +3VDC to be</em>
 <a class="jxr_linenumber" name="56" href="#56">56</a>          <em class="jxr_comment">// triggered</em>
-<a class="jxr_linenumber" name="57" href="#57">57</a>          GpioPin inputPin = gpio.provisionInputPin(Pin.GPIO_04, <span class="jxr_string">"Test-Input"</span>, PinEdge.BOTH,
+<a class="jxr_linenumber" name="57" href="#57">57</a>          GpioPin inputPin = gpio.provisionInputPin(Pin.GPIO_07, <span class="jxr_string">"Test-Input"</span>, PinEdge.BOTH,
 <a class="jxr_linenumber" name="58" href="#58">58</a>                                                    PinResistor.PULL_DOWN);
 <a class="jxr_linenumber" name="59" href="#59">59</a>  
 <a class="jxr_linenumber" name="60" href="#60">60</a>          <em class="jxr_comment">// add gpio listener</em>
 <a class="jxr_linenumber" name="61" href="#61">61</a>          inputPin.addListener(listener);
 <a class="jxr_linenumber" name="62" href="#62">62</a>  
-<a class="jxr_linenumber" name="63" href="#63">63</a>          <em class="jxr_comment">// setup gpio pin #21, 22, 23 as output pins</em>
-<a class="jxr_linenumber" name="64" href="#64">64</a>          GpioPin pinLed1 = gpio.provisionOuputPin(Pin.GPIO_21, <span class="jxr_string">"LED-One"</span>, PinState.LOW);
-<a class="jxr_linenumber" name="65" href="#65">65</a>          GpioPin pinLed2 = gpio.provisionOuputPin(Pin.GPIO_22, <span class="jxr_string">"LED-Two"</span>, PinState.HIGH);
-<a class="jxr_linenumber" name="66" href="#66">66</a>          GpioPin pinLed3 = gpio.provisionOuputPin(Pin.GPIO_23, <span class="jxr_string">"LED-Three"</span>, PinState.LOW);
+<a class="jxr_linenumber" name="63" href="#63">63</a>          <em class="jxr_comment">// setup gpio pin #04, #05, #06 as output pins</em>
+<a class="jxr_linenumber" name="64" href="#64">64</a>          GpioPin pinLed1 = gpio.provisionOuputPin(Pin.GPIO_04, <span class="jxr_string">"LED-One"</span>, PinState.LOW);
+<a class="jxr_linenumber" name="65" href="#65">65</a>          GpioPin pinLed2 = gpio.provisionOuputPin(Pin.GPIO_05, <span class="jxr_string">"LED-Two"</span>, PinState.HIGH);
+<a class="jxr_linenumber" name="66" href="#66">66</a>          GpioPin pinLed3 = gpio.provisionOuputPin(Pin.GPIO_06, <span class="jxr_string">"LED-Three"</span>, PinState.LOW);
 <a class="jxr_linenumber" name="67" href="#67">67</a>  
 <a class="jxr_linenumber" name="68" href="#68">68</a>          <em class="jxr_comment">// create gpio triggers</em>
 <a class="jxr_linenumber" name="69" href="#69">69</a>          inputPin.addTrigger(<strong class="jxr_keyword">new</strong> GpioSetStateTrigger(PinState.HIGH, pinLed1, PinState.HIGH));

@@ -275,15 +275,19 @@ public class ListenGpioExample
 {
     public static void main(String args[]) throws InterruptedException
     {
+        System.out.println(&quot;&lt;--Pi4J--&gt; GPIO Listen Example ... started.&quot;);
+        
         // create gpio controller
         Gpio gpio = GpioFactory.createInstance();
 
-        // provision gpio pin #4 as an input pin with its internal pull down resistor enabled
+        // provision gpio pin #02 as an input pin with its internal pull down resistor enabled
         // (configure pin edge to both rising and falling to get notified for HIGH and LOW state changes)
-        GpioPin myButton = gpio.provisionInputPin(Pin.GPIO_04, &quot;MyButton&quot;, PinEdge.BOTH, PinResistor.PULL_DOWN);
+        GpioPin myButton = gpio.provisionInputPin(Pin.GPIO_02, &quot;MyButton&quot;, PinEdge.BOTH, PinResistor.PULL_DOWN);
 
         // create and register gpio pin listener
         myButton.addListener(new GpioExampleListener());
+        
+        System.out.println(&quot; ... complete the GPIO #02 circuit and see the listener feedback here in the console.&quot;);
 
         // keep program running until user aborts (CTRL-C)
         for (;;)
@@ -309,7 +313,7 @@ class GpioExampleListener implements GpioListener
                 + event.getState());
     }
 }
-</pre></div></div><div class="section"><h3>Wiring Diagram<a name="Wiring_Diagram"></a></h3><p>The following circuit can be used in conjunction with this sample code.</p><img src="../images/gpio-listener-example.png" alt="" /></div><div class="section"><h3>Compile<a name="Compile"></a></h3><p>First, copy the <i>ListenGpioExample.java</i> source file to a directory on the RaspberryPi.<br />Next, use the following command to compile this example program:</p><p><tt>javac -cp /usr/share/java/pi4j.jar -d ListenGpioExample.java</tt></p></div><div class="section"><h3>Execute<a name="Execute"></a></h3><p>The following command will run this example program:</p><p><tt>sudo java -Djava.library.path=/usr/local/lib -classpath .:/usr/share/java/pi4j.jar com.pi4j.example.ListenGpioExample</tt></p></div><div class="section"><h3>Output<a name="Output"></a></h3><p>You should see the following message on the console each time the momentary button is pressed:</p><p><tt> --&gt; GPIO PIN STATE CHANGE: 4 = HIGH </tt></p><p>and this message on the console each time the momentary button is released:</p><p><tt> --&gt; GPIO PIN STATE CHANGE: 4 = LOW </tt></p></div></div>
+</pre></div></div><div class="section"><h3>Wiring Diagram<a name="Wiring_Diagram"></a></h3><p>The following circuit can be used in conjunction with this sample code.</p><img src="../images/gpio-listener-example.png" alt="" /><p><a href="../images/gpio-listener-example-large.png">(click here for hi-resolution image)</a></p></div><div class="section"><h3>Compile<a name="Compile"></a></h3><p>First, copy the <i>ListenGpioExample.java</i> source file to a directory on the RaspberryPi.<br />Next, use the following command to compile this example program:</p><p><tt>javac -cp pi4j.jar -d . ListenGpioExample.java</tt></p></div><div class="section"><h3>Execute<a name="Execute"></a></h3><p>The following command will run this example program:</p><p><tt>sudo java -classpath .:pi4j.jar com.pi4j.example.ListenGpioExample</tt></p></div><div class="section"><h3>Output<a name="Output"></a></h3><p>You should see the following message on the console each time the momentary button is pressed:</p><p><tt> --&gt; GPIO PIN STATE CHANGE: 4 = HIGH </tt></p><p>and this message on the console each time the momentary button is released:</p><p><tt> --&gt; GPIO PIN STATE CHANGE: 4 = LOW </tt></p></div></div>
                   </div>
             </div>
           </div>

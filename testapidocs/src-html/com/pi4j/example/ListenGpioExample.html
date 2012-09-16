@@ -56,41 +56,45 @@
 <span class="sourceLineNo">048</span>{<a name="line.48"></a>
 <span class="sourceLineNo">049</span>    public static void main(String args[]) throws InterruptedException<a name="line.49"></a>
 <span class="sourceLineNo">050</span>    {<a name="line.50"></a>
-<span class="sourceLineNo">051</span>        // create gpio controller<a name="line.51"></a>
-<span class="sourceLineNo">052</span>        Gpio gpio = GpioFactory.createInstance();<a name="line.52"></a>
-<span class="sourceLineNo">053</span><a name="line.53"></a>
-<span class="sourceLineNo">054</span>        // provision gpio pin #4 as an input pin with its internal pull down resistor enabled<a name="line.54"></a>
-<span class="sourceLineNo">055</span>        // (configure pin edge to both rising and falling to get notified for HIGH and LOW state changes)<a name="line.55"></a>
-<span class="sourceLineNo">056</span>        GpioPin myButton = gpio.provisionInputPin(Pin.GPIO_04, "MyButton", PinEdge.BOTH, PinResistor.PULL_DOWN);<a name="line.56"></a>
-<span class="sourceLineNo">057</span><a name="line.57"></a>
-<span class="sourceLineNo">058</span>        // create and register gpio pin listener<a name="line.58"></a>
-<span class="sourceLineNo">059</span>        myButton.addListener(new GpioExampleListener());<a name="line.59"></a>
-<span class="sourceLineNo">060</span><a name="line.60"></a>
-<span class="sourceLineNo">061</span>        // keep program running until user aborts (CTRL-C)<a name="line.61"></a>
-<span class="sourceLineNo">062</span>        for (;;)<a name="line.62"></a>
-<span class="sourceLineNo">063</span>        {<a name="line.63"></a>
-<span class="sourceLineNo">064</span>            Thread.sleep(500);<a name="line.64"></a>
-<span class="sourceLineNo">065</span>        }<a name="line.65"></a>
-<span class="sourceLineNo">066</span>    }<a name="line.66"></a>
-<span class="sourceLineNo">067</span>}<a name="line.67"></a>
-<span class="sourceLineNo">068</span><a name="line.68"></a>
-<span class="sourceLineNo">069</span>/**<a name="line.69"></a>
-<span class="sourceLineNo">070</span> * This class implements the GPIO listener interface<a name="line.70"></a>
-<span class="sourceLineNo">071</span> * with the callback method for event notifications<a name="line.71"></a>
-<span class="sourceLineNo">072</span> * when GPIO pin states change.<a name="line.72"></a>
-<span class="sourceLineNo">073</span> * <a name="line.73"></a>
-<span class="sourceLineNo">074</span> * @see GpioListener<a name="line.74"></a>
-<span class="sourceLineNo">075</span> * @author Robert Savage<a name="line.75"></a>
-<span class="sourceLineNo">076</span> */<a name="line.76"></a>
-<span class="sourceLineNo">077</span>class GpioExampleListener implements GpioListener<a name="line.77"></a>
-<span class="sourceLineNo">078</span>{<a name="line.78"></a>
-<span class="sourceLineNo">079</span>    public void pinStateChanged(GpioPinStateChangeEvent event)<a name="line.79"></a>
-<span class="sourceLineNo">080</span>    {<a name="line.80"></a>
-<span class="sourceLineNo">081</span>        System.out.println(" --&gt; GPIO PIN STATE CHANGE: " + event.getPin() + " = "<a name="line.81"></a>
-<span class="sourceLineNo">082</span>                + event.getState());<a name="line.82"></a>
-<span class="sourceLineNo">083</span>    }<a name="line.83"></a>
-<span class="sourceLineNo">084</span>}<a name="line.84"></a>
-<span class="sourceLineNo">085</span>// END SNIPPET: listen-gpio-snippet<a name="line.85"></a>
+<span class="sourceLineNo">051</span>        System.out.println("&lt;--Pi4J--&gt; GPIO Listen Example ... started.");<a name="line.51"></a>
+<span class="sourceLineNo">052</span>        <a name="line.52"></a>
+<span class="sourceLineNo">053</span>        // create gpio controller<a name="line.53"></a>
+<span class="sourceLineNo">054</span>        Gpio gpio = GpioFactory.createInstance();<a name="line.54"></a>
+<span class="sourceLineNo">055</span><a name="line.55"></a>
+<span class="sourceLineNo">056</span>        // provision gpio pin #02 as an input pin with its internal pull down resistor enabled<a name="line.56"></a>
+<span class="sourceLineNo">057</span>        // (configure pin edge to both rising and falling to get notified for HIGH and LOW state changes)<a name="line.57"></a>
+<span class="sourceLineNo">058</span>        GpioPin myButton = gpio.provisionInputPin(Pin.GPIO_02, "MyButton", PinEdge.BOTH, PinResistor.PULL_DOWN);<a name="line.58"></a>
+<span class="sourceLineNo">059</span><a name="line.59"></a>
+<span class="sourceLineNo">060</span>        // create and register gpio pin listener<a name="line.60"></a>
+<span class="sourceLineNo">061</span>        myButton.addListener(new GpioExampleListener());<a name="line.61"></a>
+<span class="sourceLineNo">062</span>        <a name="line.62"></a>
+<span class="sourceLineNo">063</span>        System.out.println(" ... complete the GPIO #02 circuit and see the listener feedback here in the console.");<a name="line.63"></a>
+<span class="sourceLineNo">064</span><a name="line.64"></a>
+<span class="sourceLineNo">065</span>        // keep program running until user aborts (CTRL-C)<a name="line.65"></a>
+<span class="sourceLineNo">066</span>        for (;;)<a name="line.66"></a>
+<span class="sourceLineNo">067</span>        {<a name="line.67"></a>
+<span class="sourceLineNo">068</span>            Thread.sleep(500);<a name="line.68"></a>
+<span class="sourceLineNo">069</span>        }<a name="line.69"></a>
+<span class="sourceLineNo">070</span>    }<a name="line.70"></a>
+<span class="sourceLineNo">071</span>}<a name="line.71"></a>
+<span class="sourceLineNo">072</span><a name="line.72"></a>
+<span class="sourceLineNo">073</span>/**<a name="line.73"></a>
+<span class="sourceLineNo">074</span> * This class implements the GPIO listener interface<a name="line.74"></a>
+<span class="sourceLineNo">075</span> * with the callback method for event notifications<a name="line.75"></a>
+<span class="sourceLineNo">076</span> * when GPIO pin states change.<a name="line.76"></a>
+<span class="sourceLineNo">077</span> * <a name="line.77"></a>
+<span class="sourceLineNo">078</span> * @see GpioListener<a name="line.78"></a>
+<span class="sourceLineNo">079</span> * @author Robert Savage<a name="line.79"></a>
+<span class="sourceLineNo">080</span> */<a name="line.80"></a>
+<span class="sourceLineNo">081</span>class GpioExampleListener implements GpioListener<a name="line.81"></a>
+<span class="sourceLineNo">082</span>{<a name="line.82"></a>
+<span class="sourceLineNo">083</span>    public void pinStateChanged(GpioPinStateChangeEvent event)<a name="line.83"></a>
+<span class="sourceLineNo">084</span>    {<a name="line.84"></a>
+<span class="sourceLineNo">085</span>        System.out.println(" --&gt; GPIO PIN STATE CHANGE: " + event.getPin() + " = "<a name="line.85"></a>
+<span class="sourceLineNo">086</span>                + event.getState());<a name="line.86"></a>
+<span class="sourceLineNo">087</span>    }<a name="line.87"></a>
+<span class="sourceLineNo">088</span>}<a name="line.88"></a>
+<span class="sourceLineNo">089</span>// END SNIPPET: listen-gpio-snippet<a name="line.89"></a>
 
 
 

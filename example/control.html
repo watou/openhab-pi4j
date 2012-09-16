@@ -226,7 +226,7 @@
                 
         <div id="bodyColumn"  class="span9" >
                                   
-            <div class="section"><h2>Simple GPIO Control using Pi4J.<a name="Simple_GPIO_Control_using_Pi4J."></a></h2><p>The following example demonstrates the simple control of a GPIO pin on the Raspberry Pi.\</p><div class="section"><h3>Source Code<a name="Source_Code"></a></h3><p>The source code for this example is included in the github repository: <a class="externalLink" href="https://github.com/Pi4J/pi4j/tree/master/src/test/java/com/pi4j/example">https://github.com/Pi4J/pi4j/tree/master/src/test/java/com/pi4j/example</a></p><div class="source"><pre class="prettyprint">package com.pi4j.example;
+            <div class="section"><h2>Simple GPIO Control using Pi4J.<a name="Simple_GPIO_Control_using_Pi4J."></a></h2><p>The following example demonstrates the simple control of a GPIO pin on the Raspberry Pi.</p><div class="section"><h3>Source Code<a name="Source_Code"></a></h3><p>The source code for this example is included in the github repository: <a class="externalLink" href="https://github.com/Pi4J/pi4j/tree/master/src/test/java/com/pi4j/example">https://github.com/Pi4J/pi4j/tree/master/src/test/java/com/pi4j/example</a></p><div class="source"><pre class="prettyprint">package com.pi4j.example;
 
 /*
  * #%L
@@ -272,34 +272,41 @@ public class ControlGpioExample
 {
     public static void main(String[] args) throws InterruptedException
     {
+        System.out.println(&quot;&lt;--Pi4J--&gt; GPIO Control Example ... started.&quot;);
+        
         // create gpio controller
         Gpio gpio = GpioFactory.createInstance();
         
-        // provision gpio pin #4 as an output pin and turn on
-        GpioPin pin = gpio.provisionOuputPin(Pin.GPIO_04, &quot;MyLED&quot;, PinState.HIGH);
+        // provision gpio pin #01 as an output pin and turn on
+        GpioPin pin = gpio.provisionOuputPin(Pin.GPIO_01, &quot;MyLED&quot;, PinState.HIGH);
+        System.out.println(&quot;--&gt; GPIO state should be: ON&quot;);
         
         Thread.sleep(5000);
         
-        // turn off gpio pin #4
+        // turn off gpio pin #01
         pin.low();
+        System.out.println(&quot;--&gt; GPIO state should be: OFF&quot;);
 
         Thread.sleep(5000);
 
-        // toggle the current state of gpio pin #4 (should turn on)
+        // toggle the current state of gpio pin #01 (should turn on)
         pin.toggle();
+        System.out.println(&quot;--&gt; GPIO state should be: ON&quot;);
 
         Thread.sleep(5000);
 
-        // toggle the current state of gpio pin #4  (should turn off)
+        // toggle the current state of gpio pin #01  (should turn off)
         pin.toggle();
+        System.out.println(&quot;--&gt; GPIO state should be: OFF&quot;);
         
         Thread.sleep(5000);
 
-        // turn on gpio pin #4 for 1 second and then off
+        // turn on gpio pin #01 for 1 second and then off
+        System.out.println(&quot;--&gt; GPIO state should be: ON for only 1 second&quot;);
         pin.pulse(1000);
     }
 }
-</pre></div></div><div class="section"><h3>Wiring Diagram<a name="Wiring_Diagram"></a></h3><p>The following circuit can be used in conjunction with this sample code.</p><img src="../images/gpio-control-example.png" alt="" /></div><div class="section"><h3>Compile<a name="Compile"></a></h3><p>First, copy the <i>ControlGpioExample.java</i> source file to a directory on the RaspberryPi.<br />Next, use the following command to compile this example program:</p><p><tt>javac -cp /usr/share/java/pi4j.jar -d ControlGpioExample.java</tt></p></div><div class="section"><h3>Execute<a name="Execute"></a></h3><p>The following command will run this example program:</p><p><tt>sudo java -Djava.library.path=/usr/local/lib -classpath .:/usr/share/java/pi4j.jar com.pi4j.example.ControlGpioExample</tt></p></div><div class="section"><h3>Output<a name="Output"></a></h3><p>You should see the attached LED perform as follows:</p><img src="../images/pinon.png" alt="" /><p>Turn ON for 5 seconds</p><img src="../images/pinoff.png" alt="" /><p>Turn OFF for 5 seconds</p><img src="../images/pinon.png" alt="" /><p>Turn ON for 5 seconds</p><img src="../images/pinoff.png" alt="" /><p>Turn OFF for 5 seconds</p><img src="../images/pinon.png" alt="" /><p>Turn ON for 1 second</p><img src="../images/pinoff.png" alt="" /><p>Turn OFF</p></div></div>
+</pre></div></div><div class="section"><h3>Wiring Diagram<a name="Wiring_Diagram"></a></h3><p>The following circuit can be used in conjunction with this sample code.</p><img src="../images/gpio-control-example.png" alt="" /><p><a href="../images/gpio-control-example-large.png">(click here for hi-resolution image)</a></p></div><div class="section"><h3>Compile<a name="Compile"></a></h3><p>First, copy the <i>ControlGpioExample.java</i> source file to a directory on the RaspberryPi.<br />Next, use the following command to compile this example program:</p><p><tt>javac -cp pi4j.jar -d . ControlGpioExample.java</tt></p></div><div class="section"><h3>Execute<a name="Execute"></a></h3><p>The following command will run this example program:</p><p><tt>sudo java -classpath .:pi4j.jar com.pi4j.example.ControlGpioExample</tt></p></div><div class="section"><h3>Output<a name="Output"></a></h3><p>You should see the attached LED perform as follows:</p><img src="../images/pinon.png" alt="" /><p>Turn ON for 5 seconds</p><img src="../images/pinoff.png" alt="" /><p>Turn OFF for 5 seconds</p><img src="../images/pinon.png" alt="" /><p>Turn ON for 5 seconds</p><img src="../images/pinoff.png" alt="" /><p>Turn OFF for 5 seconds</p><img src="../images/pinon.png" alt="" /><p>Turn ON for 1 second</p><img src="../images/pinoff.png" alt="" /><p>Turn OFF</p></div></div>
                   </div>
             </div>
           </div>
