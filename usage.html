@@ -226,7 +226,68 @@
                 
         <div id="bodyColumn"  class="span9" >
                                   
-            <div class="section"><h2>Usage <a name="Usage"></a></h2><ul><li><a href="#Import_Pi4J_Packages">Import Pi4J Packages</a></li><li><a href="#Create_Controller_Instance">Create Controller Instance</a></li><li><a href="#Pin_Numbering">Pin Numbering</a></li><li><a href="#Provision_Pins">Provision Pins</a></li><li><a href="#Control_Pin_State">Control Pin State</a></li><li><a href="#Read_Pin_State">Read Pin State</a></li><li><a href="#Listen_for_Pin_Changes">Listen for Pin Changes</a></li></ul><div class="section"><h3>Import Pi4J Packages<a name="Import_Pi4J_Packages"></a></h3><p>TODO: add more usage documentation </p></div><div class="section"><h3>Create Controller Instance<a name="Create_Controller_Instance"></a></h3><p>TODO: add more usage documentation </p></div><div class="section"><h3>Pin Numbering<a name="Pin_Numbering"></a></h3><p>Pi4J uses an abstract pin numbering scheme to help insulate software from hardware changes.&#160; P14J implements the same pin number scheme as the Wiring Pi project. More information about the WiringPi pin number scheme can be found here: <a class="externalLink" href="https://projects.drogon.net/raspberry-pi/wiringpi/pins/">https://projects.drogon.net/raspberry-pi/wiringpi/pins/</a></p><img src="./images/p1header.png" alt="" /><p><a href="./images/p1header-large.png">(click here for hi-resolution image)</a></p><p>&#160;</p><p>NOTE: The P5 header is only available on board revisions 2.0 and newer.</p><img src="./images/p5header.png" alt="" /><p><a href="./images/p5header-large.png">(click here for hi-resolution image)</a></p></div><div class="section"><h3>Provision Pins<a name="Provision_Pins"></a></h3><p>TODO: add more usage documentation </p></div><div class="section"><h3>Control Pin State<a name="Control_Pin_State"></a></h3><p>TODO: add more usage documentation </p></div><div class="section"><h3>Read Pin State<a name="Read_Pin_State"></a></h3><p>TODO: add more usage documentation </p></div><div class="section"><h3>Listen for Pin Changes<a name="Listen_for_Pin_Changes"></a></h3><p>TODO: add more usage documentation </p></div></div>
+            <div class="section"><h2>Usage <a name="Usage"></a></h2><ul><li><a href="#Import_Pi4J_Packages">Import Pi4J Packages</a></li><li><a href="#Create_Controller_Instance">Create Controller Instance</a></li><li><a href="#Pin_Numbering">Pin Numbering</a></li><li><a href="#Provision_Pins">Provision Pins</a></li><li><a href="#Control_Pin_State">Control Pin State</a></li><li><a href="#Read_Pin_State">Read Pin State</a></li><li><a href="#Listen_for_Pin_Changes">Listen for Pin Changes</a></li><li><a href="#Pin_Triggers">Pin Triggers</a></li></ul><div class="section"><h3>Import Pi4J Packages<a name="Import_Pi4J_Packages"></a></h3><p>To implement Pi4J, you will need to include a number of Pi4J packages into your project classes. The following list includes the majority of the Pi4J imports that you would need. You probably will not require all of these imports in your project, you can remove any unused imports. </p><div class="source"><pre class="prettyprint">import com.pi4j.io.gpio.Gpio;
+import com.pi4j.io.gpio.GpioFactory;
+import com.pi4j.io.gpio.GpioPin;
+import com.pi4j.io.gpio.Pin;
+import com.pi4j.io.gpio.PinDirection;
+import com.pi4j.io.gpio.PinEdge;
+import com.pi4j.io.gpio.PinMode;
+import com.pi4j.io.gpio.PinResistor;
+import com.pi4j.io.gpio.PinState;
+import com.pi4j.io.gpio.trigger.GpioCallbackTrigger;
+import com.pi4j.io.gpio.trigger.GpioPulseStateTrigger;
+import com.pi4j.io.gpio.trigger.GpioSetStateTrigger;
+import com.pi4j.io.gpio.trigger.GpioSyncStateTrigger;
+import com.pi4j.io.gpio.event.GpioListener;
+import com.pi4j.io.gpio.event.GpioPinStateChangeEvent;
+
+</pre></div></div><div class="section"><h3>Create Controller Instance<a name="Create_Controller_Instance"></a></h3><p>Before interacting with Pi4J, you must first create a new GPIO controller instance. The <i>GpioFactory</i> includes a <i>createInstance</i> method to create the GPIO controller. Your project should only instantiate a single GPIO controller instance and that instance should be shared across your project. </p><div class="source"><pre class="prettyprint">// create gpio controller instance
+Gpio gpio = GpioFactory.createInstance();
+</pre></div></div><div class="section"><h3>Pin Numbering<a name="Pin_Numbering"></a></h3><p>Pi4J uses an abstract pin numbering scheme to help insulate software from hardware changes.&#160; P14J implements the same pin number scheme as the Wiring Pi project. More information about the WiringPi pin number scheme can be found here: <a class="externalLink" href="https://projects.drogon.net/raspberry-pi/wiringpi/pins/">https://projects.drogon.net/raspberry-pi/wiringpi/pins/</a></p><p>Pi4J provides a <a href="./apidocs/index.html?com/pi4j/io/gpio/Pin.html">Pin</a> enumeration that is used to manage the accessible GPIO pins. </p><img src="./images/p1header.png" alt="" /><p><a href="./images/p1header-large.png">(click here for hi-resolution image)</a></p><p>&#160;</p><p>NOTE: The P5 header is only available on board revisions 2.0 and newer.</p><img src="./images/p5header.png" alt="" /><p><a href="./images/p5header-large.png">(click here for hi-resolution image)</a></p></div><div class="section"><h3>Provision Pins<a name="Provision_Pins"></a></h3><p>To access a GPIO pin, you must first provision the pin.<br />Provisioning configures the pin based on how you intend to use it. Provisioning can automatically export the pin, set its direction, and setup any edge detection for interrupt based events.</p><p>The following example demonstrates how to provision an INPUT pin. Input pins are pins that your program will monitor for state change or interrogate state when needed. Input pins are used for switches, sensors, etc. </p><div class="source"><pre class="prettyprint">        // provision gpio pin #02 as an input pin with its internal pull down resistor enabled
+        // (configure pin edge to both rising and falling to get notified for HIGH and LOW state
+        // changes)
+        GpioPin myButton = gpio.provisionInputPin(Pin.GPIO_02,            // PIN NUMBER
+                                                  &quot;MyButton&quot;,             // PIN FRIENDLY NAME
+                                                  PinEdge.BOTH,           // PIN EDGE DETECTION
+                                                  PinResistor.PULL_DOWN); // PIN RESISTANCE
+
+</pre></div><p>The following example demonstrates how to provision an OUTPUT pin.<br />Output pins are pins that your program will control state changes. Output pins are used for controlling relays, LEDs, transistors, etc. </p><div class="source"><pre class="prettyprint">// provision gpio pins #04 as an output pin and make sure is is set to LOW at startup
+GpioPin myLed = gpio.provisionOuputPin(Pin.GPIO_04,   // PIN NUMBER
+                                       &quot;My LED&quot;,      // PIN FRIENDLY NAME
+                                       PinState.LOW); // PIN STARTUP STATE
+</pre></div></div><div class="section"><h3>Control Pin State<a name="Control_Pin_State"></a></h3><p>P14J provides a number of convenience method for controlling or writing a state to a GPIO pin.<br />The examples below demonstrate a few of the controlling methods you can invoke on a GPIO pin. </p><div class="source"><pre class="prettyprint">        // explicitly set a state on the pin object
+        myLed.setState(PinState.HIGH);
+
+        // use convenience wrapper method to set state on the pin object
+        myLed.low();
+        myLed.high();
+
+        // use toggle method to apply inverse state on the pin object
+        myLed.toggle();
+
+        // use pulse method to set the pin to the HIGH state for
+        // an explicit length of time in milliseconds
+        myLed.pulse(1000);
+</pre></div><p>A complete example project demonstrating the control of GPIO pins is provided <a href="./example/control.html">here</a>.</p></div><div class="section"><h3>Read Pin State<a name="Read_Pin_State"></a></h3><p>P14J provides a number of convenience method for reading/interrogating the current state to a GPIO pin.<br />The examples below demonstrate a few of the reading methods you can invoke on a GPIO pin. </p><div class="source"><pre class="prettyprint">        // get explicit state enumeration for the GPIO pin associated with the button
+        PinState myButtonState = myButton.getState();
+
+        // use convenience wrapper method to interrogate the button state
+        boolean buttonPressed = myButton.isHigh();
+</pre></div></div><div class="section"><h3>Listen for Pin Changes<a name="Listen_for_Pin_Changes"></a></h3><p>Pi4J provides an implementation for monitoring GPIO pin interrupts. This is a far more efficient method for actively monitoring pin states versus constantly polling and interrogating the pin state.</p><p>You must create a class that implements the <i>GpioListener</i> interface. This interface simply contain a single method <i>pinStateChanged(GpioPinStateChangeEvent event)</i> that is used to notify the listener class when a pin change event has occurred.<br />The following snippet demonstrates a simple listener implementation: </p><div class="source"><pre class="prettyprint">class GpioUsageExampleListener implements GpioListener
+{
+    public void pinStateChanged(GpioPinStateChangeEvent event)
+    {
+        System.out.println(&quot; --&gt; GPIO PIN STATE CHANGE: &quot; + event.getPin() + &quot; = &quot;
+                + event.getState());
+    }
+}
+</pre></div><p>To setup your listener, you must register the listener with a pin and instantiate your listener impl.</p><div class="source"><pre class="prettyprint">// create and register gpio pin listener
+myButton.addListener(new GpioExampleListener());
+</pre></div><p>A complete example project demonstrating the listening for GPIO pin state changes is provided <a href="./example/listener.html">here</a>.</p></div><div class="section"><h3>Pin Triggers<a name="Pin_Triggers"></a></h3><p>P14J provides a series of <i>GpioTriggers</i> that can perform actions on GPIO pins based on the state change of another pin. Triggers also provide an extensible interface that allow you to extend and create your own custom triggers.&#160; The following snippet demonstrates a simple ''follow-me' trigger implementation: </p><div class="source"><pre class="prettyprint">// create a gpio synchronization trigger on the input pin
+// when the input state changes, also set LED controlling gpio pin to same state
+myButton.addTrigger(new GpioSyncStateTrigger(myLed));
+</pre></div><p>A complete example project demonstrating the GPIO pin triggers is provided <a href="./example/trigger.html">here</a>.<br />(This example includes all available provided triggers.)</p></div></div>
                   </div>
             </div>
           </div>
