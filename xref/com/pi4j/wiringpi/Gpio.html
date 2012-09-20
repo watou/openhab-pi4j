@@ -14,7 +14,7 @@
 <a class="jxr_linenumber" name="4" href="#4">4</a>   <em class="jxr_comment"> * #%L</em>
 <a class="jxr_linenumber" name="5" href="#5">5</a>   <em class="jxr_comment"> * **********************************************************************</em>
 <a class="jxr_linenumber" name="6" href="#6">6</a>   <em class="jxr_comment"> * ORGANIZATION  :  Pi4J</em>
-<a class="jxr_linenumber" name="7" href="#7">7</a>   <em class="jxr_comment"> * PROJECT       :  Pi4J :: Java Library</em>
+<a class="jxr_linenumber" name="7" href="#7">7</a>   <em class="jxr_comment"> * PROJECT       :  Pi4J :: Java Library (Core)</em>
 <a class="jxr_linenumber" name="8" href="#8">8</a>   <em class="jxr_comment"> * FILENAME      :  Gpio.java  </em>
 <a class="jxr_linenumber" name="9" href="#9">9</a>   <em class="jxr_comment"> * </em>
 <a class="jxr_linenumber" name="10" href="#10">10</a>  <em class="jxr_comment"> * This file is part of the Pi4J project. More information about </em>
@@ -82,7 +82,7 @@
 <a class="jxr_linenumber" name="72" href="#72">72</a>  <em class="jxr_javadoccomment">     * &lt;/p&gt;</em>
 <a class="jxr_linenumber" name="73" href="#73">73</a>  <em class="jxr_javadoccomment">     * &lt;i&gt;(Note this is not the maximum pin count on the Pi GPIO header.)&lt;/i&gt;</em>
 <a class="jxr_linenumber" name="74" href="#74">74</a>  <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="75" href="#75">75</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">int</strong> NUM_PINS = 17;
+<a class="jxr_linenumber" name="75" href="#75">75</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">int</strong> NUM_PINS = 20;
 <a class="jxr_linenumber" name="76" href="#76">76</a>  
 <a class="jxr_linenumber" name="77" href="#77">77</a>      <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="78" href="#78">78</a>  <em class="jxr_javadoccomment">     * &lt;h1&gt;GPIO PIN DIRECTION&lt;/h1&gt;</em>
@@ -604,41 +604,83 @@
 <a class="jxr_linenumber" name="594" href="#594">594</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">native</strong> <strong class="jxr_keyword">int</strong> waitForInterrupt(<strong class="jxr_keyword">int</strong> pin, <strong class="jxr_keyword">int</strong> timeout);
 <a class="jxr_linenumber" name="595" href="#595">595</a> 
 <a class="jxr_linenumber" name="596" href="#596">596</a>     <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="597" href="#597">597</a> <em class="jxr_javadoccomment">     * --------------------------------------------------------------------------------------------</em>
-<a class="jxr_linenumber" name="598" href="#598">598</a> <em class="jxr_javadoccomment">     * lets not use native code for threading in Java; that could get you into some trouble.</em>
-<a class="jxr_linenumber" name="599" href="#599">599</a> <em class="jxr_javadoccomment">     * --------------------------------------------------------------------------------------------</em>
-<a class="jxr_linenumber" name="600" href="#600">600</a> <em class="jxr_javadoccomment">     * &lt;h1&gt;Concurrent Processing (multi-threading)&lt;/h1&gt;</em>
-<a class="jxr_linenumber" name="601" href="#601">601</a> <em class="jxr_javadoccomment">     * </em>
-<a class="jxr_linenumber" name="602" href="#602">602</a> <em class="jxr_javadoccomment">     * wiringPi has a simplified interface to the Linux implementation of Posix threads, as well as</em>
-<a class="jxr_linenumber" name="603" href="#603">603</a> <em class="jxr_javadoccomment">     * a (simplified) mechanisms to access mutexs (Mutual exclusions)</em>
-<a class="jxr_linenumber" name="604" href="#604">604</a> <em class="jxr_javadoccomment">     * </em>
-<a class="jxr_linenumber" name="605" href="#605">605</a> <em class="jxr_javadoccomment">     * Using these functions you can create a new process (a function inside your main program)</em>
-<a class="jxr_linenumber" name="606" href="#606">606</a> <em class="jxr_javadoccomment">     * which runs concurrently with your main program and using the mutex mechanisms, safely pass</em>
-<a class="jxr_linenumber" name="607" href="#607">607</a> <em class="jxr_javadoccomment">     * variables between them.</em>
-<a class="jxr_linenumber" name="608" href="#608">608</a> <em class="jxr_javadoccomment">     * </em>
-<a class="jxr_linenumber" name="609" href="#609">609</a> <em class="jxr_javadoccomment">     * @see &lt;a</em>
-<a class="jxr_linenumber" name="610" href="#610">610</a> <em class="jxr_javadoccomment">     *      href="https://projects.drogon.net/raspberry-pi/wiringpi/functions/"&gt;https://projects.drogon.net/raspberry-pi/wiringpi/functions/&lt;/a&gt;</em>
-<a class="jxr_linenumber" name="611" href="#611">611</a> <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="612" href="#612">612</a>     <em class="jxr_comment">// public static native int piThreadCreate(void fn, int timeout);</em>
-<a class="jxr_linenumber" name="613" href="#613">613</a>     <em class="jxr_comment">// public static native void piLock(int key);</em>
-<a class="jxr_linenumber" name="614" href="#614">614</a>     <em class="jxr_comment">// public static native void piUnlock(int key);</em>
+<a class="jxr_linenumber" name="597" href="#597">597</a> <em class="jxr_javadoccomment">     * &lt;h1&gt;[Hardware]&lt;/h1&gt;</em>
+<a class="jxr_linenumber" name="598" href="#598">598</a> <em class="jxr_javadoccomment">     * </em>
+<a class="jxr_linenumber" name="599" href="#599">599</a> <em class="jxr_javadoccomment">     * &lt;p&gt;</em>
+<a class="jxr_linenumber" name="600" href="#600">600</a> <em class="jxr_javadoccomment">     * &lt;b&gt;extern int piBoardRev(void);&lt;/b&gt;</em>
+<a class="jxr_linenumber" name="601" href="#601">601</a> <em class="jxr_javadoccomment">     * &lt;/p&gt;</em>
+<a class="jxr_linenumber" name="602" href="#602">602</a> <em class="jxr_javadoccomment">     * </em>
+<a class="jxr_linenumber" name="603" href="#603">603</a> <em class="jxr_javadoccomment">     * &lt;p&gt;</em>
+<a class="jxr_linenumber" name="604" href="#604">604</a> <em class="jxr_javadoccomment">     * This method provides the board revision as determined by the wiringPi library. </em>
+<a class="jxr_linenumber" name="605" href="#605">605</a> <em class="jxr_javadoccomment">     * &lt;/p&gt;</em>
+<a class="jxr_linenumber" name="606" href="#606">606</a> <em class="jxr_javadoccomment">     * </em>
+<a class="jxr_linenumber" name="607" href="#607">607</a> <em class="jxr_javadoccomment">     * @see &lt;a</em>
+<a class="jxr_linenumber" name="608" href="#608">608</a> <em class="jxr_javadoccomment">     *      href="https://projects.drogon.net/raspberry-pi/wiringpi/functions/"&gt;https://projects.drogon.net/raspberry-pi/wiringpi/functions/&lt;/a&gt;</em>
+<a class="jxr_linenumber" name="609" href="#609">609</a> <em class="jxr_javadoccomment">     * @return &lt;p&gt;</em>
+<a class="jxr_linenumber" name="610" href="#610">610</a> <em class="jxr_javadoccomment">     *         The return value represents the major board revision version. </em>
+<a class="jxr_linenumber" name="611" href="#611">611</a> <em class="jxr_javadoccomment">     *         A -1 will be returned if the board revision cannot be determined.</em>
+<a class="jxr_linenumber" name="612" href="#612">612</a> <em class="jxr_javadoccomment">     *         &lt;/p&gt;</em>
+<a class="jxr_linenumber" name="613" href="#613">613</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="614" href="#614">614</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">native</strong> <strong class="jxr_keyword">int</strong> piBoardRev();
 <a class="jxr_linenumber" name="615" href="#615">615</a> 
-<a class="jxr_linenumber" name="616" href="#616">616</a>     <em class="jxr_comment">// private static class Hook extends Thread</em>
-<a class="jxr_linenumber" name="617" href="#617">617</a>     <em class="jxr_comment">// {</em>
-<a class="jxr_linenumber" name="618" href="#618">618</a>     <em class="jxr_comment">// File libfile;</em>
-<a class="jxr_linenumber" name="619" href="#619">619</a>     <em class="jxr_comment">//</em>
-<a class="jxr_linenumber" name="620" href="#620">620</a>     <em class="jxr_comment">// public Hook(File libfile)</em>
-<a class="jxr_linenumber" name="621" href="#621">621</a>     <em class="jxr_comment">// {</em>
-<a class="jxr_linenumber" name="622" href="#622">622</a>     <em class="jxr_comment">// this.libfile = libfile;</em>
-<a class="jxr_linenumber" name="623" href="#623">623</a>     <em class="jxr_comment">// }</em>
-<a class="jxr_linenumber" name="624" href="#624">624</a>     <em class="jxr_comment">// public void run()</em>
-<a class="jxr_linenumber" name="625" href="#625">625</a>     <em class="jxr_comment">// {</em>
-<a class="jxr_linenumber" name="626" href="#626">626</a>     <em class="jxr_comment">// if(libfile.exists())</em>
-<a class="jxr_linenumber" name="627" href="#627">627</a>     <em class="jxr_comment">// libfile.deleteOnExit()</em>
-<a class="jxr_linenumber" name="628" href="#628">628</a>     <em class="jxr_comment">// System.out.println( "Running Clean Up..." );</em>
-<a class="jxr_linenumber" name="629" href="#629">629</a>     <em class="jxr_comment">// }</em>
-<a class="jxr_linenumber" name="630" href="#630">630</a>     <em class="jxr_comment">// }</em>
-<a class="jxr_linenumber" name="631" href="#631">631</a> }
+<a class="jxr_linenumber" name="616" href="#616">616</a>     
+<a class="jxr_linenumber" name="617" href="#617">617</a>     <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="618" href="#618">618</a> <em class="jxr_javadoccomment">     * &lt;h1&gt;[Hardware]&lt;/h1&gt;</em>
+<a class="jxr_linenumber" name="619" href="#619">619</a> <em class="jxr_javadoccomment">     * </em>
+<a class="jxr_linenumber" name="620" href="#620">620</a> <em class="jxr_javadoccomment">     * &lt;p&gt;</em>
+<a class="jxr_linenumber" name="621" href="#621">621</a> <em class="jxr_javadoccomment">     * &lt;b&gt;extern int wpiPinToGpio(int wpiPin);&lt;/b&gt;</em>
+<a class="jxr_linenumber" name="622" href="#622">622</a> <em class="jxr_javadoccomment">     * &lt;/p&gt;</em>
+<a class="jxr_linenumber" name="623" href="#623">623</a> <em class="jxr_javadoccomment">     * </em>
+<a class="jxr_linenumber" name="624" href="#624">624</a> <em class="jxr_javadoccomment">     * &lt;p&gt;</em>
+<a class="jxr_linenumber" name="625" href="#625">625</a> <em class="jxr_javadoccomment">     * This method provides the edge GPIO pin number for the requested wiringPi pin number. </em>
+<a class="jxr_linenumber" name="626" href="#626">626</a> <em class="jxr_javadoccomment">     * &lt;/p&gt;</em>
+<a class="jxr_linenumber" name="627" href="#627">627</a> <em class="jxr_javadoccomment">     * </em>
+<a class="jxr_linenumber" name="628" href="#628">628</a> <em class="jxr_javadoccomment">     * @see &lt;a</em>
+<a class="jxr_linenumber" name="629" href="#629">629</a> <em class="jxr_javadoccomment">     *      href="https://projects.drogon.net/raspberry-pi/wiringpi/functions/"&gt;https://projects.drogon.net/raspberry-pi/wiringpi/functions/&lt;/a&gt;</em>
+<a class="jxr_linenumber" name="630" href="#630">630</a> <em class="jxr_javadoccomment">     * @return &lt;p&gt;</em>
+<a class="jxr_linenumber" name="631" href="#631">631</a> <em class="jxr_javadoccomment">     *         The return value represents the RaspberryPi GPIO (edge) pin number. </em>
+<a class="jxr_linenumber" name="632" href="#632">632</a> <em class="jxr_javadoccomment">     *         A -1 will be returned for an invalid pin number.</em>
+<a class="jxr_linenumber" name="633" href="#633">633</a> <em class="jxr_javadoccomment">     *         &lt;/p&gt;</em>
+<a class="jxr_linenumber" name="634" href="#634">634</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="635" href="#635">635</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">native</strong> <strong class="jxr_keyword">int</strong> wpiPinToGpio(<strong class="jxr_keyword">int</strong> wpiPin);
+<a class="jxr_linenumber" name="636" href="#636">636</a>                                                      
+<a class="jxr_linenumber" name="637" href="#637">637</a>     
+<a class="jxr_linenumber" name="638" href="#638">638</a>     <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="639" href="#639">639</a> <em class="jxr_javadoccomment">     * --------------------------------------------------------------------------------------------</em>
+<a class="jxr_linenumber" name="640" href="#640">640</a> <em class="jxr_javadoccomment">     * lets not use native code for threading in Java; that could get you into some trouble.</em>
+<a class="jxr_linenumber" name="641" href="#641">641</a> <em class="jxr_javadoccomment">     * --------------------------------------------------------------------------------------------</em>
+<a class="jxr_linenumber" name="642" href="#642">642</a> <em class="jxr_javadoccomment">     * &lt;h1&gt;Concurrent Processing (multi-threading)&lt;/h1&gt;</em>
+<a class="jxr_linenumber" name="643" href="#643">643</a> <em class="jxr_javadoccomment">     * </em>
+<a class="jxr_linenumber" name="644" href="#644">644</a> <em class="jxr_javadoccomment">     * wiringPi has a simplified interface to the Linux implementation of Posix threads, as well as</em>
+<a class="jxr_linenumber" name="645" href="#645">645</a> <em class="jxr_javadoccomment">     * a (simplified) mechanisms to access mutexs (Mutual exclusions)</em>
+<a class="jxr_linenumber" name="646" href="#646">646</a> <em class="jxr_javadoccomment">     * </em>
+<a class="jxr_linenumber" name="647" href="#647">647</a> <em class="jxr_javadoccomment">     * Using these functions you can create a new process (a function inside your main program)</em>
+<a class="jxr_linenumber" name="648" href="#648">648</a> <em class="jxr_javadoccomment">     * which runs concurrently with your main program and using the mutex mechanisms, safely pass</em>
+<a class="jxr_linenumber" name="649" href="#649">649</a> <em class="jxr_javadoccomment">     * variables between them.</em>
+<a class="jxr_linenumber" name="650" href="#650">650</a> <em class="jxr_javadoccomment">     * </em>
+<a class="jxr_linenumber" name="651" href="#651">651</a> <em class="jxr_javadoccomment">     * @see &lt;a</em>
+<a class="jxr_linenumber" name="652" href="#652">652</a> <em class="jxr_javadoccomment">     *      href="https://projects.drogon.net/raspberry-pi/wiringpi/functions/"&gt;https://projects.drogon.net/raspberry-pi/wiringpi/functions/&lt;/a&gt;</em>
+<a class="jxr_linenumber" name="653" href="#653">653</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="654" href="#654">654</a>     <em class="jxr_comment">// public static native int piThreadCreate(void fn, int timeout);</em>
+<a class="jxr_linenumber" name="655" href="#655">655</a>     <em class="jxr_comment">// public static native void piLock(int key);</em>
+<a class="jxr_linenumber" name="656" href="#656">656</a>     <em class="jxr_comment">// public static native void piUnlock(int key);</em>
+<a class="jxr_linenumber" name="657" href="#657">657</a> 
+<a class="jxr_linenumber" name="658" href="#658">658</a>     <em class="jxr_comment">// private static class Hook extends Thread</em>
+<a class="jxr_linenumber" name="659" href="#659">659</a>     <em class="jxr_comment">// {</em>
+<a class="jxr_linenumber" name="660" href="#660">660</a>     <em class="jxr_comment">// File libfile;</em>
+<a class="jxr_linenumber" name="661" href="#661">661</a>     <em class="jxr_comment">//</em>
+<a class="jxr_linenumber" name="662" href="#662">662</a>     <em class="jxr_comment">// public Hook(File libfile)</em>
+<a class="jxr_linenumber" name="663" href="#663">663</a>     <em class="jxr_comment">// {</em>
+<a class="jxr_linenumber" name="664" href="#664">664</a>     <em class="jxr_comment">// this.libfile = libfile;</em>
+<a class="jxr_linenumber" name="665" href="#665">665</a>     <em class="jxr_comment">// }</em>
+<a class="jxr_linenumber" name="666" href="#666">666</a>     <em class="jxr_comment">// public void run()</em>
+<a class="jxr_linenumber" name="667" href="#667">667</a>     <em class="jxr_comment">// {</em>
+<a class="jxr_linenumber" name="668" href="#668">668</a>     <em class="jxr_comment">// if(libfile.exists())</em>
+<a class="jxr_linenumber" name="669" href="#669">669</a>     <em class="jxr_comment">// libfile.deleteOnExit()</em>
+<a class="jxr_linenumber" name="670" href="#670">670</a>     <em class="jxr_comment">// System.out.println( "Running Clean Up..." );</em>
+<a class="jxr_linenumber" name="671" href="#671">671</a>     <em class="jxr_comment">// }</em>
+<a class="jxr_linenumber" name="672" href="#672">672</a>     <em class="jxr_comment">// }</em>
+<a class="jxr_linenumber" name="673" href="#673">673</a> }
 </pre>
 <hr/><div id="footer">This page was automatically generated by <a href="http://maven.apache.org/">Maven</a></div></body>
 </html>

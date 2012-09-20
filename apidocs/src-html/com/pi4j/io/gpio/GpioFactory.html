@@ -12,7 +12,7 @@
 <span class="sourceLineNo">004</span> * #%L<a name="line.4"></a>
 <span class="sourceLineNo">005</span> * **********************************************************************<a name="line.5"></a>
 <span class="sourceLineNo">006</span> * ORGANIZATION  :  Pi4J<a name="line.6"></a>
-<span class="sourceLineNo">007</span> * PROJECT       :  Pi4J :: Java Library<a name="line.7"></a>
+<span class="sourceLineNo">007</span> * PROJECT       :  Pi4J :: Java Library (Core)<a name="line.7"></a>
 <span class="sourceLineNo">008</span> * FILENAME      :  GpioFactory.java  <a name="line.8"></a>
 <span class="sourceLineNo">009</span> * <a name="line.9"></a>
 <span class="sourceLineNo">010</span> * This file is part of the Pi4J project. More information about <a name="line.10"></a>
@@ -65,18 +65,26 @@
 <span class="sourceLineNo">057</span> */<a name="line.57"></a>
 <span class="sourceLineNo">058</span>public class GpioFactory<a name="line.58"></a>
 <span class="sourceLineNo">059</span>{<a name="line.59"></a>
-<span class="sourceLineNo">060</span>    /**<a name="line.60"></a>
-<span class="sourceLineNo">061</span>     * &lt;h1&gt;Create New Serial instance&lt;/h1&gt;<a name="line.61"></a>
-<span class="sourceLineNo">062</span>     * <a name="line.62"></a>
-<span class="sourceLineNo">063</span>     * @return &lt;p&gt;<a name="line.63"></a>
-<span class="sourceLineNo">064</span>     *         Return a new Serial impl instance.<a name="line.64"></a>
-<span class="sourceLineNo">065</span>     *         &lt;/p&gt;<a name="line.65"></a>
-<span class="sourceLineNo">066</span>     */<a name="line.66"></a>
-<span class="sourceLineNo">067</span>    public static Gpio createInstance()<a name="line.67"></a>
-<span class="sourceLineNo">068</span>    {<a name="line.68"></a>
-<span class="sourceLineNo">069</span>        return new GpioControllerImpl();<a name="line.69"></a>
-<span class="sourceLineNo">070</span>    }<a name="line.70"></a>
-<span class="sourceLineNo">071</span>}<a name="line.71"></a>
+<span class="sourceLineNo">060</span>    // we only allow a single controller to exists<a name="line.60"></a>
+<span class="sourceLineNo">061</span>    private static Gpio controller = null;<a name="line.61"></a>
+<span class="sourceLineNo">062</span>    <a name="line.62"></a>
+<span class="sourceLineNo">063</span>    /**<a name="line.63"></a>
+<span class="sourceLineNo">064</span>     * &lt;h1&gt;Create New Serial instance&lt;/h1&gt;<a name="line.64"></a>
+<span class="sourceLineNo">065</span>     * <a name="line.65"></a>
+<span class="sourceLineNo">066</span>     * @return &lt;p&gt;<a name="line.66"></a>
+<span class="sourceLineNo">067</span>     *         Return a new Serial impl instance.<a name="line.67"></a>
+<span class="sourceLineNo">068</span>     *         &lt;/p&gt;<a name="line.68"></a>
+<span class="sourceLineNo">069</span>     */<a name="line.69"></a>
+<span class="sourceLineNo">070</span>    public static Gpio createInstance()<a name="line.70"></a>
+<span class="sourceLineNo">071</span>    {<a name="line.71"></a>
+<span class="sourceLineNo">072</span>        // if a controller has not been created, then create a new instance<a name="line.72"></a>
+<span class="sourceLineNo">073</span>        if(controller == null)<a name="line.73"></a>
+<span class="sourceLineNo">074</span>            controller = new GpioControllerImpl();<a name="line.74"></a>
+<span class="sourceLineNo">075</span><a name="line.75"></a>
+<span class="sourceLineNo">076</span>        // else return a copy of the existing controller<a name="line.76"></a>
+<span class="sourceLineNo">077</span>        return controller;<a name="line.77"></a>
+<span class="sourceLineNo">078</span>    }<a name="line.78"></a>
+<span class="sourceLineNo">079</span>}<a name="line.79"></a>
 
 
 

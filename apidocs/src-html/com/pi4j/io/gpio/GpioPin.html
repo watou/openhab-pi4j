@@ -12,7 +12,7 @@
 <span class="sourceLineNo">004</span> * #%L<a name="line.4"></a>
 <span class="sourceLineNo">005</span> * **********************************************************************<a name="line.5"></a>
 <span class="sourceLineNo">006</span> * ORGANIZATION  :  Pi4J<a name="line.6"></a>
-<span class="sourceLineNo">007</span> * PROJECT       :  Pi4J :: Java Library<a name="line.7"></a>
+<span class="sourceLineNo">007</span> * PROJECT       :  Pi4J :: Java Library (Core)<a name="line.7"></a>
 <span class="sourceLineNo">008</span> * FILENAME      :  GpioPin.java  <a name="line.8"></a>
 <span class="sourceLineNo">009</span> * <a name="line.9"></a>
 <span class="sourceLineNo">010</span> * This file is part of the Pi4J project. More information about <a name="line.10"></a>
@@ -103,7 +103,15 @@
 <span class="sourceLineNo">095</span>    void removeTrigger(GpioTrigger[] triggers);<a name="line.95"></a>
 <span class="sourceLineNo">096</span>    void removeTrigger(List&lt;GpioTrigger&gt; triggers);<a name="line.96"></a>
 <span class="sourceLineNo">097</span>    void removeAllTriggers();<a name="line.97"></a>
-<span class="sourceLineNo">098</span>}<a name="line.98"></a>
+<span class="sourceLineNo">098</span>    <a name="line.98"></a>
+<span class="sourceLineNo">099</span>    GpioPinShutdown getShutdownOptions();<a name="line.99"></a>
+<span class="sourceLineNo">100</span>    void setShutdownOptions(GpioPinShutdown options);<a name="line.100"></a>
+<span class="sourceLineNo">101</span>    void setShutdownOptions(Boolean unexport);<a name="line.101"></a>
+<span class="sourceLineNo">102</span>    void setShutdownOptions(Boolean unexport, PinState state);<a name="line.102"></a>
+<span class="sourceLineNo">103</span>    void setShutdownOptions(Boolean unexport, PinState state, PinEdge edge);<a name="line.103"></a>
+<span class="sourceLineNo">104</span>    void setShutdownOptions(Boolean unexport, PinState state, PinEdge edge, PinResistor resistance);<a name="line.104"></a>
+<span class="sourceLineNo">105</span>    void setShutdownOptions(Boolean unexport, PinState state, PinEdge edge, PinResistor resistance, PinDirection direction);<a name="line.105"></a>
+<span class="sourceLineNo">106</span>}<a name="line.106"></a>
 
 
 
