@@ -2,7 +2,7 @@
 'D:/DEV/Pi4J/pi4j/pi4j-core/src/main/java/com/pi4j/io/gpio/event/GpioPinStateChangeEvent.java'
 'D:/DEV/Pi4J/pi4j/pi4j-core/src/main/java/com/pi4j/io/gpio/exception/GpioPinExistsException.java'
 'D:/DEV/Pi4J/pi4j/pi4j-core/src/main/java/com/pi4j/io/gpio/exception/GpioPinNotProvisionedException.java'
-'D:/DEV/Pi4J/pi4j/pi4j-core/src/main/java/com/pi4j/io/gpio/Gpio.java'
+'D:/DEV/Pi4J/pi4j/pi4j-core/src/main/java/com/pi4j/io/gpio/GpioController.java'
 'D:/DEV/Pi4J/pi4j/pi4j-core/src/main/java/com/pi4j/io/gpio/GpioFactory.java'
 'D:/DEV/Pi4J/pi4j/pi4j-core/src/main/java/com/pi4j/io/gpio/GpioPin.java'
 'D:/DEV/Pi4J/pi4j/pi4j-core/src/main/java/com/pi4j/io/gpio/GpioPinShutdown.java'

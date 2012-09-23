@@ -16,11 +16,11 @@
 -docencoding
 'UTF-8'
 -doctitle
-'Pi4J :: Parent POM 0.0.1-SNAPSHOT API'
+'Pi4J :: Parent POM 0.0.2-SNAPSHOT API'
 -linkoffline
 'http://download.oracle.com/javase/6/docs/api' 'D:/DEV/Pi4J/pi4j/target/javadoc-bundle-options'
 -linksource
 -use
 -version
 -windowtitle
-'Pi4J :: Parent POM 0.0.1-SNAPSHOT API'
+'Pi4J :: Parent POM 0.0.2-SNAPSHOT API'
