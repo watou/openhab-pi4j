@@ -38,11 +38,11 @@
 <span class="sourceLineNo">030</span><a name="line.30"></a>
 <span class="sourceLineNo">031</span>public enum PinState<a name="line.31"></a>
 <span class="sourceLineNo">032</span>{<a name="line.32"></a>
-<span class="sourceLineNo">033</span>    LOW(0, "HIGH"), <a name="line.33"></a>
-<span class="sourceLineNo">034</span>    HIGH(1, "LOW"); <a name="line.34"></a>
+<span class="sourceLineNo">033</span>    LOW(0, "LOW"), <a name="line.33"></a>
+<span class="sourceLineNo">034</span>    HIGH(1, "HIGH"); <a name="line.34"></a>
 <span class="sourceLineNo">035</span><a name="line.35"></a>
-<span class="sourceLineNo">036</span>    private int value;<a name="line.36"></a>
-<span class="sourceLineNo">037</span>    private String name = null;<a name="line.37"></a>
+<span class="sourceLineNo">036</span>    private final int value;<a name="line.36"></a>
+<span class="sourceLineNo">037</span>    private final String name;<a name="line.37"></a>
 <span class="sourceLineNo">038</span><a name="line.38"></a>
 <span class="sourceLineNo">039</span>    private PinState(int value, String name)<a name="line.39"></a>
 <span class="sourceLineNo">040</span>    {<a name="line.40"></a>

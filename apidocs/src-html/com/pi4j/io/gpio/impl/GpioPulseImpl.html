@@ -50,7 +50,7 @@
 <span class="sourceLineNo">042</span>public class GpioPulseImpl<a name="line.42"></a>
 <span class="sourceLineNo">043</span>{<a name="line.43"></a>
 <span class="sourceLineNo">044</span>    @SuppressWarnings("rawtypes")<a name="line.44"></a>
-<span class="sourceLineNo">045</span>    private static ConcurrentHashMap&lt;Pin, ScheduledFuture&gt; tasks = new ConcurrentHashMap&lt;Pin, ScheduledFuture&gt;();<a name="line.45"></a>
+<span class="sourceLineNo">045</span>    private static final ConcurrentHashMap&lt;Pin, ScheduledFuture&gt; tasks = new ConcurrentHashMap&lt;Pin, ScheduledFuture&gt;();<a name="line.45"></a>
 <span class="sourceLineNo">046</span>    private static ScheduledExecutorService scheduledExecutorService;<a name="line.46"></a>
 <span class="sourceLineNo">047</span><a name="line.47"></a>
 <span class="sourceLineNo">048</span>    public synchronized static void execute(GpioController gpio, Pin pin, long milliseconds)<a name="line.48"></a>
