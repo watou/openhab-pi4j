@@ -168,29 +168,51 @@
 <span class="sourceLineNo">160</span>     */<a name="line.160"></a>
 <span class="sourceLineNo">161</span>    public static synchronized void addListener(GpioInterruptListener listener)<a name="line.161"></a>
 <span class="sourceLineNo">162</span>    {<a name="line.162"></a>
-<span class="sourceLineNo">163</span>        listeners.addElement(listener);<a name="line.163"></a>
-<span class="sourceLineNo">164</span>    }<a name="line.164"></a>
-<span class="sourceLineNo">165</span><a name="line.165"></a>
-<span class="sourceLineNo">166</span>    /**<a name="line.166"></a>
-<span class="sourceLineNo">167</span>     * &lt;h1&gt;Remove GPIO Interrupt Listener&lt;/h1&gt;<a name="line.167"></a>
-<span class="sourceLineNo">168</span>     * <a name="line.168"></a>
-<span class="sourceLineNo">169</span>     * &lt;p&gt;<a name="line.169"></a>
-<span class="sourceLineNo">170</span>     * Java consumer code can all this method to unregister itself as a listener for pin state<a name="line.170"></a>
-<span class="sourceLineNo">171</span>     * changes.<a name="line.171"></a>
-<span class="sourceLineNo">172</span>     * &lt;/p&gt;<a name="line.172"></a>
-<span class="sourceLineNo">173</span>     * <a name="line.173"></a>
-<span class="sourceLineNo">174</span>     * @see #com.pi4j.wiringpi.GpioInterruptListener<a name="line.174"></a>
-<span class="sourceLineNo">175</span>     * @see #com.pi4j.wiringpi.GpioInterruptEvent<a name="line.175"></a>
-<span class="sourceLineNo">176</span>     * <a name="line.176"></a>
-<span class="sourceLineNo">177</span>     * @param listener &lt;p&gt;<a name="line.177"></a>
-<span class="sourceLineNo">178</span>     *            A class instance that implements the GpioInterruptListener interface.<a name="line.178"></a>
-<span class="sourceLineNo">179</span>     *            &lt;/p&gt;<a name="line.179"></a>
-<span class="sourceLineNo">180</span>     */<a name="line.180"></a>
-<span class="sourceLineNo">181</span>    public static synchronized void removeListener(GpioInterruptListener listener)<a name="line.181"></a>
-<span class="sourceLineNo">182</span>    {<a name="line.182"></a>
-<span class="sourceLineNo">183</span>        listeners.removeElement(listener);<a name="line.183"></a>
-<span class="sourceLineNo">184</span>    }<a name="line.184"></a>
-<span class="sourceLineNo">185</span>}<a name="line.185"></a>
+<span class="sourceLineNo">163</span>        if(!listeners.contains(listener))<a name="line.163"></a>
+<span class="sourceLineNo">164</span>            listeners.addElement(listener);<a name="line.164"></a>
+<span class="sourceLineNo">165</span>    }<a name="line.165"></a>
+<span class="sourceLineNo">166</span><a name="line.166"></a>
+<span class="sourceLineNo">167</span>    /**<a name="line.167"></a>
+<span class="sourceLineNo">168</span>     * &lt;h1&gt;Remove GPIO Interrupt Listener&lt;/h1&gt;<a name="line.168"></a>
+<span class="sourceLineNo">169</span>     * <a name="line.169"></a>
+<span class="sourceLineNo">170</span>     * &lt;p&gt;<a name="line.170"></a>
+<span class="sourceLineNo">171</span>     * Java consumer code can all this method to unregister itself as a listener for pin state<a name="line.171"></a>
+<span class="sourceLineNo">172</span>     * changes.<a name="line.172"></a>
+<span class="sourceLineNo">173</span>     * &lt;/p&gt;<a name="line.173"></a>
+<span class="sourceLineNo">174</span>     * <a name="line.174"></a>
+<span class="sourceLineNo">175</span>     * @see #com.pi4j.wiringpi.GpioInterruptListener<a name="line.175"></a>
+<span class="sourceLineNo">176</span>     * @see #com.pi4j.wiringpi.GpioInterruptEvent<a name="line.176"></a>
+<span class="sourceLineNo">177</span>     * <a name="line.177"></a>
+<span class="sourceLineNo">178</span>     * @param listener &lt;p&gt;<a name="line.178"></a>
+<span class="sourceLineNo">179</span>     *            A class instance that implements the GpioInterruptListener interface.<a name="line.179"></a>
+<span class="sourceLineNo">180</span>     *            &lt;/p&gt;<a name="line.180"></a>
+<span class="sourceLineNo">181</span>     */<a name="line.181"></a>
+<span class="sourceLineNo">182</span>    public static synchronized void removeListener(GpioInterruptListener listener)<a name="line.182"></a>
+<span class="sourceLineNo">183</span>    {<a name="line.183"></a>
+<span class="sourceLineNo">184</span>        if(listeners.contains(listener))<a name="line.184"></a>
+<span class="sourceLineNo">185</span>            listeners.removeElement(listener);<a name="line.185"></a>
+<span class="sourceLineNo">186</span>    }<a name="line.186"></a>
+<span class="sourceLineNo">187</span>    <a name="line.187"></a>
+<span class="sourceLineNo">188</span>    <a name="line.188"></a>
+<span class="sourceLineNo">189</span>    /**<a name="line.189"></a>
+<span class="sourceLineNo">190</span>     * &lt;h1&gt;IS GPIO Interrupt Listener already registered&lt;/h1&gt;<a name="line.190"></a>
+<span class="sourceLineNo">191</span>     * <a name="line.191"></a>
+<span class="sourceLineNo">192</span>     * &lt;p&gt;<a name="line.192"></a>
+<span class="sourceLineNo">193</span>     * Returns true if the listener is already registered for event callbacks.<a name="line.193"></a>
+<span class="sourceLineNo">194</span>     * &lt;/p&gt;<a name="line.194"></a>
+<span class="sourceLineNo">195</span>     * <a name="line.195"></a>
+<span class="sourceLineNo">196</span>     * @see #com.pi4j.wiringpi.GpioInterruptListener<a name="line.196"></a>
+<span class="sourceLineNo">197</span>     * @see #com.pi4j.wiringpi.GpioInterruptEvent<a name="line.197"></a>
+<span class="sourceLineNo">198</span>     * <a name="line.198"></a>
+<span class="sourceLineNo">199</span>     * @param listener &lt;p&gt;<a name="line.199"></a>
+<span class="sourceLineNo">200</span>     *            A class instance that implements the GpioInterruptListener interface.<a name="line.200"></a>
+<span class="sourceLineNo">201</span>     *            &lt;/p&gt;<a name="line.201"></a>
+<span class="sourceLineNo">202</span>     */<a name="line.202"></a>
+<span class="sourceLineNo">203</span>    public static synchronized boolean hasListener(GpioInterruptListener listener)<a name="line.203"></a>
+<span class="sourceLineNo">204</span>    {<a name="line.204"></a>
+<span class="sourceLineNo">205</span>        return listeners.contains(listener);<a name="line.205"></a>
+<span class="sourceLineNo">206</span>    }    <a name="line.206"></a>
+<span class="sourceLineNo">207</span>}<a name="line.207"></a>
 
 
 
