@@ -42,7 +42,7 @@
 <span class="sourceLineNo">034</span>    private PinMode mode;<a name="line.34"></a>
 <span class="sourceLineNo">035</span>    private PinState state;<a name="line.35"></a>
 <span class="sourceLineNo">036</span>    private PinPullResistance resistance;<a name="line.36"></a>
-<span class="sourceLineNo">037</span>    private int analogValue = -1;<a name="line.37"></a>
+<span class="sourceLineNo">037</span>    private double analogValue = -1;<a name="line.37"></a>
 <span class="sourceLineNo">038</span>    private int pwmValue = -1;<a name="line.38"></a>
 <span class="sourceLineNo">039</span>    private boolean exported = false; <a name="line.39"></a>
 <span class="sourceLineNo">040</span>    <a name="line.40"></a>
@@ -87,14 +87,14 @@
 <span class="sourceLineNo">079</span>        this.resistance = resistance;<a name="line.79"></a>
 <span class="sourceLineNo">080</span>    }<a name="line.80"></a>
 <span class="sourceLineNo">081</span>    <a name="line.81"></a>
-<span class="sourceLineNo">082</span>    public int getAnalogValue()<a name="line.82"></a>
+<span class="sourceLineNo">082</span>    public double getAnalogValue()<a name="line.82"></a>
 <span class="sourceLineNo">083</span>    {<a name="line.83"></a>
 <span class="sourceLineNo">084</span>        return analogValue;<a name="line.84"></a>
 <span class="sourceLineNo">085</span>    }<a name="line.85"></a>
 <span class="sourceLineNo">086</span>    <a name="line.86"></a>
-<span class="sourceLineNo">087</span>    public void setAnalogValue(int analogValue)<a name="line.87"></a>
+<span class="sourceLineNo">087</span>    public void setAnalogValue(double value)<a name="line.87"></a>
 <span class="sourceLineNo">088</span>    {<a name="line.88"></a>
-<span class="sourceLineNo">089</span>        this.analogValue = analogValue;<a name="line.89"></a>
+<span class="sourceLineNo">089</span>        this.analogValue = value;<a name="line.89"></a>
 <span class="sourceLineNo">090</span>    }<a name="line.90"></a>
 <span class="sourceLineNo">091</span>    <a name="line.91"></a>
 <span class="sourceLineNo">092</span>    public int getPwmValue()<a name="line.92"></a>
@@ -102,9 +102,9 @@
 <span class="sourceLineNo">094</span>        return pwmValue;<a name="line.94"></a>
 <span class="sourceLineNo">095</span>    }<a name="line.95"></a>
 <span class="sourceLineNo">096</span>    <a name="line.96"></a>
-<span class="sourceLineNo">097</span>    public void setPwmValue(int pwmValue)<a name="line.97"></a>
+<span class="sourceLineNo">097</span>    public void setPwmValue(int value)<a name="line.97"></a>
 <span class="sourceLineNo">098</span>    {<a name="line.98"></a>
-<span class="sourceLineNo">099</span>        this.pwmValue = pwmValue;<a name="line.99"></a>
+<span class="sourceLineNo">099</span>        this.pwmValue = value;<a name="line.99"></a>
 <span class="sourceLineNo">100</span>    }<a name="line.100"></a>
 <span class="sourceLineNo">101</span>    <a name="line.101"></a>
 <span class="sourceLineNo">102</span>    public boolean isExported()<a name="line.102"></a>

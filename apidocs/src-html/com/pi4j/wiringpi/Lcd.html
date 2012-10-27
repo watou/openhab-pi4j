@@ -87,163 +87,169 @@
 <span class="sourceLineNo">079</span> */<a name="line.79"></a>
 <span class="sourceLineNo">080</span>public class Lcd<a name="line.80"></a>
 <span class="sourceLineNo">081</span>{<a name="line.81"></a>
-<span class="sourceLineNo">082</span>    static<a name="line.82"></a>
-<span class="sourceLineNo">083</span>    {<a name="line.83"></a>
-<span class="sourceLineNo">084</span>        // Load the platform library<a name="line.84"></a>
-<span class="sourceLineNo">085</span>        NativeLibraryLoader.load("pi4j", "libpi4j.so");<a name="line.85"></a>
+<span class="sourceLineNo">082</span>    // private constructor <a name="line.82"></a>
+<span class="sourceLineNo">083</span>    private Lcd() <a name="line.83"></a>
+<span class="sourceLineNo">084</span>    {<a name="line.84"></a>
+<span class="sourceLineNo">085</span>        // forbid object construction <a name="line.85"></a>
 <span class="sourceLineNo">086</span>    }<a name="line.86"></a>
-<span class="sourceLineNo">087</span><a name="line.87"></a>
-<span class="sourceLineNo">088</span>    /**<a name="line.88"></a>
-<span class="sourceLineNo">089</span>     * &lt;p&gt;<a name="line.89"></a>
-<span class="sourceLineNo">090</span>     * First, you need to initialize wiringPi in the way you want to. The LCD library will call<a name="line.90"></a>
-<span class="sourceLineNo">091</span>     * pinMode functions, but these are ignored if you have already set the modes using the gpio<a name="line.91"></a>
-<span class="sourceLineNo">092</span>     * program and want to use the wiringPiSetupSys() mechanism.<a name="line.92"></a>
-<span class="sourceLineNo">093</span>     * &lt;/p&gt;<a name="line.93"></a>
-<span class="sourceLineNo">094</span>     * <a name="line.94"></a>
-<span class="sourceLineNo">095</span>     * &lt;pre&gt;<a name="line.95"></a>
-<span class="sourceLineNo">096</span>     * int lcdInit(int rows, int cols, int bits, int rs, int strb, int d0, int d1, int d2, int d3, int d4,<a name="line.96"></a>
-<span class="sourceLineNo">097</span>     *         int d5, int d6, int d7);<a name="line.97"></a>
-<span class="sourceLineNo">098</span>     * &lt;/pre&gt;<a name="line.98"></a>
-<span class="sourceLineNo">099</span>     * <a name="line.99"></a>
-<span class="sourceLineNo">100</span>     * &lt;p&gt;<a name="line.100"></a>
-<span class="sourceLineNo">101</span>     * This is the main initialization function and must be called before you use any other LCD<a name="line.101"></a>
-<span class="sourceLineNo">102</span>     * functions.<a name="line.102"></a>
-<span class="sourceLineNo">103</span>     * &lt;/p&gt;<a name="line.103"></a>
-<span class="sourceLineNo">104</span>     * <a name="line.104"></a>
-<span class="sourceLineNo">105</span>     * &lt;p&gt;<a name="line.105"></a>
-<span class="sourceLineNo">106</span>     * Rows and cols are the rows and columns on the display (e.g. 2, 16 or 4,20). Bits is the<a name="line.106"></a>
-<span class="sourceLineNo">107</span>     * number of bits wide on the interface (4 or 8). The rs and strb represent the pin numbers of<a name="line.107"></a>
-<span class="sourceLineNo">108</span>     * the displays RS pin and Strobe (E) pin. The parameters d0 through d7 are the pin numbers of<a name="line.108"></a>
-<span class="sourceLineNo">109</span>     * the 8 data pins connected from the Pi to the display. Only the first 4 are used if you are<a name="line.109"></a>
-<span class="sourceLineNo">110</span>     * running the display in 4-bit mode.<a name="line.110"></a>
-<span class="sourceLineNo">111</span>     * &lt;/p&gt;<a name="line.111"></a>
-<span class="sourceLineNo">112</span>     * <a name="line.112"></a>
-<span class="sourceLineNo">113</span>     * &lt;p&gt;<a name="line.113"></a>
-<span class="sourceLineNo">114</span>     * The pin numbers will be either wiringPi pin numbers of GPIO pin numbers depending on which<a name="line.114"></a>
-<span class="sourceLineNo">115</span>     * wiringPiSetup function you used.<a name="line.115"></a>
-<span class="sourceLineNo">116</span>     * &lt;/p&gt;<a name="line.116"></a>
-<span class="sourceLineNo">117</span>     * <a name="line.117"></a>
-<span class="sourceLineNo">118</span>     * &lt;p&gt;<a name="line.118"></a>
-<span class="sourceLineNo">119</span>     * The return value is the handle to be used for all subsequent calls to the lcd library when<a name="line.119"></a>
-<span class="sourceLineNo">120</span>     * dealing with that LCD, or -1 to indicate a fault. (Usually incorrect parameters)<a name="line.120"></a>
-<span class="sourceLineNo">121</span>     * &lt;/p&gt;<a name="line.121"></a>
-<span class="sourceLineNo">122</span>     * <a name="line.122"></a>
-<span class="sourceLineNo">123</span>     * @see &lt;a<a name="line.123"></a>
-<span class="sourceLineNo">124</span>     *      href="https://projects.drogon.net/raspberry-pi/wiringpi/lcd-library/"&gt;https://projects.drogon.net/raspberry-pi/wiringpi/lcd-library/&lt;/a&gt;<a name="line.124"></a>
-<span class="sourceLineNo">125</span>     * <a name="line.125"></a>
-<span class="sourceLineNo">126</span>     * @param rows<a name="line.126"></a>
-<span class="sourceLineNo">127</span>     * @param cols<a name="line.127"></a>
-<span class="sourceLineNo">128</span>     * @param bits<a name="line.128"></a>
-<span class="sourceLineNo">129</span>     * @param rs<a name="line.129"></a>
-<span class="sourceLineNo">130</span>     * @param strb<a name="line.130"></a>
-<span class="sourceLineNo">131</span>     * @param d0<a name="line.131"></a>
-<span class="sourceLineNo">132</span>     * @param d1<a name="line.132"></a>
-<span class="sourceLineNo">133</span>     * @param d2<a name="line.133"></a>
-<span class="sourceLineNo">134</span>     * @param d3<a name="line.134"></a>
-<span class="sourceLineNo">135</span>     * @param d4<a name="line.135"></a>
-<span class="sourceLineNo">136</span>     * @param d5<a name="line.136"></a>
-<span class="sourceLineNo">137</span>     * @param d6<a name="line.137"></a>
-<span class="sourceLineNo">138</span>     * @param d7<a name="line.138"></a>
-<span class="sourceLineNo">139</span>     * @return return value<a name="line.139"></a>
-<span class="sourceLineNo">140</span>     */<a name="line.140"></a>
-<span class="sourceLineNo">141</span>    public static native int lcdInit(int rows, int cols, int bits, int rs, int strb, int d0,<a name="line.141"></a>
-<span class="sourceLineNo">142</span>            int d1, int d2, int d3, int d4, int d5, int d6, int d7);<a name="line.142"></a>
-<span class="sourceLineNo">143</span><a name="line.143"></a>
-<span class="sourceLineNo">144</span>    /**<a name="line.144"></a>
-<span class="sourceLineNo">145</span>     * &lt;h1&gt;void lcdHome (int handle);&lt;/h1&gt;<a name="line.145"></a>
-<span class="sourceLineNo">146</span>     * <a name="line.146"></a>
-<span class="sourceLineNo">147</span>     * &lt;p&gt;<a name="line.147"></a>
-<span class="sourceLineNo">148</span>     * Set the cursor to the home position.<a name="line.148"></a>
-<span class="sourceLineNo">149</span>     * &lt;/p&gt;<a name="line.149"></a>
-<span class="sourceLineNo">150</span>     * <a name="line.150"></a>
-<span class="sourceLineNo">151</span>     * @see &lt;a<a name="line.151"></a>
-<span class="sourceLineNo">152</span>     *      href="https://projects.drogon.net/raspberry-pi/wiringpi/lcd-library/"&gt;https://projects.drogon.net/raspberry-pi/wiringpi/lcd-library/&lt;/a&gt;<a name="line.152"></a>
-<span class="sourceLineNo">153</span>     * @param handle<a name="line.153"></a>
-<span class="sourceLineNo">154</span>     */<a name="line.154"></a>
-<span class="sourceLineNo">155</span>    public static native void lcdHome(int handle);<a name="line.155"></a>
-<span class="sourceLineNo">156</span><a name="line.156"></a>
-<span class="sourceLineNo">157</span>    /**<a name="line.157"></a>
-<span class="sourceLineNo">158</span>     * &lt;h1&gt;void lcdClear (int handle);&lt;/h1&gt;<a name="line.158"></a>
-<span class="sourceLineNo">159</span>     * <a name="line.159"></a>
-<span class="sourceLineNo">160</span>     * &lt;p&gt;<a name="line.160"></a>
-<span class="sourceLineNo">161</span>     * Clears the LCD screen.<a name="line.161"></a>
-<span class="sourceLineNo">162</span>     * &lt;/p&gt;<a name="line.162"></a>
-<span class="sourceLineNo">163</span>     * <a name="line.163"></a>
-<span class="sourceLineNo">164</span>     * @see &lt;a<a name="line.164"></a>
-<span class="sourceLineNo">165</span>     *      href="https://projects.drogon.net/raspberry-pi/wiringpi/lcd-library/"&gt;https://projects.drogon.net/raspberry-pi/wiringpi/lcd-library/&lt;/a&gt;<a name="line.165"></a>
-<span class="sourceLineNo">166</span>     * @param handle<a name="line.166"></a>
-<span class="sourceLineNo">167</span>     */<a name="line.167"></a>
-<span class="sourceLineNo">168</span>    public static native void lcdClear(int handle);<a name="line.168"></a>
-<span class="sourceLineNo">169</span><a name="line.169"></a>
-<span class="sourceLineNo">170</span>    /**<a name="line.170"></a>
-<span class="sourceLineNo">171</span>     * &lt;h1&gt;lcdPosition (int handle, int x, int y)&lt;/h1&gt;<a name="line.171"></a>
-<span class="sourceLineNo">172</span>     * <a name="line.172"></a>
-<span class="sourceLineNo">173</span>     * &lt;p&gt;<a name="line.173"></a>
-<span class="sourceLineNo">174</span>     * Set the position of the cursor for subsequent text entry.<a name="line.174"></a>
-<span class="sourceLineNo">175</span>     * &lt;/p&gt;<a name="line.175"></a>
-<span class="sourceLineNo">176</span>     * <a name="line.176"></a>
-<span class="sourceLineNo">177</span>     * @see &lt;a<a name="line.177"></a>
-<span class="sourceLineNo">178</span>     *      href="https://projects.drogon.net/raspberry-pi/wiringpi/lcd-library/"&gt;https://projects.drogon.net/raspberry-pi/wiringpi/lcd-library/&lt;/a&gt;<a name="line.178"></a>
-<span class="sourceLineNo">179</span>     * @param handle<a name="line.179"></a>
-<span class="sourceLineNo">180</span>     * @param x<a name="line.180"></a>
-<span class="sourceLineNo">181</span>     * @param y<a name="line.181"></a>
-<span class="sourceLineNo">182</span>     */<a name="line.182"></a>
-<span class="sourceLineNo">183</span>    public static native void lcdPosition(int handle, int x, int y);<a name="line.183"></a>
-<span class="sourceLineNo">184</span><a name="line.184"></a>
-<span class="sourceLineNo">185</span>    /**<a name="line.185"></a>
-<span class="sourceLineNo">186</span>     * &lt;h1&gt;lcdPutchar(int handle, byte data)&lt;/h1&gt;<a name="line.186"></a>
-<span class="sourceLineNo">187</span>     * <a name="line.187"></a>
-<span class="sourceLineNo">188</span>     * &lt;p&gt;<a name="line.188"></a>
-<span class="sourceLineNo">189</span>     * Write a single character of data to the LCD display.<a name="line.189"></a>
-<span class="sourceLineNo">190</span>     * &lt;/p&gt;<a name="line.190"></a>
-<span class="sourceLineNo">191</span>     * <a name="line.191"></a>
-<span class="sourceLineNo">192</span>     * @see &lt;a<a name="line.192"></a>
-<span class="sourceLineNo">193</span>     *      href="https://projects.drogon.net/raspberry-pi/wiringpi/lcd-library/"&gt;https://projects.drogon.net/raspberry-pi/wiringpi/lcd-library/&lt;/a&gt;<a name="line.193"></a>
-<span class="sourceLineNo">194</span>     * @param handle<a name="line.194"></a>
-<span class="sourceLineNo">195</span>     * @param data<a name="line.195"></a>
-<span class="sourceLineNo">196</span>     */<a name="line.196"></a>
-<span class="sourceLineNo">197</span>    public static native void lcdPutchar(int handle, byte data);<a name="line.197"></a>
-<span class="sourceLineNo">198</span><a name="line.198"></a>
-<span class="sourceLineNo">199</span>    /**<a name="line.199"></a>
-<span class="sourceLineNo">200</span>     * &lt;h1&gt;lcdPuts(int handle, String data)&lt;/h1&gt;<a name="line.200"></a>
-<span class="sourceLineNo">201</span>     * <a name="line.201"></a>
-<span class="sourceLineNo">202</span>     * &lt;p&gt;<a name="line.202"></a>
-<span class="sourceLineNo">203</span>     * Write string of data to the LCD display.<a name="line.203"></a>
-<span class="sourceLineNo">204</span>     * &lt;/p&gt;<a name="line.204"></a>
-<span class="sourceLineNo">205</span>     * <a name="line.205"></a>
-<span class="sourceLineNo">206</span>     * &lt;p&gt;<a name="line.206"></a>
-<span class="sourceLineNo">207</span>     * (ATTENTION: the 'data' argument can only be a maximum of 512 characters.)<a name="line.207"></a>
-<span class="sourceLineNo">208</span>     * &lt;/p&gt;<a name="line.208"></a>
-<span class="sourceLineNo">209</span>     * <a name="line.209"></a>
-<span class="sourceLineNo">210</span>     * @see &lt;a<a name="line.210"></a>
-<span class="sourceLineNo">211</span>     *      href="https://projects.drogon.net/raspberry-pi/wiringpi/lcd-library/"&gt;https://projects.drogon.net/raspberry-pi/wiringpi/lcd-library/&lt;/a&gt;<a name="line.211"></a>
-<span class="sourceLineNo">212</span>     * @param handle<a name="line.212"></a>
-<span class="sourceLineNo">213</span>     * @param data<a name="line.213"></a>
-<span class="sourceLineNo">214</span>     */<a name="line.214"></a>
-<span class="sourceLineNo">215</span>    public static native void lcdPuts(int handle, String data);<a name="line.215"></a>
-<span class="sourceLineNo">216</span><a name="line.216"></a>
-<span class="sourceLineNo">217</span>    /**<a name="line.217"></a>
-<span class="sourceLineNo">218</span>     * &lt;h1&gt;lcdPuts(int handle, String data, String... args)&lt;/h1&gt;<a name="line.218"></a>
-<span class="sourceLineNo">219</span>     * <a name="line.219"></a>
-<span class="sourceLineNo">220</span>     * &lt;p&gt;<a name="line.220"></a>
-<span class="sourceLineNo">221</span>     * Write formatted string of data to the LCD display.<a name="line.221"></a>
-<span class="sourceLineNo">222</span>     * &lt;/p&gt;<a name="line.222"></a>
-<span class="sourceLineNo">223</span>     * <a name="line.223"></a>
-<span class="sourceLineNo">224</span>     * &lt;p&gt;<a name="line.224"></a>
-<span class="sourceLineNo">225</span>     * (ATTENTION: the 'data' argument can only be a maximum of 512 characters.)<a name="line.225"></a>
-<span class="sourceLineNo">226</span>     * &lt;/p&gt;<a name="line.226"></a>
-<span class="sourceLineNo">227</span>     * <a name="line.227"></a>
-<span class="sourceLineNo">228</span>     * @see &lt;a<a name="line.228"></a>
-<span class="sourceLineNo">229</span>     *      href="https://projects.drogon.net/raspberry-pi/wiringpi/lcd-library/"&gt;https://projects.drogon.net/raspberry-pi/wiringpi/lcd-library/&lt;/a&gt;<a name="line.229"></a>
-<span class="sourceLineNo">230</span>     * @param handle<a name="line.230"></a>
-<span class="sourceLineNo">231</span>     * @param data<a name="line.231"></a>
-<span class="sourceLineNo">232</span>     * @param args<a name="line.232"></a>
-<span class="sourceLineNo">233</span>     */<a name="line.233"></a>
-<span class="sourceLineNo">234</span>    public static void lcdPuts(int handle, String data, String... args)<a name="line.234"></a>
-<span class="sourceLineNo">235</span>    {<a name="line.235"></a>
-<span class="sourceLineNo">236</span>        lcdPuts(handle, String.format(data, (Object[]) args));<a name="line.236"></a>
-<span class="sourceLineNo">237</span>    }<a name="line.237"></a>
-<span class="sourceLineNo">238</span>}<a name="line.238"></a>
+<span class="sourceLineNo">087</span>    <a name="line.87"></a>
+<span class="sourceLineNo">088</span>    static<a name="line.88"></a>
+<span class="sourceLineNo">089</span>    {<a name="line.89"></a>
+<span class="sourceLineNo">090</span>        // Load the platform library<a name="line.90"></a>
+<span class="sourceLineNo">091</span>        NativeLibraryLoader.load("pi4j", "libpi4j.so");<a name="line.91"></a>
+<span class="sourceLineNo">092</span>    }<a name="line.92"></a>
+<span class="sourceLineNo">093</span><a name="line.93"></a>
+<span class="sourceLineNo">094</span>    /**<a name="line.94"></a>
+<span class="sourceLineNo">095</span>     * &lt;p&gt;<a name="line.95"></a>
+<span class="sourceLineNo">096</span>     * First, you need to initialize wiringPi in the way you want to. The LCD library will call<a name="line.96"></a>
+<span class="sourceLineNo">097</span>     * pinMode functions, but these are ignored if you have already set the modes using the gpio<a name="line.97"></a>
+<span class="sourceLineNo">098</span>     * program and want to use the wiringPiSetupSys() mechanism.<a name="line.98"></a>
+<span class="sourceLineNo">099</span>     * &lt;/p&gt;<a name="line.99"></a>
+<span class="sourceLineNo">100</span>     * <a name="line.100"></a>
+<span class="sourceLineNo">101</span>     * &lt;pre&gt;<a name="line.101"></a>
+<span class="sourceLineNo">102</span>     * int lcdInit(int rows, int cols, int bits, int rs, int strb, int d0, int d1, int d2, int d3, int d4,<a name="line.102"></a>
+<span class="sourceLineNo">103</span>     *         int d5, int d6, int d7);<a name="line.103"></a>
+<span class="sourceLineNo">104</span>     * &lt;/pre&gt;<a name="line.104"></a>
+<span class="sourceLineNo">105</span>     * <a name="line.105"></a>
+<span class="sourceLineNo">106</span>     * &lt;p&gt;<a name="line.106"></a>
+<span class="sourceLineNo">107</span>     * This is the main initialization function and must be called before you use any other LCD<a name="line.107"></a>
+<span class="sourceLineNo">108</span>     * functions.<a name="line.108"></a>
+<span class="sourceLineNo">109</span>     * &lt;/p&gt;<a name="line.109"></a>
+<span class="sourceLineNo">110</span>     * <a name="line.110"></a>
+<span class="sourceLineNo">111</span>     * &lt;p&gt;<a name="line.111"></a>
+<span class="sourceLineNo">112</span>     * Rows and cols are the rows and columns on the display (e.g. 2, 16 or 4,20). Bits is the<a name="line.112"></a>
+<span class="sourceLineNo">113</span>     * number of bits wide on the interface (4 or 8). The rs and strb represent the pin numbers of<a name="line.113"></a>
+<span class="sourceLineNo">114</span>     * the displays RS pin and Strobe (E) pin. The parameters d0 through d7 are the pin numbers of<a name="line.114"></a>
+<span class="sourceLineNo">115</span>     * the 8 data pins connected from the Pi to the display. Only the first 4 are used if you are<a name="line.115"></a>
+<span class="sourceLineNo">116</span>     * running the display in 4-bit mode.<a name="line.116"></a>
+<span class="sourceLineNo">117</span>     * &lt;/p&gt;<a name="line.117"></a>
+<span class="sourceLineNo">118</span>     * <a name="line.118"></a>
+<span class="sourceLineNo">119</span>     * &lt;p&gt;<a name="line.119"></a>
+<span class="sourceLineNo">120</span>     * The pin numbers will be either wiringPi pin numbers of GPIO pin numbers depending on which<a name="line.120"></a>
+<span class="sourceLineNo">121</span>     * wiringPiSetup function you used.<a name="line.121"></a>
+<span class="sourceLineNo">122</span>     * &lt;/p&gt;<a name="line.122"></a>
+<span class="sourceLineNo">123</span>     * <a name="line.123"></a>
+<span class="sourceLineNo">124</span>     * &lt;p&gt;<a name="line.124"></a>
+<span class="sourceLineNo">125</span>     * The return value is the handle to be used for all subsequent calls to the lcd library when<a name="line.125"></a>
+<span class="sourceLineNo">126</span>     * dealing with that LCD, or -1 to indicate a fault. (Usually incorrect parameters)<a name="line.126"></a>
+<span class="sourceLineNo">127</span>     * &lt;/p&gt;<a name="line.127"></a>
+<span class="sourceLineNo">128</span>     * <a name="line.128"></a>
+<span class="sourceLineNo">129</span>     * @see &lt;a<a name="line.129"></a>
+<span class="sourceLineNo">130</span>     *      href="https://projects.drogon.net/raspberry-pi/wiringpi/lcd-library/"&gt;https://projects.drogon.net/raspberry-pi/wiringpi/lcd-library/&lt;/a&gt;<a name="line.130"></a>
+<span class="sourceLineNo">131</span>     * <a name="line.131"></a>
+<span class="sourceLineNo">132</span>     * @param rows<a name="line.132"></a>
+<span class="sourceLineNo">133</span>     * @param cols<a name="line.133"></a>
+<span class="sourceLineNo">134</span>     * @param bits<a name="line.134"></a>
+<span class="sourceLineNo">135</span>     * @param rs<a name="line.135"></a>
+<span class="sourceLineNo">136</span>     * @param strb<a name="line.136"></a>
+<span class="sourceLineNo">137</span>     * @param d0<a name="line.137"></a>
+<span class="sourceLineNo">138</span>     * @param d1<a name="line.138"></a>
+<span class="sourceLineNo">139</span>     * @param d2<a name="line.139"></a>
+<span class="sourceLineNo">140</span>     * @param d3<a name="line.140"></a>
+<span class="sourceLineNo">141</span>     * @param d4<a name="line.141"></a>
+<span class="sourceLineNo">142</span>     * @param d5<a name="line.142"></a>
+<span class="sourceLineNo">143</span>     * @param d6<a name="line.143"></a>
+<span class="sourceLineNo">144</span>     * @param d7<a name="line.144"></a>
+<span class="sourceLineNo">145</span>     * @return return value<a name="line.145"></a>
+<span class="sourceLineNo">146</span>     */<a name="line.146"></a>
+<span class="sourceLineNo">147</span>    public static native int lcdInit(int rows, int cols, int bits, int rs, int strb, int d0,<a name="line.147"></a>
+<span class="sourceLineNo">148</span>            int d1, int d2, int d3, int d4, int d5, int d6, int d7);<a name="line.148"></a>
+<span class="sourceLineNo">149</span><a name="line.149"></a>
+<span class="sourceLineNo">150</span>    /**<a name="line.150"></a>
+<span class="sourceLineNo">151</span>     * &lt;h1&gt;void lcdHome (int handle);&lt;/h1&gt;<a name="line.151"></a>
+<span class="sourceLineNo">152</span>     * <a name="line.152"></a>
+<span class="sourceLineNo">153</span>     * &lt;p&gt;<a name="line.153"></a>
+<span class="sourceLineNo">154</span>     * Set the cursor to the home position.<a name="line.154"></a>
+<span class="sourceLineNo">155</span>     * &lt;/p&gt;<a name="line.155"></a>
+<span class="sourceLineNo">156</span>     * <a name="line.156"></a>
+<span class="sourceLineNo">157</span>     * @see &lt;a<a name="line.157"></a>
+<span class="sourceLineNo">158</span>     *      href="https://projects.drogon.net/raspberry-pi/wiringpi/lcd-library/"&gt;https://projects.drogon.net/raspberry-pi/wiringpi/lcd-library/&lt;/a&gt;<a name="line.158"></a>
+<span class="sourceLineNo">159</span>     * @param handle<a name="line.159"></a>
+<span class="sourceLineNo">160</span>     */<a name="line.160"></a>
+<span class="sourceLineNo">161</span>    public static native void lcdHome(int handle);<a name="line.161"></a>
+<span class="sourceLineNo">162</span><a name="line.162"></a>
+<span class="sourceLineNo">163</span>    /**<a name="line.163"></a>
+<span class="sourceLineNo">164</span>     * &lt;h1&gt;void lcdClear (int handle);&lt;/h1&gt;<a name="line.164"></a>
+<span class="sourceLineNo">165</span>     * <a name="line.165"></a>
+<span class="sourceLineNo">166</span>     * &lt;p&gt;<a name="line.166"></a>
+<span class="sourceLineNo">167</span>     * Clears the LCD screen.<a name="line.167"></a>
+<span class="sourceLineNo">168</span>     * &lt;/p&gt;<a name="line.168"></a>
+<span class="sourceLineNo">169</span>     * <a name="line.169"></a>
+<span class="sourceLineNo">170</span>     * @see &lt;a<a name="line.170"></a>
+<span class="sourceLineNo">171</span>     *      href="https://projects.drogon.net/raspberry-pi/wiringpi/lcd-library/"&gt;https://projects.drogon.net/raspberry-pi/wiringpi/lcd-library/&lt;/a&gt;<a name="line.171"></a>
+<span class="sourceLineNo">172</span>     * @param handle<a name="line.172"></a>
+<span class="sourceLineNo">173</span>     */<a name="line.173"></a>
+<span class="sourceLineNo">174</span>    public static native void lcdClear(int handle);<a name="line.174"></a>
+<span class="sourceLineNo">175</span><a name="line.175"></a>
+<span class="sourceLineNo">176</span>    /**<a name="line.176"></a>
+<span class="sourceLineNo">177</span>     * &lt;h1&gt;lcdPosition (int handle, int x, int y)&lt;/h1&gt;<a name="line.177"></a>
+<span class="sourceLineNo">178</span>     * <a name="line.178"></a>
+<span class="sourceLineNo">179</span>     * &lt;p&gt;<a name="line.179"></a>
+<span class="sourceLineNo">180</span>     * Set the position of the cursor for subsequent text entry.<a name="line.180"></a>
+<span class="sourceLineNo">181</span>     * &lt;/p&gt;<a name="line.181"></a>
+<span class="sourceLineNo">182</span>     * <a name="line.182"></a>
+<span class="sourceLineNo">183</span>     * @see &lt;a<a name="line.183"></a>
+<span class="sourceLineNo">184</span>     *      href="https://projects.drogon.net/raspberry-pi/wiringpi/lcd-library/"&gt;https://projects.drogon.net/raspberry-pi/wiringpi/lcd-library/&lt;/a&gt;<a name="line.184"></a>
+<span class="sourceLineNo">185</span>     * @param handle<a name="line.185"></a>
+<span class="sourceLineNo">186</span>     * @param x<a name="line.186"></a>
+<span class="sourceLineNo">187</span>     * @param y<a name="line.187"></a>
+<span class="sourceLineNo">188</span>     */<a name="line.188"></a>
+<span class="sourceLineNo">189</span>    public static native void lcdPosition(int handle, int x, int y);<a name="line.189"></a>
+<span class="sourceLineNo">190</span><a name="line.190"></a>
+<span class="sourceLineNo">191</span>    /**<a name="line.191"></a>
+<span class="sourceLineNo">192</span>     * &lt;h1&gt;lcdPutchar(int handle, byte data)&lt;/h1&gt;<a name="line.192"></a>
+<span class="sourceLineNo">193</span>     * <a name="line.193"></a>
+<span class="sourceLineNo">194</span>     * &lt;p&gt;<a name="line.194"></a>
+<span class="sourceLineNo">195</span>     * Write a single character of data to the LCD display.<a name="line.195"></a>
+<span class="sourceLineNo">196</span>     * &lt;/p&gt;<a name="line.196"></a>
+<span class="sourceLineNo">197</span>     * <a name="line.197"></a>
+<span class="sourceLineNo">198</span>     * @see &lt;a<a name="line.198"></a>
+<span class="sourceLineNo">199</span>     *      href="https://projects.drogon.net/raspberry-pi/wiringpi/lcd-library/"&gt;https://projects.drogon.net/raspberry-pi/wiringpi/lcd-library/&lt;/a&gt;<a name="line.199"></a>
+<span class="sourceLineNo">200</span>     * @param handle<a name="line.200"></a>
+<span class="sourceLineNo">201</span>     * @param data<a name="line.201"></a>
+<span class="sourceLineNo">202</span>     */<a name="line.202"></a>
+<span class="sourceLineNo">203</span>    public static native void lcdPutchar(int handle, byte data);<a name="line.203"></a>
+<span class="sourceLineNo">204</span><a name="line.204"></a>
+<span class="sourceLineNo">205</span>    /**<a name="line.205"></a>
+<span class="sourceLineNo">206</span>     * &lt;h1&gt;lcdPuts(int handle, String data)&lt;/h1&gt;<a name="line.206"></a>
+<span class="sourceLineNo">207</span>     * <a name="line.207"></a>
+<span class="sourceLineNo">208</span>     * &lt;p&gt;<a name="line.208"></a>
+<span class="sourceLineNo">209</span>     * Write string of data to the LCD display.<a name="line.209"></a>
+<span class="sourceLineNo">210</span>     * &lt;/p&gt;<a name="line.210"></a>
+<span class="sourceLineNo">211</span>     * <a name="line.211"></a>
+<span class="sourceLineNo">212</span>     * &lt;p&gt;<a name="line.212"></a>
+<span class="sourceLineNo">213</span>     * (ATTENTION: the 'data' argument can only be a maximum of 512 characters.)<a name="line.213"></a>
+<span class="sourceLineNo">214</span>     * &lt;/p&gt;<a name="line.214"></a>
+<span class="sourceLineNo">215</span>     * <a name="line.215"></a>
+<span class="sourceLineNo">216</span>     * @see &lt;a<a name="line.216"></a>
+<span class="sourceLineNo">217</span>     *      href="https://projects.drogon.net/raspberry-pi/wiringpi/lcd-library/"&gt;https://projects.drogon.net/raspberry-pi/wiringpi/lcd-library/&lt;/a&gt;<a name="line.217"></a>
+<span class="sourceLineNo">218</span>     * @param handle<a name="line.218"></a>
+<span class="sourceLineNo">219</span>     * @param data<a name="line.219"></a>
+<span class="sourceLineNo">220</span>     */<a name="line.220"></a>
+<span class="sourceLineNo">221</span>    public static native void lcdPuts(int handle, String data);<a name="line.221"></a>
+<span class="sourceLineNo">222</span><a name="line.222"></a>
+<span class="sourceLineNo">223</span>    /**<a name="line.223"></a>
+<span class="sourceLineNo">224</span>     * &lt;h1&gt;lcdPuts(int handle, String data, String... args)&lt;/h1&gt;<a name="line.224"></a>
+<span class="sourceLineNo">225</span>     * <a name="line.225"></a>
+<span class="sourceLineNo">226</span>     * &lt;p&gt;<a name="line.226"></a>
+<span class="sourceLineNo">227</span>     * Write formatted string of data to the LCD display.<a name="line.227"></a>
+<span class="sourceLineNo">228</span>     * &lt;/p&gt;<a name="line.228"></a>
+<span class="sourceLineNo">229</span>     * <a name="line.229"></a>
+<span class="sourceLineNo">230</span>     * &lt;p&gt;<a name="line.230"></a>
+<span class="sourceLineNo">231</span>     * (ATTENTION: the 'data' argument can only be a maximum of 512 characters.)<a name="line.231"></a>
+<span class="sourceLineNo">232</span>     * &lt;/p&gt;<a name="line.232"></a>
+<span class="sourceLineNo">233</span>     * <a name="line.233"></a>
+<span class="sourceLineNo">234</span>     * @see &lt;a<a name="line.234"></a>
+<span class="sourceLineNo">235</span>     *      href="https://projects.drogon.net/raspberry-pi/wiringpi/lcd-library/"&gt;https://projects.drogon.net/raspberry-pi/wiringpi/lcd-library/&lt;/a&gt;<a name="line.235"></a>
+<span class="sourceLineNo">236</span>     * @param handle<a name="line.236"></a>
+<span class="sourceLineNo">237</span>     * @param data<a name="line.237"></a>
+<span class="sourceLineNo">238</span>     * @param args<a name="line.238"></a>
+<span class="sourceLineNo">239</span>     */<a name="line.239"></a>
+<span class="sourceLineNo">240</span>    public static void lcdPuts(int handle, String data, String... args)<a name="line.240"></a>
+<span class="sourceLineNo">241</span>    {<a name="line.241"></a>
+<span class="sourceLineNo">242</span>        lcdPuts(handle, String.format(data, (Object[]) args));<a name="line.242"></a>
+<span class="sourceLineNo">243</span>    }<a name="line.243"></a>
+<span class="sourceLineNo">244</span>}<a name="line.244"></a>
 
 
 
