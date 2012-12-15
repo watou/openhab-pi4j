@@ -52,6 +52,8 @@
 'D:/DEV/Pi4J/pi4j/pi4j-core/src/main/java/com/pi4j/io/gpio/tasks/impl/GpioBlinkTaskImpl.java'
 'D:/DEV/Pi4J/pi4j/pi4j-core/src/main/java/com/pi4j/io/gpio/tasks/impl/GpioEventDispatchTaskImpl.java'
 'D:/DEV/Pi4J/pi4j/pi4j-core/src/main/java/com/pi4j/io/gpio/tasks/impl/GpioPulseTaskImpl.java'
+'D:/DEV/Pi4J/pi4j/pi4j-core/src/main/java/com/pi4j/io/gpio/trigger/GpioBlinkStateTrigger.java'
+'D:/DEV/Pi4J/pi4j/pi4j-core/src/main/java/com/pi4j/io/gpio/trigger/GpioBlinkStopStateTrigger.java'
 'D:/DEV/Pi4J/pi4j/pi4j-core/src/main/java/com/pi4j/io/gpio/trigger/GpioCallbackTrigger.java'
 'D:/DEV/Pi4J/pi4j/pi4j-core/src/main/java/com/pi4j/io/gpio/trigger/GpioInverseSyncStateTrigger.java'
 'D:/DEV/Pi4J/pi4j/pi4j-core/src/main/java/com/pi4j/io/gpio/trigger/GpioPulseStateTrigger.java'
