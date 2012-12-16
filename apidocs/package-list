@@ -10,5 +10,6 @@ com.pi4j.io.serial
 com.pi4j.io.serial.impl
 com.pi4j.jni
 com.pi4j.system
+com.pi4j.temperature
 com.pi4j.util
 com.pi4j.wiringpi

@@ -78,6 +78,8 @@
 'D:/DEV/Pi4J/pi4j/pi4j-core/src/main/java/com/pi4j/system/NetworkInfo.java'
 'D:/DEV/Pi4J/pi4j/pi4j-core/src/main/java/com/pi4j/system/NetworkInterface.java'
 'D:/DEV/Pi4J/pi4j/pi4j-core/src/main/java/com/pi4j/system/SystemInfo.java'
+'D:/DEV/Pi4J/pi4j/pi4j-core/src/main/java/com/pi4j/temperature/TemperatureConversion.java'
+'D:/DEV/Pi4J/pi4j/pi4j-core/src/main/java/com/pi4j/temperature/TemperatureScale.java'
 'D:/DEV/Pi4J/pi4j/pi4j-core/src/main/java/com/pi4j/util/NativeLibraryLoader.java'
 'D:/DEV/Pi4J/pi4j/pi4j-core/src/main/java/com/pi4j/wiringpi/Gertboard.java'
 'D:/DEV/Pi4J/pi4j/pi4j-core/src/main/java/com/pi4j/wiringpi/Gpio.java'
