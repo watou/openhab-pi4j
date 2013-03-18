@@ -44,6 +44,7 @@
 'D:/DEV/Pi4J/pi4j/pi4j-core/src/main/java/com/pi4j/io/gpio/impl/GpioPinShutdownImpl.java'
 'D:/DEV/Pi4J/pi4j/pi4j-core/src/main/java/com/pi4j/io/gpio/impl/GpioScheduledExecutorImpl.java'
 'D:/DEV/Pi4J/pi4j/pi4j-core/src/main/java/com/pi4j/io/gpio/impl/PinImpl.java'
+'D:/DEV/Pi4J/pi4j/pi4j-core/src/main/java/com/pi4j/io/gpio/PiFacePin.java'
 'D:/DEV/Pi4J/pi4j/pi4j-core/src/main/java/com/pi4j/io/gpio/Pin.java'
 'D:/DEV/Pi4J/pi4j/pi4j-core/src/main/java/com/pi4j/io/gpio/PinDirection.java'
 'D:/DEV/Pi4J/pi4j/pi4j-core/src/main/java/com/pi4j/io/gpio/PinEdge.java'
