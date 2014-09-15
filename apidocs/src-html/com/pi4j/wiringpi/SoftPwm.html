@@ -19,7 +19,7 @@
 <span class="sourceLineNo">011</span> * this project can be found here:  http://www.pi4j.com/<a name="line.11"></a>
 <span class="sourceLineNo">012</span> * **********************************************************************<a name="line.12"></a>
 <span class="sourceLineNo">013</span> * %%<a name="line.13"></a>
-<span class="sourceLineNo">014</span> * Copyright (C) 2012 - 2013 Pi4J<a name="line.14"></a>
+<span class="sourceLineNo">014</span> * Copyright (C) 2012 - 2014 Pi4J<a name="line.14"></a>
 <span class="sourceLineNo">015</span> * %%<a name="line.15"></a>
 <span class="sourceLineNo">016</span> * Licensed under the Apache License, Version 2.0 (the "License");<a name="line.16"></a>
 <span class="sourceLineNo">017</span> * you may not use this file except in compliance with the License.<a name="line.17"></a>
@@ -77,13 +77,13 @@
 <span class="sourceLineNo">069</span> * &lt;li&gt;pthread&lt;/li&gt;<a name="line.69"></a>
 <span class="sourceLineNo">070</span> * &lt;/ul&gt;<a name="line.70"></a>
 <span class="sourceLineNo">071</span> * &lt;blockquote&gt; This library depends on the wiringPi native system library.&lt;/br&gt; (developed by<a name="line.71"></a>
-<span class="sourceLineNo">072</span> * Gordon Henderson @ &lt;a href="https://projects.drogon.net/"&gt;https://projects.drogon.net/&lt;/a&gt;)<a name="line.72"></a>
+<span class="sourceLineNo">072</span> * Gordon Henderson @ &lt;a href="http://wiringpi.com/"&gt;http://wiringpi.com/&lt;/a&gt;)<a name="line.72"></a>
 <span class="sourceLineNo">073</span> * &lt;/blockquote&gt;<a name="line.73"></a>
 <span class="sourceLineNo">074</span> * &lt;/p&gt;<a name="line.74"></a>
 <span class="sourceLineNo">075</span> * <a name="line.75"></a>
 <span class="sourceLineNo">076</span> * @see &lt;a href="http://www.pi4j.com/"&gt;http://www.pi4j.com/&lt;/a&gt;<a name="line.76"></a>
 <span class="sourceLineNo">077</span> * @see &lt;a<a name="line.77"></a>
-<span class="sourceLineNo">078</span> *      href="https://projects.drogon.net/raspberry-pi/wiringpi/software-pwm-library/"&gt;https://projects.drogon.net/raspberry-pi/wiringpi/software-pwm-library/&lt;/a&gt;<a name="line.78"></a>
+<span class="sourceLineNo">078</span> *      href="http://wiringpi.com/reference/software-pwm-library/"&gt;http://wiringpi.com/reference/software-pwm-library/&lt;/a&gt;<a name="line.78"></a>
 <span class="sourceLineNo">079</span> * @author Robert Savage (&lt;a<a name="line.79"></a>
 <span class="sourceLineNo">080</span> *         href="http://www.savagehomeautomation.com"&gt;http://www.savagehomeautomation.com&lt;/a&gt;)<a name="line.80"></a>
 <span class="sourceLineNo">081</span> */<a name="line.81"></a>
@@ -107,9 +107,9 @@
 <span class="sourceLineNo">099</span>     * will be that of the wiringPiSetup function you used. Use 100 for the pwmRange, then the value<a name="line.99"></a>
 <span class="sourceLineNo">100</span>     * can be anything from 0 (off) to 100 (fully on) for the given pin.<a name="line.100"></a>
 <span class="sourceLineNo">101</span>     * &lt;/p&gt;<a name="line.101"></a>
-<span class="sourceLineNo">102</span>     * <a name="line.102"></a>
+<span class="sourceLineNo">102</span>     *<a name="line.102"></a>
 <span class="sourceLineNo">103</span>     * @see &lt;a<a name="line.103"></a>
-<span class="sourceLineNo">104</span>     *      href="https://projects.drogon.net/raspberry-pi/wiringpi/software-pwm-library/"&gt;https://projects.drogon.net/raspberry-pi/wiringpi/software-pwm-library/&lt;/a&gt;<a name="line.104"></a>
+<span class="sourceLineNo">104</span>     *      href="http://wiringpi.com/reference/software-pwm-library/"&gt;http://wiringpi.com/reference/software-pwm-library/&lt;/a&gt;<a name="line.104"></a>
 <span class="sourceLineNo">105</span>     * <a name="line.105"></a>
 <span class="sourceLineNo">106</span>     * @param pin The GPIO pin to use as a PWM pin.<a name="line.106"></a>
 <span class="sourceLineNo">107</span>     *            &lt;/p&gt;<a name="line.107"></a>
@@ -128,15 +128,16 @@
 <span class="sourceLineNo">120</span>     * This updates the PWM value on the given pin. The value is checked to be in-range and pins<a name="line.120"></a>
 <span class="sourceLineNo">121</span>     * that haven't previously been initialized via softPwmCreate will be silently ignored.<a name="line.121"></a>
 <span class="sourceLineNo">122</span>     * &lt;/p&gt;<a name="line.122"></a>
-<span class="sourceLineNo">123</span>     * <a name="line.123"></a>
+<span class="sourceLineNo">123</span>     *<a name="line.123"></a>
 <span class="sourceLineNo">124</span>     * @see &lt;a<a name="line.124"></a>
-<span class="sourceLineNo">125</span>     *      href="https://projects.drogon.net/raspberry-pi/wiringpi/software-pwm-library/"&gt;https://projects.drogon.net/raspberry-pi/wiringpi/software-pwm-library/&lt;/a&gt;<a name="line.125"></a>
-<span class="sourceLineNo">126</span>     * @param pin The GPIO pin to use as a PWM pin.<a name="line.126"></a>
-<span class="sourceLineNo">127</span>     * @param value The value to initialize the PWM pin (between 0 &lt;i&gt;(off)&lt;/i&gt; to 100 &lt;i&gt;(fully<a name="line.127"></a>
-<span class="sourceLineNo">128</span>     *            on)&lt;/i&gt;)<a name="line.128"></a>
-<span class="sourceLineNo">129</span>     */<a name="line.129"></a>
-<span class="sourceLineNo">130</span>    public static native void softPwmWrite(int pin, int value);<a name="line.130"></a>
-<span class="sourceLineNo">131</span>}<a name="line.131"></a>
+<span class="sourceLineNo">125</span>     *      href="http://wiringpi.com/reference/software-pwm-library/"&gt;http://wiringpi.com/reference/software-pwm-library/&lt;/a&gt;<a name="line.125"></a>
+<span class="sourceLineNo">126</span>     *<a name="line.126"></a>
+<span class="sourceLineNo">127</span>     * @param pin The GPIO pin to use as a PWM pin.<a name="line.127"></a>
+<span class="sourceLineNo">128</span>     * @param value The value to initialize the PWM pin (between 0 &lt;i&gt;(off)&lt;/i&gt; to 100 &lt;i&gt;(fully<a name="line.128"></a>
+<span class="sourceLineNo">129</span>     *            on)&lt;/i&gt;)<a name="line.129"></a>
+<span class="sourceLineNo">130</span>     */<a name="line.130"></a>
+<span class="sourceLineNo">131</span>    public static native void softPwmWrite(int pin, int value);<a name="line.131"></a>
+<span class="sourceLineNo">132</span>}<a name="line.132"></a>
 
 
 

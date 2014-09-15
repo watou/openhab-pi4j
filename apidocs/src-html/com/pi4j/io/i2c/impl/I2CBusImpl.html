@@ -19,7 +19,7 @@
 <span class="sourceLineNo">011</span> * this project can be found here:  http://www.pi4j.com/<a name="line.11"></a>
 <span class="sourceLineNo">012</span> * **********************************************************************<a name="line.12"></a>
 <span class="sourceLineNo">013</span> * %%<a name="line.13"></a>
-<span class="sourceLineNo">014</span> * Copyright (C) 2012 - 2013 Pi4J<a name="line.14"></a>
+<span class="sourceLineNo">014</span> * Copyright (C) 2012 - 2014 Pi4J<a name="line.14"></a>
 <span class="sourceLineNo">015</span> * %%<a name="line.15"></a>
 <span class="sourceLineNo">016</span> * Licensed under the Apache License, Version 2.0 (the "License");<a name="line.16"></a>
 <span class="sourceLineNo">017</span> * you may not use this file except in compliance with the License.<a name="line.17"></a>
@@ -35,11 +35,11 @@
 <span class="sourceLineNo">027</span> * #L%<a name="line.27"></a>
 <span class="sourceLineNo">028</span> */<a name="line.28"></a>
 <span class="sourceLineNo">029</span><a name="line.29"></a>
-<span class="sourceLineNo">030</span>import java.io.IOException;<a name="line.30"></a>
-<span class="sourceLineNo">031</span><a name="line.31"></a>
-<span class="sourceLineNo">032</span>import com.pi4j.io.i2c.I2CBus;<a name="line.32"></a>
-<span class="sourceLineNo">033</span>import com.pi4j.io.i2c.I2CDevice;<a name="line.33"></a>
-<span class="sourceLineNo">034</span>import com.pi4j.jni.I2C;<a name="line.34"></a>
+<span class="sourceLineNo">030</span>import com.pi4j.io.i2c.I2CBus;<a name="line.30"></a>
+<span class="sourceLineNo">031</span>import com.pi4j.io.i2c.I2CDevice;<a name="line.31"></a>
+<span class="sourceLineNo">032</span>import com.pi4j.jni.I2C;<a name="line.32"></a>
+<span class="sourceLineNo">033</span><a name="line.33"></a>
+<span class="sourceLineNo">034</span>import java.io.IOException;<a name="line.34"></a>
 <span class="sourceLineNo">035</span><a name="line.35"></a>
 <span class="sourceLineNo">036</span>/**<a name="line.36"></a>
 <span class="sourceLineNo">037</span> * This is implementation of i2c bus. This class keeps underlying linux file descriptor of<a name="line.37"></a>
@@ -65,7 +65,7 @@
 <span class="sourceLineNo">057</span>     * @throws IOException thrown in case there is a problem opening bus file or bus number is not 0 or 1.<a name="line.57"></a>
 <span class="sourceLineNo">058</span>     */<a name="line.58"></a>
 <span class="sourceLineNo">059</span>    public static I2CBus getBus(int busNumber) throws IOException {<a name="line.59"></a>
-<span class="sourceLineNo">060</span>        I2CBus bus = null;<a name="line.60"></a>
+<span class="sourceLineNo">060</span>        I2CBus bus;<a name="line.60"></a>
 <span class="sourceLineNo">061</span>        if (busNumber == 0) {<a name="line.61"></a>
 <span class="sourceLineNo">062</span>            bus = bus0;<a name="line.62"></a>
 <span class="sourceLineNo">063</span>            if (bus == null) {<a name="line.63"></a>
