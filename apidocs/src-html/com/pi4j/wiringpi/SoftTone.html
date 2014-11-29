@@ -72,66 +72,65 @@
 <span class="sourceLineNo">064</span> * @author Robert Savage (&lt;a<a name="line.64"></a>
 <span class="sourceLineNo">065</span> *         href="http://www.savagehomeautomation.com"&gt;http://www.savagehomeautomation.com&lt;/a&gt;)<a name="line.65"></a>
 <span class="sourceLineNo">066</span> */<a name="line.66"></a>
-<span class="sourceLineNo">067</span>@SuppressWarnings("unused")<a name="line.67"></a>
-<span class="sourceLineNo">068</span>public class SoftTone {<a name="line.68"></a>
-<span class="sourceLineNo">069</span><a name="line.69"></a>
-<span class="sourceLineNo">070</span>    // private constructor<a name="line.70"></a>
-<span class="sourceLineNo">071</span>    private SoftTone() {<a name="line.71"></a>
-<span class="sourceLineNo">072</span>        // forbid object construction <a name="line.72"></a>
-<span class="sourceLineNo">073</span>    }<a name="line.73"></a>
-<span class="sourceLineNo">074</span>    <a name="line.74"></a>
-<span class="sourceLineNo">075</span>    static {<a name="line.75"></a>
-<span class="sourceLineNo">076</span>        // Load the platform library<a name="line.76"></a>
-<span class="sourceLineNo">077</span>        NativeLibraryLoader.load("pi4j", "libpi4j.so");<a name="line.77"></a>
-<span class="sourceLineNo">078</span>    }<a name="line.78"></a>
-<span class="sourceLineNo">079</span><a name="line.79"></a>
-<span class="sourceLineNo">080</span>    /**<a name="line.80"></a>
-<span class="sourceLineNo">081</span>     * &lt;p&gt;int softToneCreate (int pin)&lt;/p&gt;<a name="line.81"></a>
-<span class="sourceLineNo">082</span>     * <a name="line.82"></a>
-<span class="sourceLineNo">083</span>     * &lt;p&gt;<a name="line.83"></a>
-<span class="sourceLineNo">084</span>     * This creates a software controlled tone pin. You can use any GPIO pin and the pin numbering will be that of<a name="line.84"></a>
-<span class="sourceLineNo">085</span>     * the wiringPiSetup() function you used.<a name="line.85"></a>
-<span class="sourceLineNo">086</span>     * &lt;/p&gt;<a name="line.86"></a>
-<span class="sourceLineNo">087</span>     *<a name="line.87"></a>
-<span class="sourceLineNo">088</span>     * @see &lt;a<a name="line.88"></a>
-<span class="sourceLineNo">089</span>     *      href="http://wiringpi.com/reference/software-tone-library/"&gt;http://wiringpi.com/reference/software-tone-library/&lt;/a&gt;<a name="line.89"></a>
-<span class="sourceLineNo">090</span>     * <a name="line.90"></a>
-<span class="sourceLineNo">091</span>     * @param pin The GPIO pin to use as a PWM pin.<a name="line.91"></a>
-<span class="sourceLineNo">092</span>     *            &lt;/p&gt;<a name="line.92"></a>
-<span class="sourceLineNo">093</span>     * @return The return value is 0 for success. Anything else and you should check the global<a name="line.93"></a>
-<span class="sourceLineNo">094</span>     *         errno variable to see what went wrong.<a name="line.94"></a>
-<span class="sourceLineNo">095</span>     */<a name="line.95"></a>
-<span class="sourceLineNo">096</span>    public static native int softToneCreate(int pin);<a name="line.96"></a>
-<span class="sourceLineNo">097</span><a name="line.97"></a>
-<span class="sourceLineNo">098</span>    /**<a name="line.98"></a>
-<span class="sourceLineNo">099</span>     * &lt;p&gt;void softToneWrite (int pin, int frequency);&lt;/p&gt;<a name="line.99"></a>
-<span class="sourceLineNo">100</span>     *<a name="line.100"></a>
-<span class="sourceLineNo">101</span>     * &lt;p&gt;<a name="line.101"></a>
-<span class="sourceLineNo">102</span>     * This updates the tone frequency value on the given pin. The tone will be played until you set the frequency to 0.<a name="line.102"></a>
-<span class="sourceLineNo">103</span>     * &lt;/p&gt;<a name="line.103"></a>
-<span class="sourceLineNo">104</span>     *<a name="line.104"></a>
-<span class="sourceLineNo">105</span>     * @see &lt;a<a name="line.105"></a>
-<span class="sourceLineNo">106</span>     *      href="http://wiringpi.com/reference/software-tone-library/"&gt;http://wiringpi.com/reference/software-tone-library/&lt;/a&gt;<a name="line.106"></a>
-<span class="sourceLineNo">107</span>     *<a name="line.107"></a>
-<span class="sourceLineNo">108</span>     * @param pin The GPIO pin to use.<a name="line.108"></a>
-<span class="sourceLineNo">109</span>     * @param frequency The frequency value set on the GPIO pin.  Set of value of '0' to stop the tone.<a name="line.109"></a>
-<span class="sourceLineNo">110</span>     */<a name="line.110"></a>
-<span class="sourceLineNo">111</span>    public static native void softToneWrite(int pin, int frequency);<a name="line.111"></a>
-<span class="sourceLineNo">112</span><a name="line.112"></a>
-<span class="sourceLineNo">113</span>    /**<a name="line.113"></a>
-<span class="sourceLineNo">114</span>     * &lt;p&gt;void softToneStop (int pin);&lt;/p&gt;<a name="line.114"></a>
-<span class="sourceLineNo">115</span>     *<a name="line.115"></a>
-<span class="sourceLineNo">116</span>     * &lt;p&gt;<a name="line.116"></a>
-<span class="sourceLineNo">117</span>     * This stops any tone frequency value on the given pin.<a name="line.117"></a>
-<span class="sourceLineNo">118</span>     * &lt;/p&gt;<a name="line.118"></a>
-<span class="sourceLineNo">119</span>     *<a name="line.119"></a>
-<span class="sourceLineNo">120</span>     * @see &lt;a<a name="line.120"></a>
-<span class="sourceLineNo">121</span>     *      href="http://wiringpi.com/reference/software-tone-library/"&gt;http://wiringpi.com/reference/software-tone-library/&lt;/a&gt;<a name="line.121"></a>
-<span class="sourceLineNo">122</span>     *<a name="line.122"></a>
-<span class="sourceLineNo">123</span>     * @param pin The GPIO pin to use.<a name="line.123"></a>
-<span class="sourceLineNo">124</span>     */<a name="line.124"></a>
-<span class="sourceLineNo">125</span>    public static native void softToneStop(int pin);<a name="line.125"></a>
-<span class="sourceLineNo">126</span>}<a name="line.126"></a>
+<span class="sourceLineNo">067</span>public class SoftTone {<a name="line.67"></a>
+<span class="sourceLineNo">068</span><a name="line.68"></a>
+<span class="sourceLineNo">069</span>    // private constructor<a name="line.69"></a>
+<span class="sourceLineNo">070</span>    private SoftTone() {<a name="line.70"></a>
+<span class="sourceLineNo">071</span>        // forbid object construction <a name="line.71"></a>
+<span class="sourceLineNo">072</span>    }<a name="line.72"></a>
+<span class="sourceLineNo">073</span>    <a name="line.73"></a>
+<span class="sourceLineNo">074</span>    static {<a name="line.74"></a>
+<span class="sourceLineNo">075</span>        // Load the platform library<a name="line.75"></a>
+<span class="sourceLineNo">076</span>        NativeLibraryLoader.load("libpi4j.so");<a name="line.76"></a>
+<span class="sourceLineNo">077</span>    }<a name="line.77"></a>
+<span class="sourceLineNo">078</span><a name="line.78"></a>
+<span class="sourceLineNo">079</span>    /**<a name="line.79"></a>
+<span class="sourceLineNo">080</span>     * &lt;p&gt;int softToneCreate (int pin)&lt;/p&gt;<a name="line.80"></a>
+<span class="sourceLineNo">081</span>     * <a name="line.81"></a>
+<span class="sourceLineNo">082</span>     * &lt;p&gt;<a name="line.82"></a>
+<span class="sourceLineNo">083</span>     * This creates a software controlled tone pin. You can use any GPIO pin and the pin numbering will be that of<a name="line.83"></a>
+<span class="sourceLineNo">084</span>     * the wiringPiSetup() function you used.<a name="line.84"></a>
+<span class="sourceLineNo">085</span>     * &lt;/p&gt;<a name="line.85"></a>
+<span class="sourceLineNo">086</span>     *<a name="line.86"></a>
+<span class="sourceLineNo">087</span>     * @see &lt;a<a name="line.87"></a>
+<span class="sourceLineNo">088</span>     *      href="http://wiringpi.com/reference/software-tone-library/"&gt;http://wiringpi.com/reference/software-tone-library/&lt;/a&gt;<a name="line.88"></a>
+<span class="sourceLineNo">089</span>     * <a name="line.89"></a>
+<span class="sourceLineNo">090</span>     * @param pin The GPIO pin to use as a PWM pin.<a name="line.90"></a>
+<span class="sourceLineNo">091</span>     *            &lt;/p&gt;<a name="line.91"></a>
+<span class="sourceLineNo">092</span>     * @return The return value is 0 for success. Anything else and you should check the global<a name="line.92"></a>
+<span class="sourceLineNo">093</span>     *         errno variable to see what went wrong.<a name="line.93"></a>
+<span class="sourceLineNo">094</span>     */<a name="line.94"></a>
+<span class="sourceLineNo">095</span>    public static native int softToneCreate(int pin);<a name="line.95"></a>
+<span class="sourceLineNo">096</span><a name="line.96"></a>
+<span class="sourceLineNo">097</span>    /**<a name="line.97"></a>
+<span class="sourceLineNo">098</span>     * &lt;p&gt;void softToneWrite (int pin, int frequency);&lt;/p&gt;<a name="line.98"></a>
+<span class="sourceLineNo">099</span>     *<a name="line.99"></a>
+<span class="sourceLineNo">100</span>     * &lt;p&gt;<a name="line.100"></a>
+<span class="sourceLineNo">101</span>     * This updates the tone frequency value on the given pin. The tone will be played until you set the frequency to 0.<a name="line.101"></a>
+<span class="sourceLineNo">102</span>     * &lt;/p&gt;<a name="line.102"></a>
+<span class="sourceLineNo">103</span>     *<a name="line.103"></a>
+<span class="sourceLineNo">104</span>     * @see &lt;a<a name="line.104"></a>
+<span class="sourceLineNo">105</span>     *      href="http://wiringpi.com/reference/software-tone-library/"&gt;http://wiringpi.com/reference/software-tone-library/&lt;/a&gt;<a name="line.105"></a>
+<span class="sourceLineNo">106</span>     *<a name="line.106"></a>
+<span class="sourceLineNo">107</span>     * @param pin The GPIO pin to use.<a name="line.107"></a>
+<span class="sourceLineNo">108</span>     * @param frequency The frequency value set on the GPIO pin.  Set of value of '0' to stop the tone.<a name="line.108"></a>
+<span class="sourceLineNo">109</span>     */<a name="line.109"></a>
+<span class="sourceLineNo">110</span>    public static native void softToneWrite(int pin, int frequency);<a name="line.110"></a>
+<span class="sourceLineNo">111</span><a name="line.111"></a>
+<span class="sourceLineNo">112</span>    /**<a name="line.112"></a>
+<span class="sourceLineNo">113</span>     * &lt;p&gt;void softToneStop (int pin);&lt;/p&gt;<a name="line.113"></a>
+<span class="sourceLineNo">114</span>     *<a name="line.114"></a>
+<span class="sourceLineNo">115</span>     * &lt;p&gt;<a name="line.115"></a>
+<span class="sourceLineNo">116</span>     * This stops any tone frequency value on the given pin.<a name="line.116"></a>
+<span class="sourceLineNo">117</span>     * &lt;/p&gt;<a name="line.117"></a>
+<span class="sourceLineNo">118</span>     *<a name="line.118"></a>
+<span class="sourceLineNo">119</span>     * @see &lt;a<a name="line.119"></a>
+<span class="sourceLineNo">120</span>     *      href="http://wiringpi.com/reference/software-tone-library/"&gt;http://wiringpi.com/reference/software-tone-library/&lt;/a&gt;<a name="line.120"></a>
+<span class="sourceLineNo">121</span>     *<a name="line.121"></a>
+<span class="sourceLineNo">122</span>     * @param pin The GPIO pin to use.<a name="line.122"></a>
+<span class="sourceLineNo">123</span>     */<a name="line.123"></a>
+<span class="sourceLineNo">124</span>    public static native void softToneStop(int pin);<a name="line.124"></a>
+<span class="sourceLineNo">125</span>}<a name="line.125"></a>
 
 
 
