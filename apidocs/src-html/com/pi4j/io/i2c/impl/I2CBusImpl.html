@@ -19,7 +19,7 @@
 <span class="sourceLineNo">011</span> * this project can be found here:  http://www.pi4j.com/<a name="line.11"></a>
 <span class="sourceLineNo">012</span> * **********************************************************************<a name="line.12"></a>
 <span class="sourceLineNo">013</span> * %%<a name="line.13"></a>
-<span class="sourceLineNo">014</span> * Copyright (C) 2012 - 2014 Pi4J<a name="line.14"></a>
+<span class="sourceLineNo">014</span> * Copyright (C) 2012 - 2015 Pi4J<a name="line.14"></a>
 <span class="sourceLineNo">015</span> * %%<a name="line.15"></a>
 <span class="sourceLineNo">016</span> * Licensed under the Apache License, Version 2.0 (the "License");<a name="line.16"></a>
 <span class="sourceLineNo">017</span> * you may not use this file except in compliance with the License.<a name="line.17"></a>
@@ -128,7 +128,19 @@
 <span class="sourceLineNo">120</span>    public void close() throws IOException {<a name="line.120"></a>
 <span class="sourceLineNo">121</span>        I2C.i2cClose(fd);<a name="line.121"></a>
 <span class="sourceLineNo">122</span>    }<a name="line.122"></a>
-<span class="sourceLineNo">123</span>}<a name="line.123"></a>
+<span class="sourceLineNo">123</span><a name="line.123"></a>
+<span class="sourceLineNo">124</span>        @Override<a name="line.124"></a>
+<span class="sourceLineNo">125</span>        public String getFileName()<a name="line.125"></a>
+<span class="sourceLineNo">126</span>        {<a name="line.126"></a>
+<span class="sourceLineNo">127</span>                return filename;<a name="line.127"></a>
+<span class="sourceLineNo">128</span>        }<a name="line.128"></a>
+<span class="sourceLineNo">129</span><a name="line.129"></a>
+<span class="sourceLineNo">130</span>        @Override<a name="line.130"></a>
+<span class="sourceLineNo">131</span>        public int getFileDescriptor()<a name="line.131"></a>
+<span class="sourceLineNo">132</span>        {<a name="line.132"></a>
+<span class="sourceLineNo">133</span>                return fd;<a name="line.133"></a>
+<span class="sourceLineNo">134</span>        }<a name="line.134"></a>
+<span class="sourceLineNo">135</span>}<a name="line.135"></a>
 
 
 
