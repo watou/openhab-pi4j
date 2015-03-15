@@ -9,7 +9,6 @@ com.pi4j.io.i2c
 com.pi4j.io.i2c.impl
 com.pi4j.io.serial
 com.pi4j.io.serial.impl
-com.pi4j.io.serial.tasks
 com.pi4j.io.spi
 com.pi4j.io.spi.impl
 com.pi4j.jni
