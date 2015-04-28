@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.pi4j</groupId>
 	<artifactId>pi4j-parent</artifactId>
-	<version>1.0</version>
+	<version>1.0-jdk6-SNAPSHOT</version>
 	<name>Pi4J :: Parent POM</name>
 	<description>Parent Maven POM for the Pi4J Project</description>
 	<url>http://www.pi4j.com</url>
@@ -128,8 +128,8 @@
 		<github.global.server>github</github.global.server>
 
         <!-- JAVA COMPILER VERSIONS -->
-        <jdk.source.version>1.7</jdk.source.version>
-        <jdk.target.version>1.7</jdk.target.version>
+        <jdk.source.version>1.6</jdk.source.version>
+        <jdk.target.version>1.6</jdk.target.version>
 
         <!-- DEPENDENCY VERSIONS -->
         <org.osgi.core.version>4.3.0</org.osgi.core.version>
