@@ -91,7 +91,11 @@ public class NativeLibraryLoader {
 		try {
 			loadLibraryFromClasspath(path);
 			logger.fine("Library [" + fileName + "] loaded successfully using embedded resource file: [" + path + "]");
-		} catch (Exception | UnsatisfiedLinkError e) {
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, "Unable to load [" + fileName + "] using path: [" + path + "]", e);
+			// either way, we did what we could, no need to remove now the library from the loaded libraries since we run inside one VM and nothing could possibly change, so there is no point in
+			// trying out this logic again
+		} catch (UnsatisfiedLinkError e) {
 			logger.log(Level.SEVERE, "Unable to load [" + fileName + "] using path: [" + path + "]", e);
 			// either way, we did what we could, no need to remove now the library from the loaded libraries since we run inside one VM and nothing could possibly change, so there is no point in
 			// trying out this logic again
@@ -133,12 +137,15 @@ public class NativeLibraryLoader {
 		File targetFile = target.toFile();
 		targetFile.deleteOnExit();
 
-		try (InputStream source = NativeLibraryLoader.class.getResourceAsStream(inputPath.toString())) {
+		InputStream source = NativeLibraryLoader.class.getResourceAsStream(inputPath.toString()); 
+		try {
 			if (source == null) {
 				throw new FileNotFoundException("File " + inputPath + " was not found in classpath.");
 			}
 			Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING);
-		}
+		} finally {
+		    source.close();
+	    }
 		// Finally, load the library
 		System.load(target.toAbsolutePath().toString());
 	}

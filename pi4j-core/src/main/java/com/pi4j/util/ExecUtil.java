@@ -43,7 +43,7 @@ public class ExecUtil
     }
     
     public static String[] execute(String command, String split) throws IOException, InterruptedException {
-        List<String> result = new ArrayList<>();
+        List<String> result = new ArrayList<String>();
         Process p = Runtime.getRuntime().exec(command);
         p.waitFor();
                 

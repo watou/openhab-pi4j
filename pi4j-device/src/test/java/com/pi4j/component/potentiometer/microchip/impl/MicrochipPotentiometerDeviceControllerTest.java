@@ -100,7 +100,7 @@ public class MicrochipPotentiometerDeviceControllerTest {
 		}
 		
 		// test for proper write-argument -> see FIGURE 7-5 and TABLE 4-1
-		testForWriteAndRead((byte) 0b1011100);
+		testForWriteAndRead((byte) 0x5C); // 0x5C);
 
 		// test success
 		
@@ -108,64 +108,67 @@ public class MicrochipPotentiometerDeviceControllerTest {
 
 		final int[] length = new int[1];
 		
-		// 0b1111111110101 -> Status-bits (see 4.2.2.1)
-		mockReadResult(i2cDevice, (byte) 0b00011111, (byte) 0b11110101, length);
+		// 0xFF10101 -> Status-bits (see 4.2.2.1)
+		mockReadResult(i2cDevice, 
+		(byte) 0x1F ,// 0b00011111, 
+		(byte) 0xF5, // 0b11110101, 
+		length);
 
         DeviceControllerDeviceStatus deviceStatus1 = controller.getDeviceStatus();
 
 		// test for proper write-argument -> see FIGURE 7-5 and TABLE 4-1
-		testForWriteAndRead((byte) 0b1011100);
+		testForWriteAndRead((byte) 0x5C); // 0x5C);
 
 		assertTrue("On calling 'getDeviceStatus' the method I2CDevice.read(...)"
 				+ "is called with a byte-array as first argument. The length of this "
 				+ "array must be at least 2 but was " + length[0], length[0] >= 2);
 	
 		assertEquals("Unexpected EEPROM-write-active-flag according to "
-				+ "status-bits 0b1111111110101 (see 4.2.2.1)",
+				+ "status-bits 0xFF10101 (see 4.2.2.1)",
 				false, deviceStatus1.isEepromWriteActive());
 		assertEquals("Unexpected channel-B-locked-flag according to "
-				+ "status-bits 0b1111111110101 (see 4.2.2.1)",
+				+ "status-bits 0xFF10101 (see 4.2.2.1)",
 				true, deviceStatus1.isChannelBLocked());
 		assertEquals("Unexpected channel-A-locked-flag according to "
-				+ "status-bits 0b1111111110101 (see 4.2.2.1)",
+				+ "status-bits 0xFF10101 (see 4.2.2.1)",
 				false, deviceStatus1.isChannelALocked());
 		assertEquals("Unexpected EEPROM-write-protected-flag according to "
-				+ "status-bits 0b1111111110101 (see 4.2.2.1)",
+				+ "status-bits 0xFF10101 (see 4.2.2.1)",
 				true, deviceStatus1.isEepromWriteProtected());
 
 		reset(i2cDevice);
 		
-		// 0b1111111111010 -> Status-bits (see 4.2.2.1)
-		mockReadResult(i2cDevice, (byte) 0b00011111, (byte) 0b11111010, length);
+		// 0xFF11010 -> Status-bits (see 4.2.2.1)
+		mockReadResult(i2cDevice, (byte) 0x1f, (byte) 0xFA, length);
 
         DeviceControllerDeviceStatus deviceStatus2 = controller.getDeviceStatus();
 
 		// test for proper write-argument -> see FIGURE 7-5 and TABLE 4-1
-		testForWriteAndRead((byte) 0b1011100);
+		testForWriteAndRead((byte) 0x5C);
 
 		assertTrue("On calling 'getDeviceStatus' the method I2CDevice.read(...)"
 				+ "is called with a byte-array as first argument. The length of this "
 				+ "array must be at least 2 but was " + length[0], length[0] >= 2);
 	
 		assertEquals("Unexpected EEPROM-write-active-flag according to "
-				+ "status-bits 0b1111111111010 (see 4.2.2.1)",
+				+ "status-bits 0xFF11010 (see 4.2.2.1)",
 				true, deviceStatus2.isEepromWriteActive());
 		assertEquals("Unexpected channel-B-locked-flag according to "
-				+ "status-bits 0b1111111111010 (see 4.2.2.1)",
+				+ "status-bits 0xFF11010 (see 4.2.2.1)",
 				false, deviceStatus2.isChannelBLocked());
 		assertEquals("Unexpected channel-A-locked-flag according to "
-				+ "status-bits 0b1111111111010 (see 4.2.2.1)",
+				+ "status-bits 0xFF11010 (see 4.2.2.1)",
 				true, deviceStatus2.isChannelALocked());
 		assertEquals("Unexpected EEPROM-write-protected-flag according to "
-				+ "status-bits 0b1111111111010 (see 4.2.2.1)",
+				+ "status-bits 0xFF11010 (see 4.2.2.1)",
 				false, deviceStatus2.isEepromWriteProtected());
 		
 		// test wrong answer from device
 		
 		reset(i2cDevice);
 		
-		// 0b0000000000000000 -> malformed result!
-		mockReadResult(i2cDevice, (byte) 0b00000000, (byte) 0b000000000, length);
+		// 000000000 -> malformed result!
+		mockReadResult(i2cDevice, (byte) 00000, (byte) 0000, length);
 		
 		try {
 			
@@ -179,7 +182,7 @@ public class MicrochipPotentiometerDeviceControllerTest {
 		}
 		
 		// test for proper write-argument -> see FIGURE 7-5 and TABLE 4-1
-		testForWriteAndRead((byte) 0b1011100);
+		testForWriteAndRead((byte) 0x5C);
 		
 		assertTrue("On calling 'getDeviceStatus' the method I2CDevice.read(...)"
 				+ "is called with a byte-array as first argument. The length of this "
@@ -201,8 +204,8 @@ public class MicrochipPotentiometerDeviceControllerTest {
 		
 		// test wiper 0 - volatile
 
-		// 0b0000000000000000 -> 0
-		mockReadResult(i2cDevice, (byte) 0b00000000, (byte) 0b00000000, (int[]) null);
+		// 000000000 -> 0
+		mockReadResult(i2cDevice, (byte) 0, (byte) 0, (int[]) null);
 		
 		int currentValue = controller.getValue(DeviceControllerChannel.A, false);
 		
@@ -210,14 +213,14 @@ public class MicrochipPotentiometerDeviceControllerTest {
 				+ "but got " + currentValue, 0, currentValue);
 		
 		// test for proper write-argument -> see FIGURE 7-5 and TABLE 4-1
-		testForWriteAndRead((byte) 0b0001100);
+		testForWriteAndRead((byte) 0xC);
 
 		// test wiper 1 - volatile
 
 		reset(i2cDevice);
 		
-		// 0b0000000010000000 -> 128
-		mockReadResult(i2cDevice, (byte) 0b00000000, (byte) 0b10000000, (int[]) null);
+		// 010000000 -> 128
+		mockReadResult(i2cDevice, (byte) 0, (byte) 0x80, (int[]) null);
 
 		currentValue = controller.getValue(DeviceControllerChannel.B, false);
 
@@ -225,14 +228,14 @@ public class MicrochipPotentiometerDeviceControllerTest {
 				+ "but got " + currentValue, 128, currentValue);
 
 		// test for proper write-argument -> see FIGURE 7-5 and TABLE 4-1
-		testForWriteAndRead((byte) 0b0011100);
+		testForWriteAndRead((byte) 0x1C);
 			
 		// test wiper 0 - non-volatile
 
 		reset(i2cDevice);
 
-		// 0b0000000100000001 -> 257
-		mockReadResult(i2cDevice, (byte) 0b00000001, (byte) 0b00000001, (int[]) null);
+		// 100000001 -> 257
+		mockReadResult(i2cDevice, (byte) 1, (byte) 1, (int[]) null);
 		
 		currentValue = controller.getValue(DeviceControllerChannel.A, true);
 		
@@ -240,14 +243,14 @@ public class MicrochipPotentiometerDeviceControllerTest {
 				+ "but got " + currentValue, 257, currentValue);
 		
 		// test for proper write-argument -> see FIGURE 7-5 and TABLE 4-1
-		testForWriteAndRead((byte) 0b0101100);
+		testForWriteAndRead((byte) 0x2C);
 
 		// test wiper 1 - non-volatile
 
 		reset(i2cDevice);
 		
-		// 0b0000000100000001 -> 257
-		mockReadResult(i2cDevice, (byte) 0b00000001, (byte) 0b00000001, (int[]) null);
+		// 100000001 -> 257
+		mockReadResult(i2cDevice, (byte) 1, (byte) 1, (int[]) null);
 		
 		currentValue = controller.getValue(DeviceControllerChannel.B, true);
 		
@@ -255,7 +258,7 @@ public class MicrochipPotentiometerDeviceControllerTest {
 				+ "but got " + currentValue, 257, currentValue);
 		
 		// test for proper write-argument -> see FIGURE 7-5 and TABLE 4-1
-		testForWriteAndRead((byte) 0b0111100);
+		testForWriteAndRead((byte) 0x3C);
 		
 	}
 	
@@ -284,7 +287,7 @@ public class MicrochipPotentiometerDeviceControllerTest {
 		controller.setValue(DeviceControllerChannel.A, 0, false);
 		
 		// test for proper write-argument -> see FIGURE 7-2 and TABLE 4-1
-		verify(i2cDevice).write(new byte[] { (byte) 0b0000000, (byte) 0b00000000 }, 0, 2);
+		verify(i2cDevice).write(new byte[] { (byte) 0, (byte) 0 }, 0, 2);
 		// test for write was called only once
 		verify(i2cDevice).write(any(byte[].class), anyInt(), anyInt());
 		
@@ -295,7 +298,7 @@ public class MicrochipPotentiometerDeviceControllerTest {
 		controller.setValue(DeviceControllerChannel.B, 1, false);
 		
 		// test for proper write-argument -> see FIGURE 7-2 and TABLE 4-1
-		verify(i2cDevice).write(new byte[] { (byte) 0b0010000, (byte) 0b00000001 }, 0, 2);
+		verify(i2cDevice).write(new byte[] { (byte) 0x10, (byte) 1 }, 0, 2);
 		// 'write' is called on time
 		verify(i2cDevice).write(any(byte[].class), anyInt(), anyInt());
 
@@ -306,7 +309,7 @@ public class MicrochipPotentiometerDeviceControllerTest {
 		controller.setValue(DeviceControllerChannel.A, 255, true);
 		
 		// test for proper write-argument -> see FIGURE 7-2 and TABLE 4-1
-		verify(i2cDevice).write(new byte[] { (byte) 0b0100000, (byte) 0b11111111 }, 0, 2);
+		verify(i2cDevice).write(new byte[] { (byte) 0x20, (byte) 0xFF }, 0, 2);
 		// 'write' is called on time
 		verify(i2cDevice).write(any(byte[].class), anyInt(), anyInt());
 
@@ -317,7 +320,7 @@ public class MicrochipPotentiometerDeviceControllerTest {
 		controller.setValue(DeviceControllerChannel.B, 256, true);
 		
 		// test for proper write-argument -> see FIGURE 7-2 and TABLE 4-1
-		verify(i2cDevice).write(new byte[] { (byte) 0b0110001, (byte) 0b00000000 }, 0, 2);
+		verify(i2cDevice).write(new byte[] { (byte) 0x31, (byte) 0 }, 0, 2);
 		// 'write' is called on time
 		verify(i2cDevice).write(any(byte[].class), anyInt(), anyInt());
 		
@@ -349,7 +352,7 @@ public class MicrochipPotentiometerDeviceControllerTest {
 		controller.increase(DeviceControllerChannel.A, 1);
 		
 		// test for proper write-argument -> see FIGURE 7-7 and TABLE 4-1
-		verify(i2cDevice).write(new byte[] { (byte) 0b0000100 }, 0, 1);
+		verify(i2cDevice).write(new byte[] { (byte) 0x4 }, 0, 1);
 		// 'write' called on time
 		verify(i2cDevice).write(any(byte[].class), anyInt(), anyInt());
 
@@ -360,8 +363,8 @@ public class MicrochipPotentiometerDeviceControllerTest {
 		controller.increase(DeviceControllerChannel.B, 3);
 		
 		// test for proper write-argument -> see FIGURE 7-7 and TABLE 4-1
-		verify(i2cDevice).write(new byte[] { (byte) 0b0010100,
-				(byte) 0b0010100, (byte) 0b0010100 }, 0, 3);
+		verify(i2cDevice).write(new byte[] { (byte) 0x14,
+				(byte) 0x14, (byte) 0x14 }, 0, 3);
 		// 'write' called on time
 		verify(i2cDevice).write(any(byte[].class), anyInt(), anyInt());
 		
@@ -372,7 +375,7 @@ public class MicrochipPotentiometerDeviceControllerTest {
 		controller.increase(DeviceControllerChannel.A, -1);
 		
 		// test for proper write-argument -> see FIGURE 7-7 and TABLE 4-1
-		verify(i2cDevice).write(new byte[] { (byte) 0b0001000 }, 0, 1);
+		verify(i2cDevice).write(new byte[] { (byte) 0x8 }, 0, 1);
 		// 'write' called on time
 		verify(i2cDevice).write(any(byte[].class), anyInt(), anyInt());
 		
@@ -404,7 +407,7 @@ public class MicrochipPotentiometerDeviceControllerTest {
 		controller.decrease(DeviceControllerChannel.A, 1);
 		
 		// test for proper write-argument -> see FIGURE 7-7 and TABLE 4-1
-		verify(i2cDevice).write(new byte[] { (byte) 0b0001000 }, 0, 1);
+		verify(i2cDevice).write(new byte[] { (byte) 0x8 }, 0, 1);
 		// 'write' called on time
 		verify(i2cDevice).write(any(byte[].class), anyInt(), anyInt());
 
@@ -415,8 +418,8 @@ public class MicrochipPotentiometerDeviceControllerTest {
 		controller.decrease(DeviceControllerChannel.B, 3);
 		
 		// test for proper write-argument -> see FIGURE 7-7 and TABLE 4-1
-		verify(i2cDevice).write(new byte[] { (byte) 0b0011000,
-				(byte) 0b0011000, (byte) 0b0011000 }, 0, 3);
+		verify(i2cDevice).write(new byte[] { (byte) 0x18,
+				(byte) 0x18, (byte) 0x18 }, 0, 3);
 		// 'write' called on time
 		verify(i2cDevice).write(any(byte[].class), anyInt(), anyInt());
 		
@@ -427,7 +430,7 @@ public class MicrochipPotentiometerDeviceControllerTest {
 		controller.decrease(DeviceControllerChannel.A, -1);
 		
 		// test for proper write-argument -> see FIGURE 7-7 and TABLE 4-1
-		verify(i2cDevice).write(new byte[] { (byte) 0b0000100 }, 0, 1);
+		verify(i2cDevice).write(new byte[] { (byte) 0x4 }, 0, 1);
 		// 'write' called on time
 		verify(i2cDevice).write(any(byte[].class), anyInt(), anyInt());
 		
@@ -445,14 +448,14 @@ public class MicrochipPotentiometerDeviceControllerTest {
 			// expected
 		}
 		
-		// 0b0111000011 -> TCON-bits (see 4.2.2.2)
-		mockReadResult(i2cDevice, (byte) 0, (byte) 0b11000011, null);
+		// 0x38011 -> TCON-bits (see 4.2.2.2)
+		mockReadResult(i2cDevice, (byte) 0, (byte) 0xC3, null);
 
         DeviceControllerTerminalConfiguration tconA = controller.getTerminalConfiguration(
                 DeviceControllerChannel.A);
 
 		// test for proper write-argument -> see FIGURE 7-5 and TABLE 4-1
-		testForWriteAndRead((byte) 0b1001100);
+		testForWriteAndRead((byte) 0x4C);
 		
 		assertNotNull("Calling 'getTerminalConfiguration(Channel.A)' did return null!",
 				tconA);
@@ -472,7 +475,7 @@ public class MicrochipPotentiometerDeviceControllerTest {
                 DeviceControllerChannel.B);
 
 		// test for proper write-argument -> see FIGURE 7-5 and TABLE 4-1
-		testForWriteAndRead((byte) 0b1001100, 2);
+		testForWriteAndRead((byte) 0x4C, 2);
 		
 		assertNotNull("Calling 'getTerminalConfiguration(Channel.B)' did return null!",
 				tconB);
@@ -512,8 +515,8 @@ public class MicrochipPotentiometerDeviceControllerTest {
 			// expected
 		}
 		
-		// 0b0101010101 -> TCON-bits (see 4.2.2.2)
-		mockReadResult(i2cDevice, (byte) 0, (byte) 0b0101010101, null);
+		// 0x155 -> TCON-bits (see 4.2.2.2)
+		mockReadResult(i2cDevice, (byte) 0, (byte) 0x155, null);
 
         DeviceControllerTerminalConfiguration tconA = new DeviceControllerTerminalConfiguration(
                 DeviceControllerChannel.A,
@@ -522,14 +525,14 @@ public class MicrochipPotentiometerDeviceControllerTest {
 		
 		// reading current configuration:
 		// test for proper write-argument -> see FIGURE 7-5 and TABLE 4-1
-		testForWriteAndRead((byte) 0b1001100);
+		testForWriteAndRead((byte) 0x4C);
 		
 		// test for proper write-argument -> see FIGURE 7-5 and TABLE 4-1
 		// The first four bits of the second byte are the same four bits of
 		// the mocked read-result. Those four bits represent the configuration
 		// of wiper1. This test only modifies wiper0, so only the last four
 		// bits have to be according to 'tconA'.
-		verify(i2cDevice).write(new byte[] { (byte) 0b1000000, (byte) 0b01011110 }, 0, 2);
+		verify(i2cDevice).write(new byte[] { (byte) 0x40, (byte) 0x5E }, 0, 2);
 
         DeviceControllerTerminalConfiguration tconB = new DeviceControllerTerminalConfiguration(
                 DeviceControllerChannel.B,
@@ -538,14 +541,14 @@ public class MicrochipPotentiometerDeviceControllerTest {
 		
 		// reading current configuration:
 		// test for proper write-argument -> see FIGURE 7-5 and TABLE 4-1
-		testForWriteAndRead((byte) 0b1001100, 2);
+		testForWriteAndRead((byte) 0x4C, 2);
 		
 		// test for proper write-argument -> see FIGURE 7-5 and TABLE 4-1
 		// The last four bits of the second byte are the same four bits of
 		// the mocked read-result. Those four bits represent the configuration
 		// of wiper0. This test only modifies wiper1, so only the last four
 		// bits have to be according to 'tconB'.
-		verify(i2cDevice).write(new byte[] { (byte) 0b1000000, (byte) 0b00010101 }, 0, 2);
+		verify(i2cDevice).write(new byte[] { (byte) 0x40, (byte) 0x15 }, 0, 2);
 		
 	}
 	
@@ -566,7 +569,7 @@ public class MicrochipPotentiometerDeviceControllerTest {
 		controller.setWiperLock(DeviceControllerChannel.A, true);
 		
 		// test for proper write-argument -> see FIGURE 7-7 and TABLE 4-1
-		verify(i2cDevice).write(new byte[] { (byte) 0b0100100 }, 0, 1);
+		verify(i2cDevice).write(new byte[] { (byte) 0x24 }, 0, 1);
 		// 'write' called on time
 		verify(i2cDevice).write(any(byte[].class), anyInt(), anyInt());
 		
@@ -577,7 +580,7 @@ public class MicrochipPotentiometerDeviceControllerTest {
 		controller.setWiperLock(DeviceControllerChannel.A, false);
 		
 		// test for proper write-argument -> see FIGURE 7-7 and TABLE 4-1
-		verify(i2cDevice).write(new byte[] { (byte) 0b0101000 }, 0, 1);
+		verify(i2cDevice).write(new byte[] { (byte) 0x28 }, 0, 1);
 		// 'write' called on time
 		verify(i2cDevice).write(any(byte[].class), anyInt(), anyInt());
 		
@@ -588,7 +591,7 @@ public class MicrochipPotentiometerDeviceControllerTest {
 		controller.setWiperLock(DeviceControllerChannel.B, true);
 		
 		// test for proper write-argument -> see FIGURE 7-7 and TABLE 4-1
-		verify(i2cDevice).write(new byte[] { (byte) 0b0110100 }, 0, 1);
+		verify(i2cDevice).write(new byte[] { (byte) 0x34 }, 0, 1);
 		// 'write' called on time
 		verify(i2cDevice).write(any(byte[].class), anyInt(), anyInt());
 		
@@ -599,7 +602,7 @@ public class MicrochipPotentiometerDeviceControllerTest {
 		controller.setWiperLock(DeviceControllerChannel.B, false);
 		
 		// test for proper write-argument -> see FIGURE 7-7 and TABLE 4-1
-		verify(i2cDevice).write(new byte[] { (byte) 0b0111000 }, 0, 1);
+		verify(i2cDevice).write(new byte[] { (byte) 0x38 }, 0, 1);
 		// 'write' called on time
 		verify(i2cDevice).write(any(byte[].class), anyInt(), anyInt());
 
@@ -613,7 +616,7 @@ public class MicrochipPotentiometerDeviceControllerTest {
 		controller.setWriteProtection(true);
 		
 		// test for proper write-argument -> see FIGURE 7-7 and TABLE 4-1
-		verify(i2cDevice).write(new byte[] { (byte) 0b11110100 }, 0, 1);
+		verify(i2cDevice).write(new byte[] { (byte) 0xF4 }, 0, 1);
 		// 'write' called on time
 		verify(i2cDevice).write(any(byte[].class), anyInt(), anyInt());
 		
@@ -624,7 +627,7 @@ public class MicrochipPotentiometerDeviceControllerTest {
 		controller.setWriteProtection(false);
 		
 		// test for proper write-argument -> see FIGURE 7-7 and TABLE 4-1
-		verify(i2cDevice).write(new byte[] { (byte) 0b11111000 }, 0, 1);
+		verify(i2cDevice).write(new byte[] { (byte) 0xF8 }, 0, 1);
 		// 'write' called on time
 		verify(i2cDevice).write(any(byte[].class), anyInt(), anyInt());
 		
@@ -655,14 +658,14 @@ public class MicrochipPotentiometerDeviceControllerTest {
 							throws Throwable {
 						
 						// save given length for checking
-						 tmp[0] = (int) invocation.getArguments()[5];
+						 tmp[0] = (Integer) invocation.getArguments()[5];
 						
 						if (tmp[0] >= 2) {
 							
 							byte[] buf = (byte[]) invocation.getArguments()[3];
-							int offset = (int) invocation.getArguments()[4];
+							int offset = (Integer) invocation.getArguments()[4];
 							
-							// 0b1111111110101 -> Status-bits (see 4.2.2.1)
+							// 0xFF10101 -> Status-bits (see 4.2.2.1)
 							buf[offset] = first;
 							buf[offset + 1] = second;
 							

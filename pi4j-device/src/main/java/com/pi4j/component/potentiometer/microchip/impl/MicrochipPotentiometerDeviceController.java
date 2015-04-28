@@ -83,12 +83,12 @@ public class MicrochipPotentiometerDeviceController {
 	
 	// status-bits (see 4.2.2.1)
 	
-	private static final int STATUS_RESERVED_MASK = 0b0000111110000;
-	private static final int STATUS_RESERVED_VALUE = 0b0000111110000;
-	private static final int STATUS_EEPROM_WRITEACTIVE_BIT = 0b1000;
-	private static final int STATUS_WIPERLOCK1_BIT = 0b0100;
-	private static final int STATUS_WIPERLOCK0_BIT = 0b0010;
-	private static final int STATUS_EEPROM_WRITEPROTECTION_BIT = 0b0001;
+	private static final int STATUS_RESERVED_MASK = 0x1f0; // 0b0000111110000;
+	private static final int STATUS_RESERVED_VALUE = 0x1f0; // 0b0000111110000;
+	private static final int STATUS_EEPROM_WRITEACTIVE_BIT = 8; // 0b1000;
+	private static final int STATUS_WIPERLOCK1_BIT = 4; // 0b0100;
+	private static final int STATUS_WIPERLOCK0_BIT = 2; // 0b0010;
+	private static final int STATUS_EEPROM_WRITEPROTECTION_BIT = 1; // 0b0001;
 	
 	/**
 	 * the underlying Pi4J-device

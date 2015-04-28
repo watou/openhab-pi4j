@@ -60,10 +60,10 @@ public class MCP23S17GpioProvider extends GpioProviderBase implements GpioProvid
     public static final String NAME = "com.pi4j.gpio.extension.mcp.MCP23S17GpioProvider";
     public static final String DESCRIPTION = "MCP23S17 GPIO Provider";
 
-    public static final byte ADDRESS_0 = 0b01000000; // 0x40 [0100 0000]
-    public static final byte ADDRESS_1 = 0b01000010; // 0x42 [0100 0010]
-    public static final byte ADDRESS_2 = 0b01000100; // 0x44 [0100 0100]
-    public static final byte ADDRESS_3 = 0b01000110; // 0x46 [0100 0110]
+    public static final byte ADDRESS_0 = 0x40; // 0b01000000; // 0x40 [0100 0000]
+    public static final byte ADDRESS_1 = 0x42; // 0b01000010; // 0x42 [0100 0010]
+    public static final byte ADDRESS_2 = 0x44; // 0b01000100; // 0x44 [0100 0100]
+    public static final byte ADDRESS_3 = 0x46; // 0b01000110; // 0x46 [0100 0110]
     public static final byte DEFAULT_ADDRESS = ADDRESS_0;
 
     private static final byte REGISTER_IODIR_A = 0x00;
@@ -109,8 +109,8 @@ public class MCP23S17GpioProvider extends GpioProviderBase implements GpioProvid
     private final SpiDevice spi;
     
     public static final int SPI_SPEED = 1000000;    
-    public static final byte WRITE_FLAG = 0b00000000;    // 0x00
-    public static final byte READ_FLAG  = 0b00000001;    // 0x01
+    public static final byte WRITE_FLAG = 0x00; // 0b00000000;    // 0x00
+    public static final byte READ_FLAG  = 0x01; // 0b00000001;    // 0x01
     
     public MCP23S17GpioProvider(byte spiAddress, int spiChannel) throws IOException {
         this(spiAddress, spiChannel, SPI_SPEED);
@@ -260,7 +260,7 @@ public class MCP23S17GpioProvider extends GpioProviderBase implements GpioProvid
         byte packet[] = new byte[3];
         packet[0] = (byte) (address | READ_FLAG);   // address byte
         packet[1] = register;                    // register byte
-        packet[2] = 0b00000000;                  // data byte
+        packet[2] = 0; // 0b00000000;                  // data byte
 
         byte[] result = spi.write(packet);
 

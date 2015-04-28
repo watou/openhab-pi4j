@@ -54,8 +54,8 @@ public abstract class GpioProviderBase implements GpioProvider {
 
     public abstract String getName();
 
-    protected final Map<Pin, List<PinListener>> listeners = new ConcurrentHashMap<>();
-    protected final Map<Pin, GpioProviderPinCache> cache = new ConcurrentHashMap<>();
+    protected final Map<Pin, List<PinListener>> listeners = new ConcurrentHashMap<Pin, List<PinListener>>();
+    protected final Map<Pin, GpioProviderPinCache> cache = new ConcurrentHashMap<Pin, GpioProviderPinCache>();
     protected boolean isshutdown = false;
     
     @Override
@@ -306,14 +306,14 @@ public abstract class GpioProviderBase implements GpioProvider {
     public void removeAllListeners() {
         synchronized (listeners) {
             // iterate over all listener pins in the map
-            List<Pin> pins_copy = new ArrayList<>(listeners.keySet());
+            List<Pin> pins_copy = new ArrayList<Pin>(listeners.keySet());
             for (Pin pin : pins_copy) {
                 if(listeners.containsKey(pin)) {
                     // iterate over all listener handler in the map entry
                     // and remove each listener handler instance
                     List<PinListener> lsnrs = listeners.get(pin);
                     if (!lsnrs.isEmpty()) {
-                        List<PinListener> lsnrs_copy = new ArrayList<>(lsnrs);
+                        List<PinListener> lsnrs_copy = new ArrayList<PinListener>(lsnrs);
                         for (int index = lsnrs_copy.size() - 1; index >= 0; index--) {
                             PinListener listener = lsnrs_copy.get(index);
                             removeListener(pin, listener);

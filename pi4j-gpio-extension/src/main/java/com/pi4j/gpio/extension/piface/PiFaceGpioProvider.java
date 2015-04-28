@@ -60,10 +60,10 @@ public class PiFaceGpioProvider extends GpioProviderBase implements GpioProvider
     public static final String NAME = "com.pi4j.gpio.extension.piface.PiFaceGpioProvider";
     public static final String DESCRIPTION = "Pi-Face GPIO Provider";
 
-    public static final byte ADDRESS_0 = 0b01000000; // 0x40 [0100 0000]
-    public static final byte ADDRESS_1 = 0b01000010; // 0x42 [0100 0010]
-    public static final byte ADDRESS_2 = 0b01000100; // 0x44 [0100 0100]
-    public static final byte ADDRESS_3 = 0b01000110; // 0x46 [0100 0110]
+    public static final byte ADDRESS_0 = 0x40; // 0b01000000; // 0x40 [0100 0000]
+    public static final byte ADDRESS_1 = 0x42; // 0b01000010; // 0x42 [0100 0010]
+    public static final byte ADDRESS_2 = 0x44; // 0b01000100; // 0x44 [0100 0100]
+    public static final byte ADDRESS_3 = 0x46; // 0b01000110; // 0x46 [0100 0110]
 
     public static final byte DEFAULT_ADDRESS = ADDRESS_0;
 
@@ -98,20 +98,20 @@ public class PiFaceGpioProvider extends GpioProviderBase implements GpioProvider
     private static final byte IOCON_MIRROR    = (byte)0x40;
     private static final byte IOCON_BANK_MODE = (byte)0x80;
 
-    private int currentStatesA = 0b00000000;
-    private int currentStatesB = 0b11111111;
-    private int currentDirectionA = 0b00000000;
-    private int currentDirectionB = 0b11111111;
-    private int currentPullupA = 0b00000000;
-    private int currentPullupB = 0b11111111;
+    private int currentStatesA = 0x00; // 0b00000000;
+    private int currentStatesB = 0xff; // 0b11111111;
+    private int currentDirectionA = 0x00; // 0b00000000;
+    private int currentDirectionB = 0xff; // 0b11111111;
+    private int currentPullupA = 0x00; // 0b00000000;
+    private int currentPullupB = 0xff; // 0b11111111;
 
     private byte address = DEFAULT_ADDRESS;
 
     private GpioStateMonitor monitor = null;
     
     public static final int SPI_SPEED = 1000000;    
-    public static final byte WRITE_FLAG = 0b00000000;    // 0x00
-    public static final byte READ_FLAG  = 0b00000001;    // 0x01
+    public static final byte WRITE_FLAG = 0x00; // 0b00000000;    // 0x00
+    public static final byte READ_FLAG  = 0x01; // 0b00000001;    // 0x01
 
 
     protected final SpiDevice spi;
@@ -228,7 +228,7 @@ public class PiFaceGpioProvider extends GpioProviderBase implements GpioProvider
         byte packet[] = new byte[3];
         packet[0] = (byte) (address | READ_FLAG);   // address byte
         packet[1] = register;                    // register byte
-        packet[2] = 0b00000000;                  // data byte
+        packet[2] = 0x00; // 0b00000000;                  // data byte
 
         byte result[] = spi.write(packet);
 

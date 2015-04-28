@@ -67,9 +67,10 @@ public class SystemInfo {
     private static String getCpuInfo(String target) throws IOException, InterruptedException {
         // if the CPU data has not been previously acquired, then acquire it now
         if (cpuInfo == null) {
-            cpuInfo = new HashMap<>();
+            cpuInfo = new HashMap<String, String>();
 
-            try(BufferedReader br = new BufferedReader(new FileReader("/proc/cpuinfo"))) {
+            BufferedReader br = new BufferedReader(new FileReader("/proc/cpuinfo"));
+            try{
                 for(String line; (line = br.readLine()) != null; ) {
                     String parts[] = line.split(":", 2);
                     if (parts.length >= 2 && !parts[0].trim().isEmpty() && !parts[1].trim().isEmpty()) {
@@ -77,6 +78,8 @@ public class SystemInfo {
                         cpuInfo.put(cpuKey, parts[1].trim());
                     }
                 }
+            } finally {
+                br.close();
             }
         }
 
@@ -221,7 +224,7 @@ public class SystemInfo {
         // Mem:     459771904  144654336  315117568          0   21319680   63713280
         // -/+ buffers/cache:   59621376  400150528
         // Swap:    104853504          0  104853504
-        List<Long> values = new ArrayList<>();
+        List<Long> values = new ArrayList<Long>();
         String result[] = ExecUtil.execute("free -b");
         if(result != null){
             for(String line : result) {
@@ -305,34 +308,40 @@ public class SystemInfo {
             // http://raspberryalphaomega.org.uk/?p=428
             // http://www.raspberrypi.org/phpBB3/viewtopic.php?p=281039#p281039
             // http://elinux.org/RPi_HardwareHistory
-            switch (revision) {
-                case "0002":  // Model B Revision 1
-                case "0003":  // Model B Revision 1 + Fuses mod and D14 removed
+            if (revision.equals("0002") || revision.equals("0003")) {
+                // case "0002":  // Model B Revision 1
+                // case "0003":  // Model B Revision 1 + Fuses mod and D14 removed
                     return BoardType.ModelB_Rev1;
-                case "0004":  // Model B Revision 2 256MB (Sony)
-                case "0005":  // Model B Revision 2 256MB (Qisda)
-                case "0006":  // Model B Revision 2 256MB (Egoman)
+            } else if (revision.equals("0004") || revision.equals("0005") || revision.equals("0006")) {
+                // case "0004":  // Model B Revision 2 256MB (Sony)
+                // case "0005":  // Model B Revision 2 256MB (Qisda)
+                // case "0006":  // Model B Revision 2 256MB (Egoman)
                     return BoardType.ModelB_Rev2;
-                case "0007":  // Model A 256MB (Egoman)
-                case "0008":  // Model A 256MB (Sony)
-                case "0009":  // Model A 256MB (Qisda)
+            } else if (revision.equals("0007") || revision.equals("0008") || revision.equals("0009")) {
+                // case "0007":  // Model A 256MB (Egoman)
+                // case "0008":  // Model A 256MB (Sony)
+                // case "0009":  // Model A 256MB (Qisda)
                     return BoardType.ModelA_Rev1;
-                case "000d":  // Model B Revision 2 512MB (Egoman)
-                case "000e":  // Model B Revision 2 512MB (Sony)
-                case "000f":  // Model B Revision 2 512MB (Qisda)
+            } else if (revision.equals("000d") || revision.equals("000e") || revision.equals("000f")) {
+                // case "000d":  // Model B Revision 2 512MB (Egoman)
+                // case "000e":  // Model B Revision 2 512MB (Sony)
+                // case "000f":  // Model B Revision 2 512MB (Qisda)
                     return BoardType.ModelB_Rev2;
-                case "0010":  // Model B Plus 512MB (Sony)
-                {             // Model 2B, Rev 1.1, Quad Core, 1GB (Sony)
+            } else if (revision.equals("0010")) {
+                // case "0010":  // Model B Plus 512MB (Sony)
+                // {             // Model 2B, Rev 1.1, Quad Core, 1GB (Sony)
                     if (getHardware().equalsIgnoreCase("BCM2709"))
                         return BoardType.Model2B_Rev1;
                     else
                         return BoardType.ModelB_Plus_Rev1;
-                }
-                case "0011":  // Compute Module 512MB (Sony)
+            } else if (revision.equals("0010")) {
+                // case "0011":  // Compute Module 512MB (Sony)
                     return BoardType.Compute_Module_Rev1;
-                case "0012":  // Model A Plus 512MB (Sony)
+            } else if (revision.equals("0010")) {
+                // case "0012":  // Model A Plus 512MB (Sony)
                     return BoardType.ModelA_Plus_Rev1;
-                default:
+            } else {
+                // default:
                     return BoardType.UNKNOWN;
             }
         }
@@ -487,7 +496,8 @@ public class SystemInfo {
                 }
             }
         }
-        catch (IOException|InterruptedException ioe) { ioe.printStackTrace(); }
+        catch (IOException ioe) { ioe.printStackTrace(); }
+        catch (InterruptedException ioe) { ioe.printStackTrace(); }
         return versionInfo;
     }
 
@@ -520,7 +530,8 @@ public class SystemInfo {
                 }
             }            
         }
-        catch (IOException|InterruptedException ioe) { ioe.printStackTrace(); }
+        catch (IOException ioe) { ioe.printStackTrace(); }
+        catch (InterruptedException ioe) { ioe.printStackTrace(); }
         return tagValue;
     }
 }

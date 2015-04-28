@@ -57,10 +57,10 @@ public class GpioPinImpl implements GpioPin,
     private final Pin pin;
     private PinListener monitor;
     private final GpioPinShutdownImpl shutdownOptions;
-    private final Map<String, String> properties = new ConcurrentHashMap<>();
-    private final List<GpioPinListener> listeners = new ArrayList<>();
-    private final List<GpioTrigger> triggers = new ArrayList<>();
-    private final Map<PinState, Integer> debounce = new HashMap<>();
+    private final Map<String, String> properties = new ConcurrentHashMap<String, String>();
+    private final List<GpioPinListener> listeners = new ArrayList<GpioPinListener>();
+    private final List<GpioTrigger> triggers = new ArrayList<GpioTrigger>();
+    private final Map<PinState, Integer> debounce = new HashMap<PinState, Integer>();
     protected final int NO_DEBOUCE = 0;
 
     @SuppressWarnings("unused")
@@ -470,7 +470,7 @@ public class GpioPinImpl implements GpioPin,
     }
     
     public synchronized void removeAllListeners() {
-        List<GpioPinListener> listeners_copy = new ArrayList<>(listeners);
+        List<GpioPinListener> listeners_copy = new ArrayList<GpioPinListener>(listeners);
         for (int index = (listeners_copy.size()-1); index >= 0; index --) {
             GpioPinListener listener = listeners_copy.get(index);
             removeListener(listener);
@@ -520,7 +520,7 @@ public class GpioPinImpl implements GpioPin,
     }
 
     public synchronized void removeAllTriggers() {
-        List<GpioTrigger> triggers_copy = new ArrayList<>(triggers);
+        List<GpioTrigger> triggers_copy = new ArrayList<GpioTrigger>(triggers);
         for (int index = triggers_copy.size() - 1; index >= 0; index--) {
             GpioTrigger trigger = triggers_copy.get(index);
             removeTrigger(trigger);

@@ -206,19 +206,23 @@ public class MicrochipPotentiometerPotentiometerImplStaticTest {
 		
 		int address1 = MicrochipPotentiometerBase.buildI2CAddress(false, false, false);
 		assertEquals("'buildI2CAddress(false, false, false)' "
-				+ "does not return '0b0101000'", 0b0101000, address1);
+				+ "does not return '0b0101000'", 40, // 0b0101000, 
+				address1);
 
 		int address2 = MicrochipPotentiometerBase.buildI2CAddress(true, false, false);
 		assertEquals("'buildI2CAddress(true, false, false)' "
-				+ "does not return '0b0101001'", 0b0101001, address2);
+				+ "does not return '0b0101001'", 41, // 0b0101001, 
+				address2);
 		
 		int address3 = MicrochipPotentiometerBase.buildI2CAddress(true, true, false);
 		assertEquals("'buildI2CAddress(true, true, false)' "
-				+ "does not return '0b0101011'", 0b0101011, address3);
+				+ "does not return '0b0101011'", 43, // 0b0101011, 
+				address3);
 
 		int address4 = MicrochipPotentiometerBase.buildI2CAddress(true, true, true);
 		assertEquals("'buildI2CAddress(true, true, true)' "
-				+ "does not return '0b0101111'", 0b0101111, address4);
+				+ "does not return '0b0101111'", 47, // 0b0101111, 
+				address4);
 		
 	}
 	

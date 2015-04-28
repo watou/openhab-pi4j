@@ -62,7 +62,7 @@ public class MCP3008GpioProviderTestCase {
 				result = spiDevice;
 
 				spiDevice.write(anyShort, anyShort, anyShort);
-				result = new short[] { 0, 0b01, 0b11111111 };
+				result = new short[] { 0, 1, 0xff }; // 0b01, 0b11111111 };
 			}
 		};
 

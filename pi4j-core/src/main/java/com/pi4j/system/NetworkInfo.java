@@ -65,7 +65,7 @@ public class NetworkInfo  {
 
     public static String[] getNameservers() throws IOException, InterruptedException {
         String[] nameservers = ExecUtil.execute("cat /etc/resolv.conf");
-        List<String> result = new ArrayList<>();
+        List<String> result = new ArrayList<String>();
         for (String nameserver : nameservers) {
             if (nameserver.startsWith("nameserver")) {
                 result.add(nameserver.substring(11).trim());

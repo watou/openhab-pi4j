@@ -59,7 +59,7 @@ import java.util.Vector;
  */
 public class GpioInterrupt {
 
-    private static Vector<GpioInterruptListener> listeners = new Vector<>();
+    private static Vector<GpioInterruptListener> listeners = new Vector<GpioInterruptListener>();
     private Object lock;
 
     // private constructor 

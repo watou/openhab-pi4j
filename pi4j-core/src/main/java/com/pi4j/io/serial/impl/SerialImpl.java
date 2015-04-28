@@ -64,7 +64,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class SerialImpl implements Serial {
 
     protected int fileDescriptor = -1;
-    protected final CopyOnWriteArrayList<SerialDataListener> listeners = new CopyOnWriteArrayList<>();
+    protected final CopyOnWriteArrayList<SerialDataListener> listeners = new CopyOnWriteArrayList<SerialDataListener>();
     protected SerialDataMonitorThread monitor;
     protected int monitorInterval = Serial.DEFAULT_MONITOR_INTERVAL;
     protected boolean isshutdown = false;

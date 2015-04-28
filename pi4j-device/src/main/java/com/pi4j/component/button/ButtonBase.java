@@ -99,7 +99,7 @@ public abstract class ButtonBase extends ObserveableComponentBase implements But
 
     @Override
     public synchronized void removeListener(ButtonHoldListener ... listener) {
-        List<ComponentListener> listeners_copy = new ArrayList<>(super.listeners);
+        List<ComponentListener> listeners_copy = new ArrayList<ComponentListener>(super.listeners);
         for(ButtonHoldListener bhl : listener) {
             for (ComponentListener cl : listeners_copy){
                 if(cl instanceof ButtonHoldListenerWrapper){
@@ -112,7 +112,7 @@ public abstract class ButtonBase extends ObserveableComponentBase implements But
     }
 
     final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-    final List<ScheduledFuture> holdEventFutures = new ArrayList<>();
+    final List<ScheduledFuture> holdEventFutures = new ArrayList<ScheduledFuture>();
 
     protected synchronized void notifyListeners(final ButtonStateChangeEvent event) {
 

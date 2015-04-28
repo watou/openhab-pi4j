@@ -263,21 +263,21 @@ public abstract class MicrochipPotentiometerBase
 			final boolean pinA2) {
 		
 		// constant component
-		int i2cAddress = 0b0101000;
+		int i2cAddress = 40; // 0b0101000;
 		
 		// dynamic component if device knows pin A0
 		if (pinA0) {
-			i2cAddress |= 0b0000001;
+			i2cAddress |= 1; // 0b0000001;
 		}
 		
 		// dynamic component if device knows pin A1
 		if (pinA1) {
-			i2cAddress |= 0b0000010;
+			i2cAddress |= 2; // 0b0000010;
 		}
 		
 		// dynamic component if device knows pin A2
 		if (pinA2) {
-			i2cAddress |= 0b0000100;
+			i2cAddress |= 4; // 0b0000100;
 		}
 		
 		return i2cAddress;

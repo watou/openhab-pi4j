@@ -69,34 +69,34 @@ public class StepperMotorGpioExample {
         // (This is the most basic method, turning on a single electromagnet every time.
         //  This sequence requires the least amount of energy and generates the smoothest movement.)
         byte[] single_step_sequence = new byte[4];
-        single_step_sequence[0] = (byte) 0b0001;  
-        single_step_sequence[1] = (byte) 0b0010;
-        single_step_sequence[2] = (byte) 0b0100;
-        single_step_sequence[3] = (byte) 0b1000;
+        single_step_sequence[0] = (byte) 1;  
+        single_step_sequence[1] = (byte) 2;
+        single_step_sequence[2] = (byte) 4;
+        single_step_sequence[3] = (byte) 8;
 
         // create byte array to demonstrate a double-step sequencing
         // (In this method two coils are turned on simultaneously.  This method does not generate 
         //  a smooth movement as the previous method, and it requires double the current, but as 
         //  return it generates double the torque.)
         byte[] double_step_sequence = new byte[4];
-        double_step_sequence[0] = (byte) 0b0011;  
-        double_step_sequence[1] = (byte) 0b0110;
-        double_step_sequence[2] = (byte) 0b1100;
-        double_step_sequence[3] = (byte) 0b1001;
+        double_step_sequence[0] = (byte) 3;  
+        double_step_sequence[1] = (byte) 6;
+        double_step_sequence[2] = (byte) 12;
+        double_step_sequence[3] = (byte) 9;
         
         // create byte array to demonstrate a half-step sequencing
         // (In this method two coils are turned on simultaneously.  This method does not generate 
         //  a smooth movement as the previous method, and it requires double the current, but as 
         //  return it generates double the torque.)
         byte[] half_step_sequence = new byte[8];
-        half_step_sequence[0] = (byte) 0b0001;  
-        half_step_sequence[1] = (byte) 0b0011;
-        half_step_sequence[2] = (byte) 0b0010;
-        half_step_sequence[3] = (byte) 0b0110;
-        half_step_sequence[4] = (byte) 0b0100;
-        half_step_sequence[5] = (byte) 0b1100;
-        half_step_sequence[6] = (byte) 0b1000;
-        half_step_sequence[7] = (byte) 0b1001;
+        half_step_sequence[0] = (byte) 1;  
+        half_step_sequence[1] = (byte) 3;
+        half_step_sequence[2] = (byte) 2;
+        half_step_sequence[3] = (byte) 6;
+        half_step_sequence[4] = (byte) 4;
+        half_step_sequence[5] = (byte) 12;
+        half_step_sequence[6] = (byte) 8;
+        half_step_sequence[7] = (byte) 9;
 
         // define stepper parameters before attempting to control motor
         // anything lower than 2 ms does not work for my sample motor using single step sequence

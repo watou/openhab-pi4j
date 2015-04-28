@@ -124,7 +124,7 @@ public class WiringPiSPIExample {
         byte packet[] = new byte[3];
         packet[0] = READ_CMD;    // address byte
         packet[1] = register;    // register byte
-        packet[2] = 0b00000000;  // data byte
+        packet[2] = 00000;  // data byte
            
         System.out.println("-----------------------------------------------");
         System.out.println("[TX] " + bytesToHex(packet));

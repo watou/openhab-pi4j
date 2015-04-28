@@ -38,7 +38,7 @@ import java.util.Vector;
 
 public abstract class GpioTriggerBase implements GpioTrigger {
 
-    private List<PinState> states = new Vector<>();
+    private List<PinState> states = new Vector<PinState>();
 
     public GpioTriggerBase() {
         addPinState(PinState.allStates());
