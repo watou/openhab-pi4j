@@ -76,6 +76,29 @@
 				<artifactId>maven-dependency-plugin</artifactId>
 			</plugin>
 
+			<!-- EMBED THE JNI NATIVE LIBRARY INSIDE THE JAR -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>embed-jni-native-resource</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>add-resource</goal>
+						</goals>
+						<configuration>
+							<resources>
+								<resource>
+									<directory>../pi4j-core/target/lib</directory>
+									<targetPath>lib</targetPath>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 			<!-- OSGi BUNDLE -->
 			<plugin>
 				<groupId>org.apache.felix</groupId>
@@ -85,10 +108,20 @@
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 						<Bundle-Version>${project.version}</Bundle-Version>
 						<Bundle-Activator>com.pi4j.service.osgi.Activator</Bundle-Activator>
+						<Bundle-NativeCode>lib/libpi4j.so;osname=linux;processor=arm</Bundle-NativeCode>
 						<Export-Package>
 							com.pi4j.service.osgi,
 							com.pi4j.system.service,
 							com.pi4j.io.gpio.service,
+                            com.pi4j.concurrent.*,
+                            com.pi4j.util.*,
+							com.pi4j.jni.*,
+							com.pi4j.wiringpi.*,
+							com.pi4j.system.*,
+							com.pi4j.temperature.*,
+							com.pi4j.io.serial.*,
+							com.pi4j.io.gpio.*,
+							com.pi4j.io.i2c.*
 						</Export-Package>
 						<Private-Package>
 							com.pi4j.system.service.impl,

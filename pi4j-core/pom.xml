@@ -139,6 +139,7 @@
 					<instructions>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 						<Bundle-Version>${project.version}</Bundle-Version>
+						<Bundle-NativeCode>lib/libpi4j.so;osname=linux;processor=arm</Bundle-NativeCode>
 						<Export-Package>
                             com.pi4j.concurrent.*,
                             com.pi4j.util.*,
